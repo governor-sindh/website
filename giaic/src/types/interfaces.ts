@@ -32,7 +32,8 @@ interface IExperience {
 }
 
 export interface IApplyForm {
-  username: string;
+  fullName: string;
+  cnic: string;
   phoneNumber: string;
   city: string;
   email: string;
@@ -54,6 +55,34 @@ export interface IApplyForm {
   languages: ILanguage[];
 }
 
+// {
+//   fullName: "Shehzad",
+//   cnic: "4220144338283478",
+//   phoneNumber: "03033111499",
+//   city: "karachi",
+//   email: "shehzad.dev@pm.me",
+//   gender: "male",
+//   highestQualification: "Intermediate / A Levels",
+//   github: "string",
+//   linkedin: "string",
+//   discord: "string",
+//   experiences: [],
+//   programmingLanguages: ["js", "ts"],
+//   programmingProjects: [
+//     {
+//       title: "string",
+//       repoLink: "string",
+//       hostedLink: "string",
+//       description: "string",
+//     },
+//     {
+//       title: "string",
+//       repoLink: "string",
+//       hostedLink: "string",
+//       description: "string",
+//     },
+//   ],
+// }
 export interface ILogin {
   fullName: string;
   CNIC: string;

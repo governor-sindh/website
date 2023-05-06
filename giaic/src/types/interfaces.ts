@@ -5,14 +5,6 @@ interface IProjects {
   description?: string;
 }
 
-interface ILanguage {
-  name: string;
-  level:
-    | "basic elementary proficiency"
-    | "limited working proficiency"
-    | "professional working proficiency"
-    | "native or bilingual proficiency";
-}
 interface IExperience {
   title: string;
   employmentType:
@@ -51,41 +43,26 @@ export interface IApplyForm {
   experiences?: IExperience[];
   programmingLanguages?: string[];
   programmingProjects?: IProjects[];
-
-  languages: ILanguage[];
 }
 
-// {
-//   fullName: "Shehzad",
-//   cnic: "4220144338283478",
-//   phoneNumber: "03033111499",
-//   city: "karachi",
-//   email: "shehzad.dev@pm.me",
-//   gender: "male",
-//   highestQualification: "Intermediate / A Levels",
-//   github: "string",
-//   linkedin: "string",
-//   discord: "string",
-//   experiences: [],
-//   programmingLanguages: ["js", "ts"],
-//   programmingProjects: [
-//     {
-//       title: "string",
-//       repoLink: "string",
-//       hostedLink: "string",
-//       description: "string",
-//     },
-//     {
-//       title: "string",
-//       repoLink: "string",
-//       hostedLink: "string",
-//       description: "string",
-//     },
-//   ],
+export type TFields =
+  | "fullName"
+  | "cnic"
+  | "phoneNumber"
+  | "city"
+  | "email"
+  | "gender"
+  | "highestQualification"
+  | "github"
+  | "linkedin"
+  | "discord"
+  | "experiences"
+  | "programmingLanguages"
+  | "programmingProjects";
+
+// export interface ISignup {
+//   fullName: string;
+//   CNIC: string;
+//   email: string;
+//   password: string;
 // }
-export interface ILogin {
-  fullName: string;
-  CNIC: string;
-  email: string;
-  password: string;
-}

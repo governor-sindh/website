@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ChakraWrapper } from "@/components/";
+import { Footer, Header } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ChakraWrapper>{children}</ChakraWrapper>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );

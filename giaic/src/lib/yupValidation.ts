@@ -19,8 +19,8 @@ export const schema = yup.object({
   city: yup
     .string()
     .required("City is required")
-    .min(3, "Please enter more then 3 characters")
-    .max(25, "Please enter within 25 characters"),
+    .min(2, "Please select your City"),
+  // .max(25, "Please enter within 25 characters"),
   email: yup
     .string()
     .email("Email is not valid")
@@ -35,14 +35,14 @@ export const schema = yup.object({
     .min(5, "Qualification is required"),
   github: yup
     .string()
-    .url("Only enter URL with http")
+    .url("Enter valid URL with http")
     .max(60, "Website URL can't be more then 60"),
   linkedin: yup
     .string()
-    .url("Only enter URL with http")
+    .url("Enter valid URL with http")
     .max(60, "Website URL can't be more then 60"),
   discord: yup
     .string()
-    .url("Only enter URL with http")
+    .url("Enter valid URL with http")
     .max(60, "Website URL can't be more then 60"),
 });

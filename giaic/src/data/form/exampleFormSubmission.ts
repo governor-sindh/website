@@ -2,7 +2,7 @@ import { IApplyForm } from "@/types/interfaces";
 
 const data: IApplyForm = {
   fullName: "Shehzad",
-  CNIC: "4220144338283478",
+  cnic: "4220144338283478",
   phoneNumber: "03033111499",
   city: "karachi",
   email: "shehzad.dev@pm.me",

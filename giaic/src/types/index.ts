@@ -1,11 +1,11 @@
-interface IProjects {
+export interface IProjects {
   title: string;
   repoLink: string;
   hostedLink?: string;
   description?: string;
 }
 
-interface IExperience {
+export interface IExperience {
   title: string;
   employmentType:
     | "Full-time"

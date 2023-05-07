@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import ChakraWrapper from "@/components/ChakraWrapper";
+import { ChakraWrapper } from "@/components/";
 
 const inter = Inter({ subsets: ["latin"] });
 

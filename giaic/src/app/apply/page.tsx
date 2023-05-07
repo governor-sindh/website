@@ -30,7 +30,21 @@ export default function Page() {
   const onFormSubmit = async (data: IApplyForm) => {
     try {
       setLoading(true);
-      console.log("data", data);
+      console.log("data", {
+        fullName: data.fullName.toLowerCase(),
+        cnic: data.cnic,
+        phoneNumber: data.phoneNumber,
+        city: data.city.toLowerCase(),
+        email: data.email.toLowerCase(),
+        gender: data.gender,
+        highestQualification: data.highestQualification,
+        github: data?.github,
+        linkedin: data?.linkedin,
+        discord: data?.discord,
+        experiences: experienceData,
+        programmingLanguages: data?.programmingLanguages,
+        programmingProjects: projectsData,
+      });
       // const res = await fetch("/api/applyform/", {
       //   // body:{},
       //   method: "",
@@ -63,7 +77,7 @@ export default function Page() {
         noValidate
         className="container mx-4 my-10 w-full max-w-2xl rounded bg-white px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
       >
-        <h1 className="mb-8 text-center text-lg font-bold text-green-800 md:text-3xl">
+        <h1 className="mb-8 text-center text-lg font-bold text-green-700 md:text-3xl">
           Student Course Registration Form{" "}
         </h1>
         <Input
@@ -208,7 +222,7 @@ export default function Page() {
         <button
           type="button"
           onClick={() => setExperienceModal(!experienceModal)}
-          className="mb-2 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          className="mb-2 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-green-600 hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
         >
           Add Work Experience
         </button>
@@ -246,7 +260,7 @@ export default function Page() {
         <button
           type="button"
           onClick={() => setProjectModal(!projectModal)}
-          className="mb-2 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          className="mb-2 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-green-600 hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
         >
           Add Programming projects
         </button>
@@ -266,22 +280,19 @@ export default function Page() {
         <div className="flex w-full justify-center">
           {/* validation is only allow form submission when form is valid and isSubmitting for not resubmitting form */}
           {/* <button
-            // disabled={!isValid || isSubmitting}
-            type="submit"
             className="mb-8 mt-8 w-36 justify-center rounded-full border border-gray-700 bg-blue-700 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:w-52 md:text-xl"
-          >
-            Apply Now
-          </button>  */}
+        */}
 
           <Button
+            // disabled={!isValid || isSubmitting}
             type="submit"
-            className="mb-8 mt-8 w-36 "
+            className="mb-8 mt-8 w-36 rounded-3xl shadow-xl"
             isLoading={loading}
             loadingText="Applying"
-            colorScheme="telegram"
+            colorScheme="green"
             variant="solid"
           >
-            Apply Now
+            APPLY NOW
           </Button>
         </div>
       </form>

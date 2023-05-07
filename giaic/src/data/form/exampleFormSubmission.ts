@@ -1,4 +1,4 @@
-import { IApplyForm } from "@/types/interfaces";
+import { IApplyForm } from "@/types";
 
 const data: IApplyForm = {
   fullName: "Shehzad",

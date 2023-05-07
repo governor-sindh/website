@@ -17,9 +17,6 @@ export default function Page() {
   const [projectModal, setProjectModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
-  console.log("experienceData", experienceData);
-  console.log("projectsData", projectsData);
-
   const { register, handleSubmit, formState } = useForm<IApplyForm>({
     mode: "onTouched",
     resolver: yupResolver(schema),
@@ -27,9 +24,17 @@ export default function Page() {
 
   const { errors, isValid, isSubmitting } = formState;
 
+  console.log(experienceData, projectsData);
+  console.log(experienceData, projectsData);
+
   const onFormSubmit = async (data: IApplyForm) => {
     try {
       setLoading(true);
+
+      const sleep = async (millis: number) =>
+        new Promise((resolve) => setTimeout(resolve, millis));
+      await sleep(2500);
+
       console.log("data", {
         fullName: data.fullName.toLowerCase(),
         cnic: data.cnic,
@@ -42,7 +47,9 @@ export default function Page() {
         linkedin: data?.linkedin,
         discord: data?.discord,
         experiences: experienceData,
-        programmingLanguages: data?.programmingLanguages,
+        programmingLanguages: data?.programmingLanguages
+          ? data?.programmingLanguages
+          : [],
         programmingProjects: projectsData,
       });
       // const res = await fetch("/api/applyform/", {

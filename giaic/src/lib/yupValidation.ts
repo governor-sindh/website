@@ -8,9 +8,9 @@ export const schema = yup.object({
     .max(40, "Please enter within 40 characters"),
   cnic: yup
     .string()
-    .required("CNIC Number is required")
-    .min(10, "Please enter more then 10 characters")
-    .max(40, "Please enter within 40 characters"),
+    .required("CNIC Number is required  without -")
+    .min(13, "Please enter more then 13 characters")
+    .max(13, "Please enter within 13 characters without -"),
   phoneNumber: yup
     .string()
     .required("Phone Number is required")

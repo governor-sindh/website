@@ -13,7 +13,7 @@ export default function Input({
   placeholder: string;
   type: "text" | "number" | "email" | "date";
   required?: boolean;
-  register: UseFormRegister<IApplyForm | IExperience>;
+  register: UseFormRegister<IApplyForm>;
   errors: FieldErrors<IApplyForm>;
 }) {
   return (

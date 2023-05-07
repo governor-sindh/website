@@ -1,4 +1,4 @@
-import { TFields, IApplyForm } from "@/types";
+import { TFields, IApplyForm, IExperience } from "@/types";
 import type { UseFormRegister, FieldErrors } from "react-hook-form";
 
 export default function Input({
@@ -11,9 +11,9 @@ export default function Input({
 }: {
   id: TFields;
   placeholder: string;
-  type: "text" | "number" | "email";
+  type: "text" | "number" | "email" | "date";
   required?: boolean;
-  register: UseFormRegister<IApplyForm>;
+  register: UseFormRegister<IApplyForm | IExperience>;
   errors: FieldErrors<IApplyForm>;
 }) {
   return (

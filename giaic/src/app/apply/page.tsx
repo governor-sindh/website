@@ -1,9 +1,9 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { IApplyForm, IExperience } from "@/types";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { ExperienceModal, CheckBox, Input, ProjectsModal } from "@/components";
+import { IApplyForm, IExperience, IProjects } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ExperienceModal, CheckBox, Input } from "@/components";
 import { schema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { Button, useToast } from "@chakra-ui/react";
@@ -11,12 +11,14 @@ import { Button, useToast } from "@chakra-ui/react";
 export default function Page() {
   const toast = useToast();
 
-  const [experience, setExperienceData] = useState<IExperience[]>([]);
+  const [experienceData, setExperienceData] = useState<IExperience[]>([]);
   const [experienceModal, setExperienceModal] = useState<boolean>(false);
-  const [projects, setProjects] = useState([]);
+  const [projectsData, setProjectsData] = useState<IProjects[]>([]);
+  const [projectModal, setProjectModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
-  console.log("rerender");
+  console.log("experienceData", experienceData);
+  console.log("projectsData", projectsData);
 
   const { register, handleSubmit, formState } = useForm<IApplyForm>({
     mode: "onTouched",
@@ -210,13 +212,20 @@ export default function Page() {
         >
           Add Work Experience
         </button>
-        {experienceModal && (
-          <ExperienceModal
-            experienceModal={experienceModal}
-            setExperienceModal={setExperienceModal}
-            setExperienceData={setExperienceData}
-          />
-        )}
+
+        <div className="space-y-2">
+          {experienceData.map((item, i) => (
+            <div
+              className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
+              key={i}
+            >
+              <h4 className=" text-lg capitalize">
+                {item.title} - {item.companyName}
+              </h4>
+              <button type="button"> X </button>
+            </div>
+          ))}
+        </div>
 
         <label className="text-md mb-4 block text-gray-400 md:text-xl">
           Programming Languages (optional)
@@ -236,10 +245,23 @@ export default function Page() {
         </label>
         <button
           type="button"
+          onClick={() => setProjectModal(!projectModal)}
           className="mb-2 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
         >
-          Add Programming projects Experience
+          Add Programming projects
         </button>
+
+        <div className="space-y-2">
+          {projectsData.map((item, i) => (
+            <div
+              className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
+              key={i}
+            >
+              <h4 className=" text-xl capitalize">{item.title}</h4>
+              <button type="button"> X </button>
+            </div>
+          ))}
+        </div>
 
         <div className="flex w-full justify-center">
           {/* validation is only allow form submission when form is valid and isSubmitting for not resubmitting form */}
@@ -253,6 +275,7 @@ export default function Page() {
 
           <Button
             type="submit"
+            className="mb-8 mt-8 w-36 "
             isLoading={loading}
             loadingText="Applying"
             colorScheme="telegram"
@@ -262,6 +285,20 @@ export default function Page() {
           </Button>
         </div>
       </form>
+      {experienceModal && (
+        <ExperienceModal
+          experienceModal={experienceModal}
+          setExperienceModal={setExperienceModal}
+          setExperienceData={setExperienceData}
+        />
+      )}
+      {projectModal && (
+        <ProjectsModal
+          projectModal={projectModal}
+          setProjectModal={setProjectModal}
+          setProjectsData={setProjectsData}
+        />
+      )}
     </main>
   );
 }

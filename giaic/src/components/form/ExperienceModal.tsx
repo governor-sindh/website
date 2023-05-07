@@ -5,6 +5,9 @@ import { IExperience } from "@/types/";
 import type { Dispatch, SetStateAction } from "react";
 import { Input } from "@/components";
 import { employmentType } from "@/data";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { experienceSchema } from "@/lib/yupValidation";
+import uuid from "react-uuid";
 
 export default function ExperienceModal({
   experienceModal,
@@ -19,10 +22,10 @@ export default function ExperienceModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IExperience>({});
+  } = useForm<IExperience>({ resolver: yupResolver(experienceSchema) });
 
   const onFormSubmit = (data: IExperience) => {
-    setExperienceData((perv) => [...perv, data]);
+    setExperienceData((perv) => [...perv, { id: uuid(), ...data }]);
     setExperienceModal(false);
   };
 
@@ -47,6 +50,7 @@ export default function ExperienceModal({
                       placeholder="Job Title"
                       register={register}
                       errors={errors}
+                      required={true}
                     />
                     <label
                       htmlFor="employmentType"
@@ -62,7 +66,7 @@ export default function ExperienceModal({
                     >
                       <option value="n">Please Select</option>
                       {employmentType.map((item, i) => (
-                        <option key={i} value={item}>
+                        <option key={uuid()} value={item}>
                           {item}
                         </option>
                       ))}
@@ -78,6 +82,7 @@ export default function ExperienceModal({
                       placeholder="Industry"
                       register={register}
                       errors={errors}
+                      required={true}
                     />
                   </div>
                   <div className="bdr2 min-w-[277px]">
@@ -87,6 +92,7 @@ export default function ExperienceModal({
                       placeholder="Company Name"
                       register={register}
                       errors={errors}
+                      required={true}
                     />
                     <Input
                       type="date"
@@ -94,6 +100,7 @@ export default function ExperienceModal({
                       placeholder="Start Date"
                       register={register}
                       errors={errors}
+                      required={true}
                     />{" "}
                     <Input
                       type="date"
@@ -147,7 +154,7 @@ export default function ExperienceModal({
                     Close
                   </button>
                   <button
-                    className="mb-1 mr-1 rounded bg-blue-500 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-yellow-700"
+                    className="mb-1 mr-1 rounded bg-green-600 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-green-700"
                     type="submit"
                   >
                     Submit

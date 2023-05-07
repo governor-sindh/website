@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { IProjects } from "@/types/";
 import type { Dispatch, SetStateAction } from "react";
 import { Input } from "@/components";
-// import { employmentType } from "@/data";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { projectSchema } from "@/lib/yupValidation";
+import uuid from "react-uuid";
 
 export default function ProjectsModal({
   projectModal,
@@ -18,10 +20,10 @@ export default function ProjectsModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IProjects>({});
+  } = useForm<IProjects>({ resolver: yupResolver(projectSchema) });
 
   const onFormSubmit = (data: IProjects) => {
-    setProjectsData((perv) => [...perv, data]);
+    setProjectsData((perv) => [...perv, { id: uuid(), ...data }]);
     setProjectModal(false);
   };
 
@@ -32,14 +34,14 @@ export default function ProjectsModal({
           <div className="relative mx-auto my-6 w-auto max-w-3xl">
             <div className="relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none">
               <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
-                <h3 className="font=semibold text-3xl">Work Experience</h3>
+                <h3 className="font=semibold text-3xl">Programming projects</h3>
               </div>
               <form
                 onSubmit={handleSubmit(onFormSubmit)}
                 className="relative flex-auto rounded bg-gray-200 p-4  shadow-md  md:w-full"
               >
                 <div className="flex flex-wrap justify-center gap-4">
-                  <div className="bdr3 min-w-[277px]">
+                  <div className="min-w-[277px]">
                     <Input
                       type="text"
                       id="title"
@@ -51,13 +53,13 @@ export default function ProjectsModal({
                     <Input
                       type="text"
                       id="repoLink"
-                      placeholder="GIT Repo Link"
+                      placeholder="Git Repo Link"
                       register={register}
                       errors={errors}
                       required={true}
                     />
                   </div>
-                  <div className="bdr2 min-w-[277px]">
+                  <div className="min-w-[277px]">
                     <Input
                       type="text"
                       id="hostedLink"
@@ -71,7 +73,7 @@ export default function ProjectsModal({
                       placeholder="Description"
                       register={register}
                       errors={errors}
-                    />{" "}
+                    />
                   </div>
                 </div>
 
@@ -84,7 +86,7 @@ export default function ProjectsModal({
                     Close
                   </button>
                   <button
-                    className="mb-1 mr-1 rounded bg-blue-500 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-yellow-700"
+                    className="mb-1 mr-1 rounded bg-green-600 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-green-700"
                     type="submit"
                   >
                     Submit

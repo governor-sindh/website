@@ -16,6 +16,7 @@ export default function Input({
   register: UseFormRegister<IApplyForm>;
   errors: FieldErrors<IApplyForm>;
 }) {
+  console.log();
   return (
     <>
       {" "}
@@ -31,7 +32,9 @@ export default function Input({
         id={id}
         className="border-rounded-lg text-md mb-2 mt-2 block w-full rounded border border-gray-400 bg-gray-100 p-3 md:text-xl"
         placeholder={` ${placeholder}`}
-        {...register(id)}
+        {...register(id, {
+          valueAsDate: type === "date" ? true : false,
+        })}
       />
       {errors?.[id] && (
         <p className="mb-4 text-red-400">{errors?.[id]?.message}</p>

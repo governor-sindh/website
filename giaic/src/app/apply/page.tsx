@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import { ExperienceModal, CheckBox, Input, ProjectsModal } from "@/components";
 import { IApplyForm, IExperience, IProjects } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "@/lib/yupValidation";
+import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { Button, useToast } from "@chakra-ui/react";
+import uuid from "react-uuid";
 
 export default function Page() {
   const toast = useToast();
@@ -19,13 +20,13 @@ export default function Page() {
 
   const { register, handleSubmit, formState } = useForm<IApplyForm>({
     mode: "onTouched",
-    resolver: yupResolver(schema),
+    resolver: yupResolver(mainFormSchema),
   });
 
   const { errors, isValid, isSubmitting } = formState;
 
-  console.log(experienceData, projectsData);
-  console.log(experienceData, projectsData);
+  console.log("experienceData", experienceData);
+  console.log("projectsData", projectsData);
 
   const onFormSubmit = async (data: IApplyForm) => {
     try {
@@ -126,7 +127,7 @@ export default function Page() {
         >
           <option value="n">Please Select</option>
           {formCities.map((item, i) => (
-            <option key={i} value={item}>
+            <option key={uuid()} value={item}>
               {item}
             </option>
           ))}
@@ -191,7 +192,7 @@ export default function Page() {
         >
           <option value="null">Please Select</option>
           {formQualifications.map((item, i) => (
-            <option key={i} value={item}>
+            <option key={uuid()} value={item}>
               {item}
             </option>
           ))}
@@ -238,12 +239,20 @@ export default function Page() {
           {experienceData.map((item, i) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={i}
+              key={uuid()}
             >
               <h4 className=" text-lg capitalize">
                 {item.title} - {item.companyName}
               </h4>
-              <button type="button"> X </button>
+              <button
+                type="button"
+                onClick={() => {
+                  experienceData.splice(i, 1);
+                  setExperienceData(experienceData);
+                }}
+              >
+                X
+              </button>
             </div>
           ))}
         </div>
@@ -276,10 +285,19 @@ export default function Page() {
           {projectsData.map((item, i) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={i}
+              key={uuid()}
             >
               <h4 className=" text-xl capitalize">{item.title}</h4>
-              <button type="button"> X </button>
+              <button
+                type="button"
+                onClick={() => {
+                  projectsData.splice(i, 1);
+                  // setProjectsData(projectsData);
+                }}
+              >
+                {" "}
+                X{" "}
+              </button>
             </div>
           ))}
         </div>

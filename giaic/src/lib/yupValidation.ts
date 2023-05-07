@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const schema = yup.object({
+export const mainFormSchema = yup.object({
   fullName: yup
     .string()
     .required("Full Name is required")
@@ -45,4 +45,49 @@ export const schema = yup.object({
     .string()
     .url("Enter valid URL with http")
     .max(60, "Website URL can't be more then 60"),
+});
+
+export const experienceSchema = yup.object({
+  title: yup
+    .string()
+    .required("Title is required")
+    .min(3, "Please enter more then 3 characters")
+    .max(40, "Please enter within 40 characters"),
+  employmentType: yup
+    .string()
+    .required("Employment Type is required")
+    .min(3, "Please select Employment type")
+    .max(40, "Please enter within 40 characters"),
+  industry: yup
+    .string()
+    .required("Industry is required")
+    .min(3, "Please enter more then 3 characters")
+    .max(40, "Please enter within 40 characters"),
+  companyName: yup
+    .string()
+    .required("Industry is required")
+    .min(3, "Please enter more then 3 characters")
+    .max(40, "Please enter within 40 characters"),
+  startDate: yup.date().typeError("Date is Required").required("Require daa"),
+  // endDate: yup.date().typeError("Date is Required"),
+  currentlyWorking: yup.string().required("Please select"),
+});
+
+export const projectSchema = yup.object({
+  title: yup
+    .string()
+    .required("Full Name is required")
+    .min(3, "Please enter more then 3 characters")
+    .max(40, "Please enter within 40 characters"),
+  repoLink: yup
+    .string()
+    .required("Full Name is required")
+    .url("Enter valid URL with http")
+    .min(3, "Please enter more then 3 characters")
+    .max(40, "Please enter within 40 characters"),
+  hostedLink: yup
+    .string()
+    .url("Enter valid URL with http")
+    .max(40, "Please enter within 40 characters"),
+  description: yup.string().max(60, "Please enter within 60 characters"),
 });

@@ -10,7 +10,7 @@ import {
   ProjectsTable,
   NewProject,
 } from "@/lib/drizzle";
-import type { IApplyForm } from "@/types/interfaces";
+import type { IApplyForm } from "@/types";
 
 export async function POST(request: NextRequest) {
   const {

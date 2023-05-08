@@ -58,7 +58,18 @@ export type TFields =
   | "discord"
   | "experiences"
   | "programmingLanguages"
-  | "programmingProjects";
+  | "programmingProjects"
+  | "title"
+  | "employmentType"
+  | "industry"
+  | "companyName"
+  | "startDate"
+  | "endDate"
+  | "currentlyWorking"
+  | "title"
+  | "repoLink"
+  | "hostedLink"
+  | "description";
 
 // export interface ISignup {
 //   fullName: string;

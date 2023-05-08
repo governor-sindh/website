@@ -25,9 +25,6 @@ export default function Page() {
 
   const { errors, isValid, isSubmitting } = formState;
 
-  console.log("experienceData", experienceData);
-  console.log("projectsData", projectsData);
-
   const onFormSubmit = async (data: IApplyForm) => {
     try {
       setLoading(true);

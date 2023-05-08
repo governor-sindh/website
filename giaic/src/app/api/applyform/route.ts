@@ -10,11 +10,11 @@ import {
   Projects_Table,
   NewProject,
 } from "@/lib/drizzle";
-import type { IApplyForm } from "@/types/interfaces";
+import type { IApplyForm } from "@/types";
 
 export async function POST(request: NextRequest) {
   const {
-    username,
+    fullName,
     phoneNumber,
     email,
     gender,

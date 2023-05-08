@@ -13,10 +13,9 @@ export default function Input({
   placeholder: string;
   type: "text" | "number" | "email" | "date";
   required?: boolean;
-  register: UseFormRegister<IApplyForm>;
-  errors: FieldErrors<IApplyForm>;
+  register: any; // UseFormRegister<IApplyForm>;
+  errors: any; //FieldErrors<IApplyForm>;
 }) {
-  console.log();
   return (
     <>
       {" "}

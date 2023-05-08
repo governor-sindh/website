@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter, Roboto } from "next/font/google";
-import { Footer, Header } from "@/components";
+import { Footer, Header, ChakraWrapper } from "@/components";
 
 const roboto = Roboto({
   weight: ["300", "400", "700", "900"],
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <Header />
-        {children}
+        <ChakraWrapper>{children}</ChakraWrapper>
         <Footer />
       </body>
     </html>

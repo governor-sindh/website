@@ -3,9 +3,11 @@ export interface IProjects {
   repoLink: string;
   hostedLink?: string;
   description?: string;
+  // id: string;
 }
 
 export interface IExperience {
+  // id: string;
   title: string;
   employmentType:
     | "Full-time"

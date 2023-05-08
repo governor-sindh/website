@@ -244,8 +244,10 @@ export default function Page() {
               <button
                 type="button"
                 onClick={() => {
-                  experienceData.splice(i, 1);
-                  setExperienceData(experienceData);
+                  const filteredData = experienceData.filter(
+                    (value) => value.id !== item.id
+                  );
+                  setExperienceData(filteredData);
                 }}
               >
                 X
@@ -288,8 +290,10 @@ export default function Page() {
               <button
                 type="button"
                 onClick={() => {
-                  projectsData.splice(i, 1);
-                  // setProjectsData(projectsData);
+                  const filteredData = projectsData.filter(
+                    (value) => value.id !== item.id
+                  );
+                  setProjectsData(filteredData);
                 }}
               >
                 {" "}

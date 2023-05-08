@@ -1,19 +1,19 @@
 import Image from 'next/image';
 import React from 'react';
 // import Lines from '../../public/assets/lines.svg'
-// import { Poppins } from '@next/font/google';
+import { Poppins } from 'next/font/google';
 import Cover from '../../../public/cover.jpg'
 import { Header } from '@/components';
 import MainHeading from '../heading/mainHeading';
 
-// const poppins = Poppins({
-//     weight: ['300', '400', '500'],
-//     subsets: ['latin']
-// })
+const poppins = Poppins({
+    weight: ['300', '400', '500','800','900'],
+    subsets: ['latin']
+})
 
 function Hero() {
     return (
-        <div className={`w-full relative py-10 md:py-5 overflow-hidden bg-zinc-100`}>
+        <div className={`w-full relative py-10 md:py-5 overflow-hidden bg-zinc-100 ${poppins.className}`}>
             {/* <div className='absolute bottom-0 w-full h-full bg_radial_gradient -z-10'></div> */}
             {/* <Image src={Lines} alt='lines' className='absolute -top-10 xl:top-0 opacity-80 w-full xl:h-full md:hidden -z-20' /> */}
             <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto mt-10 md:mt-20 flex md:block justify-between items-center relative'>

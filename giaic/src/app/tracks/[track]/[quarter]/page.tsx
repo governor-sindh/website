@@ -47,16 +47,16 @@ async function Page({ params }: { params: { track: string, quarter: string } }) 
     return (
         <>
 
-            <div className={`w-full mb-20 ${roboto.className}`}>
+            <div className={`w-full mb-20`}>
                 <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto flex md:block justify-between mt-20 gap-10 relative'>
                     <div className='w-[270px] md:w-full h-fit md:border border-zinc-800 md:rounded-lg flex-shrink-0 sticky md:relative md:top-0 top-40'>
-                        <div className='h-fit rounded-lg p-3 bg-zinc-300'>
+                        <div className='h-fit rounded-lg p-3 bg-gray-50'>
                             <h2 className='font-normal text-white text-sm leading-tight bg-[#045084] p-3 rounded-lg'>{data.trackName}</h2>
                             <ul className='mt-2 text-zinc-800'>
                                 {
                                     ['4', '5'].map((val, index) => {
                                         return (
-                                            <Link key={index} href={`tracks/${encodeURIComponent(params.track)}/${encodeURIComponent(val)}`}><li className={`py-[5px] pl-5 text-sm tracking-widest border-l-[2px] ${params.quarter === val ? 'border-[#045084] text-[#045084]' : 'border-[#c2c2c2]'}`}>Quarter - {val}</li></Link>
+                                            <Link key={index} href={`tracks/${encodeURIComponent(params.track)}/${encodeURIComponent(val)}`}><li className={`py-[5px] pl-5 text-sm tracking-widest border-l-[2px] ${params.quarter === val ? 'border-[#045084] text-[#045084]' : 'border-[#c2c2c2]'}`}>Course - {val}</li></Link>
                                         )
                                     })
                                 }
@@ -82,12 +82,12 @@ async function Page({ params }: { params: { track: string, quarter: string } }) 
                             </ul>
                         </div>
                         <div className='mt-8 md:p-2'>
-                            <h3 className='font-bold text-zinc-800  text-base leading-tight'>Compulsory Quarters</h3>
+                            <h3 className='font-bold text-zinc-800  text-base leading-tight'>Compulsory Courses</h3>
                             <div className='flex gap-2 mt-2 items-center justify-between'>
                                 {
                                     ['1', '2', '3'].map((val, index) => {
                                         return (
-                                            <Link href={`compulsory/${encodeURIComponent(val)}`} key={index} className='p-3 w-1/3 text-center text-sm rounded-lg font-bold bg-zinc-300 text-zinc-800 transition-all hover:bg-[#045084] hover:text-[#f1f1f1] hover:font-bold'>Q{val}</Link>
+                                            <Link href={`compulsory/${encodeURIComponent(val)}`} key={index} className='p-3 w-1/3 text-center text-sm rounded-lg font-bold bg-gray-50 text-zinc-800 transition-all hover:bg-[#045084] hover:text-[#f1f1f1] hover:font-bold'>Q{val}</Link>
                                         )
                                     })
                                 }

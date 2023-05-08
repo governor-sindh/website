@@ -14,11 +14,11 @@ function Header() {
                             Home
                         </div>
                     </Link>
-                    <Link href={'/'}>
+                    {/* <Link href={'/'}>
                         <div className='menu_btns'>
                             Courses
                         </div>
-                    </Link>
+                    </Link> */}
                     <Link href={'/apply'}>
                         <div className='menu_btns'>
                             Apply

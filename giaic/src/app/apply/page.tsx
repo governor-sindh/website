@@ -245,6 +245,7 @@ export default function Page() {
                 type="button"
                 onClick={() => {
                   const filteredData = experienceData.filter(
+                    // @ts-expect-error
                     (value) => value.id !== item.id
                   );
                   setExperienceData(filteredData);
@@ -291,6 +292,7 @@ export default function Page() {
                 type="button"
                 onClick={() => {
                   const filteredData = projectsData.filter(
+                    // @ts-expect-error
                     (value) => value.id !== item.id
                   );
                   setProjectsData(filteredData);

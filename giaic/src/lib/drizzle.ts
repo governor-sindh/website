@@ -1,26 +1,22 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import {
-  integer,
   pgTable,
   serial,
   text,
   timestamp,
   varchar,
-  uniqueIndex,
-  uuid,
-  customType,
   boolean,
   date,
-  PgDate,
 } from "drizzle-orm/pg-core";
 import { InferModel } from "drizzle-orm";
-import { Pool, types } from "pg";
 import { db } from "@vercel/postgres";
 
-export const Applied_Users_Table = pgTable("applied_users", {
+export const UsersTable = pgTable("applied_users", {
   id: serial("id").primaryKey(),
-  username: text("name").notNull(),
+  fullName: text("full_name").notNull(),
+  cnic: varchar("cnic").notNull(),
   phoneNumber: varchar("phone_number").notNull(),
+  city: text("city").notNull(),
   email: text("email").notNull(),
   gender: text("gender").notNull(),
   highestQualification: text("highest_qualification").notNull(),
@@ -32,9 +28,14 @@ export const Applied_Users_Table = pgTable("applied_users", {
   programmingLanguages: text("programming_languages"),
 });
 
-export const Experiences_Table = pgTable("experiences", {
+// serial("user_id")
+//     .references(() => UsersTable.id)
+//     .notNull(),
+export const ExperiencesTable = pgTable("experiences", {
   id: serial("id").primaryKey(),
-  userId: serial("user_id").primaryKey().notNull(),
+  userId: serial("user_id")
+    .references(() => UsersTable.id)
+    .notNull(),
   title: varchar("title").notNull(),
   employment_type: varchar("employment_type").notNull(),
   industry: varchar("industry").notNull(),
@@ -42,15 +43,14 @@ export const Experiences_Table = pgTable("experiences", {
   startDate: date("start_date").notNull(),
   endDate: date("end_date"),
   currentlyWorking: boolean("currently_working").notNull(),
-
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-export const Projects_Table = pgTable("programming_projects", {
+export const ProjectsTable = pgTable("programming_projects", {
   id: serial("id").primaryKey(),
   userId: serial("user_id")
-    .references(() => Applied_Users_Table.id)
+    .references(() => UsersTable.id)
     .notNull(),
   title: varchar("title").notNull(),
   repoLink: text("repo_link"),
@@ -58,11 +58,11 @@ export const Projects_Table = pgTable("programming_projects", {
   description: text("description"),
 });
 
-export type User = InferModel<typeof Applied_Users_Table>;
-export type NewUser = InferModel<typeof Applied_Users_Table, "insert">;
-export type Experience = InferModel<typeof Experiences_Table>;
-export type NewExperience = InferModel<typeof Experiences_Table, "insert">;
-export type Project = InferModel<typeof Projects_Table>;
-export type NewProject = InferModel<typeof Projects_Table, "insert">;
+export type User = InferModel<typeof UsersTable>;
+export type NewUser = InferModel<typeof UsersTable, "insert">;
+export type Experience = InferModel<typeof ExperiencesTable>;
+export type NewExperience = InferModel<typeof ExperiencesTable, "insert">;
+export type Project = InferModel<typeof ProjectsTable>;
+export type NewProject = InferModel<typeof ProjectsTable, "insert">;
 
 export const database = drizzle(db);

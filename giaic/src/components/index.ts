@@ -9,6 +9,7 @@ import Compulsory from "./Compulsory";
 import Coursecontent from "./courseContent";
 import Advance from "./Advance";
 import Footer from "./Footer";
+import Text from "./Text";
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   CheckBox,
   ChakraWrapper,
   ProjectsModal,
+  Text
 };

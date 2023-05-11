@@ -8,6 +8,7 @@ import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { Button, useToast } from "@chakra-ui/react";
 import uuid from "react-uuid";
+// #044e83
 
 export default function Page() {
   const toast = useToast();
@@ -28,37 +29,54 @@ export default function Page() {
   const onFormSubmit = async (data: IApplyForm) => {
     try {
       setLoading(true);
-
-      const sleep = async (millis: number) =>
-        new Promise((resolve) => setTimeout(resolve, millis));
-      await sleep(2500);
-
-      console.log("data", {
+      console.log({
         fullName: data.fullName.toLowerCase(),
         cnic: data.cnic,
         phoneNumber: data.phoneNumber,
         city: data.city.toLowerCase(),
         email: data.email.toLowerCase(),
+        dateOfBirth: data.dateOfBirth,
         gender: data.gender,
         highestQualification: data.highestQualification,
-        github: data?.github,
-        linkedin: data?.linkedin,
-        discord: data?.discord,
-        experiences: experienceData,
+        github: data?.github ? data?.github : null,
+        linkedin: data?.linkedin ? data?.linkedin : null,
+        discord: data?.discord ? data?.discord : null,
+        experiences: experienceData.length ? experienceData : null,
         programmingLanguages: data?.programmingLanguages
           ? data?.programmingLanguages
-          : [],
-        programmingProjects: projectsData,
+          : null,
+        programmingProjects: projectsData.length ? projectsData : null,
       });
-      // const res = await fetch("/api/applyform/", {
-      //   // body:{},
-      //   method: "",
-      // });
+
+      const res = await fetch("/api/applyform/", {
+        body: JSON.stringify({
+          fullName: data.fullName.toLowerCase(),
+          cnic: data.cnic,
+          phoneNumber: data.phoneNumber,
+          city: data.city.toLowerCase(),
+          email: data.email.toLowerCase(),
+          dateOfBirth: data.dateOfBirth,
+          gender: data.gender,
+          highestQualification: data.highestQualification,
+          github: data?.github,
+          linkedin: data?.linkedin,
+          discord: data?.discord,
+          experiences: experienceData,
+          programmingLanguages: data?.programmingLanguages
+            ? data?.programmingLanguages
+            : [],
+          programmingProjects: projectsData,
+        }),
+        method: "POST",
+      });
+
+      const resData = await res.json();
+      console.log(resData.message);
 
       toast({
-        title: "Applied Successfully.",
-        description: "We've created your account for you.",
-        status: "success",
+        title: `${resData.message}`,
+        // description: "We've created your account for you.",
+        status: resData.message === "User Already Exist" ? "error" : "success",
         duration: 9000,
         isClosable: true,
       });
@@ -82,13 +100,13 @@ export default function Page() {
         noValidate
         className="container mx-4 my-10 w-full max-w-2xl rounded bg-white px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
       >
-        <h1 className="mb-8 text-center text-lg font-bold text-green-700 md:text-3xl">
+        <h1 className="text-main mb-8 text-center text-3xl font-bold text-green-700 md:text-lg">
           Student Course Registration Form{" "}
         </h1>
         <Input
           type="text"
           id="fullName"
-          placeholder="Name"
+          placeholder="Full Name"
           required={true}
           register={register}
           errors={errors}
@@ -96,7 +114,7 @@ export default function Page() {
         <Input
           type="number"
           id="cnic"
-          placeholder="CNIC"
+          placeholder="CNIC or B-Form Number"
           required={true}
           register={register}
           errors={errors}
@@ -109,17 +127,14 @@ export default function Page() {
           register={register}
           errors={errors}
         />
-        <label
-          htmlFor="city"
-          className=" text-md mb-6 mt-4 text-gray-400 md:text-xl"
-        >
+        <label htmlFor="city" className="text-md text-gray-400 md:text-xl">
           City *
         </label>
 
         <select
           {...register("city", { required: true })}
           id="city"
-          className="mb-8 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
+          className="mb-2 mt-2 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
           required
         >
           <option value="n">Please Select</option>
@@ -141,19 +156,24 @@ export default function Page() {
           register={register}
           errors={errors}
         />
-        <label className="text-md mb-8 mt-4 text-gray-400 md:text-xl">
-          {" "}
-          Gender *
-        </label>
+        <Input
+          type="date"
+          id="dateOfBirth"
+          placeholder="Date of Birth"
+          required={true}
+          register={register}
+          errors={errors}
+        />
+        <label className="text-md text-gray-400 md:text-xl"> Gender *</label>
         <div className="mb-4 flex justify-center gap-20 text-xl">
           <div className="flex items-center  ">
             <input
               {...register("gender", { required: true })}
               type="radio"
               value="male"
-              className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+              className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
             />
-            <label className="ml-2 text-2xl font-medium text-gray-900 dark:text-gray-300">
+            <label className="ml-2 text-2xl font-medium text-gray-800">
               {" "}
               Male
             </label>
@@ -163,9 +183,9 @@ export default function Page() {
               {...register("gender", { required: true })}
               type="radio"
               value="female"
-              className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+              className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
             />
-            <label className="ml-2 text-2xl font-medium text-gray-900 dark:text-gray-300">
+            <label className="ml-2 text-2xl font-medium text-gray-800">
               {" "}
               Female
             </label>
@@ -176,7 +196,7 @@ export default function Page() {
         )}
         <label
           htmlFor="qualification"
-          className=" text-md mb-6 mt-4 text-gray-400 md:text-xl"
+          className=" text-md  text-gray-400 md:text-xl"
         >
           Highest Qualification *
         </label>
@@ -184,8 +204,7 @@ export default function Page() {
         <select
           {...register("highestQualification", { required: true })}
           id="qualification"
-          className="mb-8 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
-          required
+          className="mb-2 mt-1 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
         >
           <option value="null">Please Select</option>
           {formQualifications.map((item, i) => (
@@ -221,13 +240,13 @@ export default function Page() {
           errors={errors}
         />
 
-        <label className="text-md mb-4 block text-gray-400 md:text-xl">
+        <label className="text-md block text-gray-400 md:text-xl">
           Experience (optional)
         </label>
         <button
           type="button"
           onClick={() => setExperienceModal(!experienceModal)}
-          className="mb-2 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-green-600 hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          className="text-main mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
         >
           Add Work Experience
         </button>
@@ -239,9 +258,11 @@ export default function Page() {
               key={uuid()}
             >
               <h4 className=" text-lg capitalize">
-                {item.title} - {item.companyName}
+                {item.title} - {item.companyName} -{" "}
+                {`${new Date().getDate()}-${new Date().getMonth()}-${new Date().getUTCFullYear()}`}
               </h4>
               <button
+                className="px-4 py-1"
                 type="button"
                 onClick={() => {
                   const filteredData = experienceData.filter(
@@ -257,7 +278,7 @@ export default function Page() {
           ))}
         </div>
 
-        <label className="text-md mb-4 block text-gray-400 md:text-xl">
+        <label className="text-md mb-2 block text-gray-400 md:text-xl">
           Programming Languages (optional)
         </label>
         <CheckBox value="JavaScript" register={register} />
@@ -276,7 +297,7 @@ export default function Page() {
         <button
           type="button"
           onClick={() => setProjectModal(!projectModal)}
-          className="mb-2 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-green-600 hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          className="text-main mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
         >
           Add Programming projects
         </button>
@@ -290,6 +311,7 @@ export default function Page() {
               <h4 className=" text-xl capitalize">{item.title}</h4>
               <button
                 type="button"
+                className="px-4 py-1"
                 onClick={() => {
                   const filteredData = projectsData.filter(
                     // @ts-expect-error
@@ -307,20 +329,17 @@ export default function Page() {
 
         <div className="flex w-full justify-center">
           {/* validation is only allow form submission when form is valid and isSubmitting for not resubmitting form */}
-          {/* <button
-            className="mb-8 mt-8 w-36 justify-center rounded-full border border-gray-700 bg-blue-700 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:w-52 md:text-xl"
-        */}
 
           <Button
             // disabled={!isValid || isSubmitting}
             type="submit"
-            className="mb-8 mt-8 w-36 rounded-3xl shadow-xl"
+            className="bg-main mb-8 mt-8 w-36 rounded-3xl shadow-xl"
             isLoading={loading}
             loadingText="Applying"
-            colorScheme="green"
+            colorScheme="bg-main"
             variant="solid"
           >
-            APPLY NOW
+            SUBMIT
           </Button>
         </div>
       </form>

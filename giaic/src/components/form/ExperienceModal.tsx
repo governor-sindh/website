@@ -22,7 +22,10 @@ export default function ExperienceModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IExperience>({ resolver: yupResolver(experienceSchema) });
+  } = useForm<IExperience>({
+    mode: "onTouched",
+    resolver: yupResolver(experienceSchema),
+  });
 
   const onFormSubmit = (data: IExperience) => {
     setExperienceData((perv) => [...perv, { id: uuid(), ...data }]);
@@ -62,7 +65,7 @@ export default function ExperienceModal({
                       {...register("employmentType", { required: true })}
                       id="employmentType"
                       className="mb-4 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
-                      required
+                      // required
                     >
                       <option value="n">Please Select</option>
                       {employmentType.map((item, i) => (
@@ -109,7 +112,7 @@ export default function ExperienceModal({
                       register={register}
                       errors={errors}
                     />
-                    <label className="text-md mb-8 mt-4 text-gray-400 md:text-xl">
+                    {/* <label className="text-md mb-8 mt-4 text-gray-400 md:text-xl">
                       {" "}
                       Currently Working *
                     </label>
@@ -141,7 +144,7 @@ export default function ExperienceModal({
                       <p className="mb-4 text-red-400">
                         {errors.currentlyWorking?.message}
                       </p>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
@@ -154,7 +157,7 @@ export default function ExperienceModal({
                     Close
                   </button>
                   <button
-                    className="mb-1 mr-1 rounded bg-green-600 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-green-700"
+                    className="bg-main mb-1 mr-1 rounded px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-blue-700"
                     type="submit"
                   >
                     Submit

@@ -10,14 +10,14 @@ export interface IExperience {
   // id: string;
   title: string;
   employmentType:
-    | "Full-time"
-    | "Part-time"
-    | "Self-employed"
-    | "Freelance"
-    | "Contract"
-    | "Internship"
-    | "Apprenticeship"
-    | "Seasonal";
+  | "Full-time"
+  | "Part-time"
+  | "Self-employed"
+  | "Freelance"
+  | "Contract"
+  | "Internship"
+  | "Apprenticeship"
+  | "Seasonal";
   industry: string;
   companyName: string;
   startDate: string;
@@ -33,11 +33,11 @@ export interface IApplyForm {
   gender: "male" | "female";
   dateOfBirth: string;
   highestQualification:
-    | "Matric / O Levels"
-    | "Intermediate / A Levels"
-    | "Undergraduate (Bachelor's)"
-    | "Graduate (Master's)"
-    | "Post-Graduate (PhD)";
+  | "Matric / O Levels"
+  | "Intermediate / A Levels"
+  | "Undergraduate (Bachelor's)"
+  | "Graduate (Master's)"
+  | "Post-Graduate (PhD)";
   github?: string;
   linkedin?: string;
   discord?: string;
@@ -53,6 +53,7 @@ export type TFields =
   | "phoneNumber"
   | "city"
   | "email"
+  | "dateOfBirth"
   | "gender"
   | "highestQualification"
   | "github"

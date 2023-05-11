@@ -40,7 +40,6 @@ export const ExperiencesTable = pgTable("experiences", {
   companyName: varchar("company_name").notNull(),
   startDate: date("start_date").notNull(),
   endDate: date("end_date"),
-  currentlyWorking: boolean("currently_working").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

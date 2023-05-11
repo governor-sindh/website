@@ -10,19 +10,18 @@ export interface IExperience {
   // id: string;
   title: string;
   employmentType:
-    | "Full-time"
-    | "Part-time"
-    | "Self-employed"
-    | "Freelance"
-    | "Contract"
-    | "Internship"
-    | "Apprenticeship"
-    | "Seasonal";
+  | "Full-time"
+  | "Part-time"
+  | "Self-employed"
+  | "Freelance"
+  | "Contract"
+  | "Internship"
+  | "Apprenticeship"
+  | "Seasonal";
   industry: string;
   companyName: string;
-  startDate: Date;
-  endDate: Date;
-  // currentlyWorking: boolean;
+  startDate: string;
+  endDate: string;
 }
 
 export interface IApplyForm {
@@ -31,15 +30,14 @@ export interface IApplyForm {
   phoneNumber: string;
   city: string;
   email: string;
-  dateOfBirth: Date;
   gender: "male" | "female";
   dateOfBirth: string;
   highestQualification:
-    | "Matric / O Levels"
-    | "Intermediate / A Levels"
-    | "Undergraduate (Bachelor's)"
-    | "Graduate (Master's)"
-    | "Post-Graduate (PhD)";
+  | "Matric / O Levels"
+  | "Intermediate / A Levels"
+  | "Undergraduate (Bachelor's)"
+  | "Graduate (Master's)"
+  | "Post-Graduate (PhD)";
   github?: string;
   linkedin?: string;
   discord?: string;

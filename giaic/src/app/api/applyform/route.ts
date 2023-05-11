@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
     city,
     email,
     gender,
+    dateOfBirth,
     highestQualification,
     github,
     linkedin,
@@ -67,7 +68,8 @@ export async function POST(request: NextRequest) {
     !cnic ||
     !city ||
     !gender ||
-    !highestQualification
+    !highestQualification ||
+    !dateOfBirth
   ) {
     return NextResponse.json(
       { message: "Add All Credentials" },
@@ -84,6 +86,7 @@ export async function POST(request: NextRequest) {
     city,
     email,
     gender,
+    dateOfBirth,
     highestQualification,
     github,
     linkedin,

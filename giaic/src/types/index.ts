@@ -32,6 +32,7 @@ export interface IApplyForm {
   city: string;
   email: string;
   gender: "male" | "female";
+  dateOfBirth: string;
   highestQualification:
     | "Matric / O Levels"
     | "Intermediate / A Levels"

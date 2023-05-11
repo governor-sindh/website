@@ -36,20 +36,20 @@ function Footer() {
                         </div>
                     </div>
 
-                    <div className='text-[#f1f1f1]'>
+                    <div className='text-zinc-800'>
                         <h1 className='font-bold text-xl'>Social Links</h1>
 
                         <div className='mt-5 flex gap-3  md:text-sm'>
-                            <Link href={'https://www.facebook.com/groups/panaverse'} target='_blank' className='w-10 h-10 bg-[#045084] rounded-full flex justify-center items-center text-white'>
+                            <Link href={'https://www.facebook.com/groups/panaverse'} target='_blank' className='w-10 h-10 bg-main rounded-full flex justify-center items-center text-white'>
                                 <FaFacebookF size={16} />
                             </Link>
-                            <Link href={'https://twitter.com/Panaverse_edu'} target='_blank' className='w-10 h-10 bg-[#045084] rounded-full flex justify-center items-center text-white'>
+                            <Link href={'https://twitter.com/Panaverse_edu'} target='_blank' className='w-10 h-10 bg-main rounded-full flex justify-center items-center text-white'>
                                 <FaTwitter size={16} />
                             </Link>
-                            <Link href={'https://www.youtube.com/@panaverse/streams'} target='_blank' className='w-10 h-10 bg-[#045084] rounded-full flex justify-center items-center text-white'>
+                            <Link href={'https://www.youtube.com/@panaverse/streams'} target='_blank' className='w-10 h-10 bg-main rounded-full flex justify-center items-center text-white'>
                                 <FaYoutube size={16} />
                             </Link>
-                            <Link href={'https://github.com/panaverse'} target='_blank' className='w-10 h-10 bg-[#045084] rounded-full flex justify-center items-center text-white'>
+                            <Link href={'https://github.com/panaverse'} target='_blank' className='w-10 h-10 bg-main rounded-full flex justify-center items-center text-white'>
                                 <FaGithub size={18} />
                             </Link>
                         </div>

@@ -18,7 +18,7 @@ function Hero() {
             <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto mt-10 flex md:block justify-between items-center relative'>
                 <div className='w-1/2 md:w-full '>
                     <h1 className='text-6xl lg:text-5xl sm:text-4xl tracking-wider text-main font-extrabold'>Governor Sindh</h1>
-                    <h1 className='text-5xl lg:text-4xl sm:text-3xl text-sub font-semibold mt-5 tracking-wider'>Initiative for<br />Artificial Intelligece,<br />Web 3.0 and Metaverse</h1>
+                    <h1 className='text-5xl lg:text-4xl sm:text-3xl text-sub font-semibold mt-5 tracking-wider'>Initiative for<br />Artificial Intelligence,<br />Web 3.0 and Metaverse</h1>
                     <p className='text-xl font-extrabold text-main my-5'>
                         Earn upto $5,000 / month
                     </p>

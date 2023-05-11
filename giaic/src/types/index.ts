@@ -20,9 +20,9 @@ export interface IExperience {
     | "Seasonal";
   industry: string;
   companyName: string;
-  startDate: string;
-  endDate: string;
-  currentlyWorking: boolean;
+  startDate: Date;
+  endDate: Date;
+  // currentlyWorking: boolean;
 }
 
 export interface IApplyForm {
@@ -31,6 +31,7 @@ export interface IApplyForm {
   phoneNumber: string;
   city: string;
   email: string;
+  dateOfBirth: Date;
   gender: "male" | "female";
   dateOfBirth: string;
   highestQualification:
@@ -54,6 +55,7 @@ export type TFields =
   | "phoneNumber"
   | "city"
   | "email"
+  | "dateOfBirth"
   | "gender"
   | "highestQualification"
   | "github"

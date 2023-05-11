@@ -3,9 +3,9 @@ import * as yup from "yup";
 export const mainFormSchema = yup.object({
   fullName: yup
     .string()
-    .required("Full Name is required")
+    .required("Name is required")
     .min(3, "Please enter more then 3 characters")
-    .max(40, "Please enter within 40 characters"),
+    .max(100, "Please enter within 100 characters"),
   cnic: yup
     .string()
     .required("CNIC Number is required  without -")
@@ -70,7 +70,7 @@ export const experienceSchema = yup.object({
     .max(40, "Please enter within 40 characters"),
   startDate: yup.date().typeError("Date is Required").required("Require daa"),
   // endDate: yup.date().typeError("Date is Required"),
-  currentlyWorking: yup.string().required("Please select"),
+  // currentlyWorking: yup.string().required("Please select"),
 });
 
 export const projectSchema = yup.object({

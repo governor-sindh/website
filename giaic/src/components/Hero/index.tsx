@@ -4,7 +4,6 @@ import React from 'react';
 import { Poppins } from 'next/font/google';
 import Cover from '../../../public/cover.jpg'
 // import { Header } from '@/components';
-// import MainHeading from '../heading/mainHeading';
 
 const poppins = Poppins({
     weight: ['300', '400', '500', '800', '900'],

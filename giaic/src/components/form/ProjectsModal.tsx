@@ -20,7 +20,10 @@ export default function ProjectsModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IProjects>({ resolver: yupResolver(projectSchema) });
+  } = useForm<IProjects>({
+    mode: "onTouched",
+    resolver: yupResolver(projectSchema),
+  });
 
   const onFormSubmit = (data: IProjects) => {
     setProjectsData((perv) => [...perv, { id: uuid(), ...data }]);
@@ -86,7 +89,7 @@ export default function ProjectsModal({
                     Close
                   </button>
                   <button
-                    className="mb-1 mr-1 rounded bg-green-600 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-green-700"
+                    className="bg-main mb-1 mr-1 rounded px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-blue-700"
                     type="submit"
                   >
                     Submit

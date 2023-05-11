@@ -22,7 +22,6 @@ export interface IExperience {
   companyName: string;
   startDate: string;
   endDate: string;
-  currentlyWorking: boolean;
 }
 
 export interface IApplyForm {

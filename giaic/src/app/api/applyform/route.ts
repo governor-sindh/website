@@ -112,7 +112,6 @@ export async function POST(request: NextRequest) {
       industry: experience.industry,
       companyName: experience.companyName,
       startDate: experience.startDate,
-      currentlyWorking: experience.currentlyWorking,
       endDate: experience.endDate,
     };
     const experiencesData = await database

@@ -1,5 +1,6 @@
-import { TFields, IApplyForm, IExperience } from "@/types";
-import type { UseFormRegister, FieldErrors } from "react-hook-form";
+import { TFields } from "@/types";
+// import { TFields, IApplyForm, IExperience, MyFormUnion } from "@/types";
+// import type { UseFormRegister, FieldErrors } from "react-hook-form";
 
 export default function Input({
   id,
@@ -13,13 +14,9 @@ export default function Input({
   placeholder: string;
   type: "text" | "number" | "email" | "date";
   required?: boolean;
-  register: any; // UseFormRegister<IApplyForm>;
+  register: any; // UseFormRegister<IApplyForm|IExperience>;
   errors: any; //FieldErrors<IApplyForm>;
 }) {
-  // console.log(
-  //   `${new Date().getUTCFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
-  // );
-
   return (
     <div className="my-6">
       <label
@@ -33,7 +30,7 @@ export default function Input({
         id={id}
         className="border-rounded-lg text-md mb-2 mt-1 block w-full rounded border border-gray-400 bg-gray-100 p-3 md:text-xl"
         placeholder={` ${placeholder}`}
-        maxLength={id === "cnic" ? 13 : ""}
+        // maxLength={id === "cnic" ? 13 : ""}
         // max={
         //   `2023-4-8`
         //   // type === "date"
@@ -43,7 +40,7 @@ export default function Input({
         // maxLength={4}
         // onChange={(e) => console.log(e.target)}
         {...register(id, {
-          valueAsDate: type === "date" ? true : false,
+          valueAsDate: false,
         })}
       />
       {errors?.[id] && (

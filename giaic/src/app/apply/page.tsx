@@ -8,7 +8,6 @@ import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { Button, useToast } from "@chakra-ui/react";
 import uuid from "react-uuid";
-// #044e83
 
 export default function Page() {
   const toast = useToast();
@@ -29,6 +28,7 @@ export default function Page() {
   const onFormSubmit = async (data: IApplyForm) => {
     try {
       setLoading(true);
+
       console.log({
         fullName: data.fullName.toLowerCase(),
         cnic: data.cnic,
@@ -58,14 +58,14 @@ export default function Page() {
           dateOfBirth: data.dateOfBirth,
           gender: data.gender,
           highestQualification: data.highestQualification,
-          github: data?.github,
-          linkedin: data?.linkedin,
-          discord: data?.discord,
-          experiences: experienceData,
+          github: data?.github ? data?.github : null,
+          linkedin: data?.linkedin ? data?.linkedin : null,
+          discord: data?.discord ? data?.discord : null,
+          experiences: experienceData.length ? experienceData : null,
           programmingLanguages: data?.programmingLanguages
             ? data?.programmingLanguages
-            : [],
-          programmingProjects: projectsData,
+            : null,
+          programmingProjects: projectsData.length ? projectsData : null,
         }),
         method: "POST",
       });
@@ -76,7 +76,11 @@ export default function Page() {
       toast({
         title: `${resData.message}`,
         // description: "We've created your account for you.",
-        status: resData.message === "User Already Exist" ? "error" : "success",
+        status:
+          resData.message === "User Already Exist" ||
+          resData.message === "Add All Credentials"
+            ? "error"
+            : "success",
         duration: 9000,
         isClosable: true,
       });
@@ -98,9 +102,9 @@ export default function Page() {
       <form
         onSubmit={handleSubmit(onFormSubmit)}
         noValidate
-        className="container mx-4 my-10 w-full max-w-2xl rounded bg-white px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
+        className="mx-4 my-10 w-full max-w-2xl rounded bg-white px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
       >
-        <h1 className="text-main mb-8 text-center text-3xl font-bold text-green-700 md:text-lg">
+        <h1 className="mb-8 text-center text-3xl font-bold  text-main md:text-lg">
           Student Course Registration Form{" "}
         </h1>
         <Input
@@ -206,7 +210,7 @@ export default function Page() {
           id="qualification"
           className="mb-2 mt-1 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
         >
-          <option value="null">Please Select</option>
+          <option value="n">Please Select</option>
           {formQualifications.map((item, i) => (
             <option key={uuid()} value={item}>
               {item}
@@ -246,7 +250,7 @@ export default function Page() {
         <button
           type="button"
           onClick={() => setExperienceModal(!experienceModal)}
-          className="text-main mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          className="mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-main hover:bg-gray-100 hover:text-blue-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
         >
           Add Work Experience
         </button>
@@ -297,7 +301,7 @@ export default function Page() {
         <button
           type="button"
           onClick={() => setProjectModal(!projectModal)}
-          className="text-main mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          className="mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-main hover:bg-gray-100 hover:text-blue-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
         >
           Add Programming projects
         </button>
@@ -328,12 +332,11 @@ export default function Page() {
         </div>
 
         <div className="flex w-full justify-center">
-          {/* validation is only allow form submission when form is valid and isSubmitting for not resubmitting form */}
-
+          {/* validation only allow form submission when form is valid and isSubmitting for not resubmitting form */}
           <Button
             // disabled={!isValid || isSubmitting}
             type="submit"
-            className="bg-main mb-8 mt-8 w-36 rounded-3xl shadow-xl"
+            className="mb-8 mt-8 w-36 rounded-3xl bg-main shadow-xl drop-shadow-md hover:bg-blue-800 hover:shadow-2xl"
             isLoading={loading}
             loadingText="Applying"
             colorScheme="bg-main"

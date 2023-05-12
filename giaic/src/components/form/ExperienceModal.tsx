@@ -57,7 +57,7 @@ export default function ExperienceModal({
                     />
                     <label
                       htmlFor="employmentType"
-                      className=" text-md mb-6 mt-4 text-gray-400 md:text-xl"
+                      className="text-md mb-6 mt-4 text-gray-400 md:text-xl"
                     >
                       Employment Type *
                     </label>
@@ -157,7 +157,7 @@ export default function ExperienceModal({
                     Close
                   </button>
                   <button
-                    className="bg-main mb-1 mr-1 rounded px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-blue-700"
+                    className="mb-1 mr-1 rounded bg-main px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-blue-700"
                     type="submit"
                   >
                     Submit

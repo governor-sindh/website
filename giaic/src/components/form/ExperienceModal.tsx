@@ -28,7 +28,7 @@ export default function ExperienceModal({
   });
 
   const onFormSubmit = (data: IExperience) => {
-    setExperienceData((perv) => [...perv, { id: uuid(), ...data }]);
+    setExperienceData((perv) => [...perv, {  ...data , id: uuid() }]);
     setExperienceModal(false);
   };
 

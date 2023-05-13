@@ -18,12 +18,12 @@ function Header() {
                     <RxCross1 className='text-white' size={25} onClick={() => setOpen(false)} />
                 </div>
                 <div className='w-[90%] m-auto mt-20 text-base text-white font-normal flex flex-col'>
-                    <Link href={'/'}>
+                    <Link href={'/'} onClick={() => setOpen(false)}>
                         <div className='py-5 border-b border-[#1468a5]'>
                             Home
                         </div>
                     </Link>
-                    <Link href={'/apply'}>
+                    <Link href={'/apply'} onClick={() => setOpen(false)}>
                         <div className='py-5 border-b border-[#1468a5]'>
                             Apply
                         </div>
@@ -48,7 +48,7 @@ function Header() {
                                 Apply
                             </div>
                         </Link>
-                        <ChakraMenu screen='large' open={open} setOpen={setOpen}  />
+                        <ChakraMenu screen='large' open={open} setOpen={setOpen} />
 
                     </div>
                     <div className='hidden sm:block'>

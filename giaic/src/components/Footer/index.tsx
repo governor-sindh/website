@@ -12,7 +12,7 @@ function Footer() {
             <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto py-20'>
                 <div className='grid grid-cols-3 md:grid-cols-1 gap-10'>
                     <div className='text-zinc-800'>
-                        <h1 className='font-bold text-xl'>Compulsory Quarters</h1>
+                        <h1 className='font-bold text-xl'>Core Courses</h1>
                         <div className='mt-5 flex flex-col gap-3 md:text-sm'>
                             {
                                 CompulsoryData.map((val, index) => {
@@ -24,7 +24,7 @@ function Footer() {
                         </div>
                     </div>
                     <div className='text-zinc-800'>
-                        <h1 className='font-bold text-xl'>Available Tracks</h1>
+                        <h1 className='font-bold text-xl'>Advance Courses</h1>
                         <div className='mt-5 flex flex-col gap-3  md:text-sm'>
                             {
                                 tracks.map((val, index) => {

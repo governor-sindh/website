@@ -18,7 +18,7 @@ export default function Page() {
   const [projectModal, setProjectModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, formState } = useForm<IApplyForm>({
+  const { register, handleSubmit, formState, watch } = useForm<IApplyForm>({
     mode: "onTouched",
     resolver: yupResolver(mainFormSchema),
   });
@@ -28,8 +28,7 @@ export default function Page() {
   const onFormSubmit = async (data: IApplyForm) => {
     try {
       setLoading(true);
-
-      console.log({
+      const formData = {
         fullName: data.fullName.toLowerCase(),
         cnic: data.cnic,
         phoneNumber: data.phoneNumber,
@@ -46,27 +45,12 @@ export default function Page() {
           ? data?.programmingLanguages
           : null,
         programmingProjects: projectsData.length ? projectsData : null,
-      });
+      };
+      // console.log("formData", formData);
+      // console.log("formData", JSON.stringify(formData));
 
       const res = await fetch("/api/applyform/", {
-        body: JSON.stringify({
-          fullName: data.fullName.toLowerCase(),
-          cnic: data.cnic,
-          phoneNumber: data.phoneNumber,
-          city: data.city.toLowerCase(),
-          email: data.email.toLowerCase(),
-          dateOfBirth: data.dateOfBirth,
-          gender: data.gender,
-          highestQualification: data.highestQualification,
-          github: data?.github ? data?.github : null,
-          linkedin: data?.linkedin ? data?.linkedin : null,
-          discord: data?.discord ? data?.discord : null,
-          experiences: experienceData.length ? experienceData : null,
-          programmingLanguages: data?.programmingLanguages
-            ? data?.programmingLanguages
-            : null,
-          programmingProjects: projectsData.length ? projectsData : null,
-        }),
+        body: JSON.stringify(formData),
         method: "POST",
       });
 
@@ -143,7 +127,7 @@ export default function Page() {
         >
           <option value="n">Please Select</option>
           {formCities.map((item, i) => (
-            <option key={uuid()} value={item}>
+            <option key={i} value={item}>
               {item}
             </option>
           ))}
@@ -212,7 +196,7 @@ export default function Page() {
         >
           <option value="n">Please Select</option>
           {formQualifications.map((item, i) => (
-            <option key={uuid()} value={item}>
+            <option key={i} value={item}>
               {item}
             </option>
           ))}
@@ -256,10 +240,10 @@ export default function Page() {
         </button>
 
         <div className="space-y-2">
-          {experienceData.map((item, i) => (
+          {experienceData.map((item) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={uuid()}
+              key={item.id}
             >
               <h4 className=" text-lg capitalize">
                 {item.title} - {item.companyName} -{" "}
@@ -270,7 +254,6 @@ export default function Page() {
                 type="button"
                 onClick={() => {
                   const filteredData = experienceData.filter(
-                    // @ts-expect-error
                     (value) => value.id !== item.id
                   );
                   setExperienceData(filteredData);
@@ -310,7 +293,7 @@ export default function Page() {
           {projectsData.map((item, i) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={uuid()}
+              key={item.id}
             >
               <h4 className=" text-xl capitalize">{item.title}</h4>
               <button
@@ -318,7 +301,6 @@ export default function Page() {
                 className="px-4 py-1"
                 onClick={() => {
                   const filteredData = projectsData.filter(
-                    // @ts-expect-error
                     (value) => value.id !== item.id
                   );
                   setProjectsData(filteredData);
@@ -330,7 +312,6 @@ export default function Page() {
             </div>
           ))}
         </div>
-
         <div className="flex w-full justify-center">
           {/* validation only allow form submission when form is valid and isSubmitting for not resubmitting form */}
           <Button

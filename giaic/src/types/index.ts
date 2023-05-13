@@ -5,11 +5,11 @@ export interface IProjects {
   repoLink: string;
   hostedLink?: string;
   description?: string;
-  // id: string;
+  id: string;
 }
 
 export interface IExperience {
-  // id: string;
+  id: string;
   title: string;
   employmentType:
     | "Full-time"

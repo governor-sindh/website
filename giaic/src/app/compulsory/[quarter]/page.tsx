@@ -49,7 +49,7 @@ async function Page({ params }: { params: { quarter: string } }) {
                 <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto flex md:block justify-between mt-20 gap-10 relative'>
                     <div className='w-[270px] md:w-full h-fit md:border border-zinc-300 md:rounded-lg flex-shrink-0 sticky md:relative md:top-0 top-40'>
                         <div className='h-fit rounded-lg p-3 bg-gray-50 '>
-                            <h2 className='font-normal text-[#f1f1f1] text-sm leading-tight bg-main p-3 rounded-lg'>Compulsory Courses</h2>
+                            <h2 className='font-normal text-[#f1f1f1] text-sm leading-tight bg-main p-3 rounded-lg'>Core Courses Sequence</h2>
                             <ul className='mt-2 text-zinc-800'>
                                 {
                                     [1, 2, 3].map((val, index) => {

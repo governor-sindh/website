@@ -19,7 +19,7 @@ function ChakraMenu({ screen, open, setOpen }: { screen: string, open: boolean, 
             </div>
             <MenuList className={`bg-zinc-50 box_shadow sm:h-[300px] sm:overflow-y-auto text-zinc-800 p-7 sm:p-4 ${screen === 'small' && 'w-[90vw]'}`}>
                 <div className='pb-5 border-b border-zinc-300'>
-                    <h1 className='text-xl sm:text-lg font-bold text-zinc-800 mb-2'>Compulsory</h1>
+                    <h1 className='text-xl sm:text-lg font-bold text-zinc-800 mb-2'>Core Courses</h1>
                     {
                         CompulsoryData.map((val, index) => {
                             let active = pathname.startsWith(`/compulsory/${val.id}`)
@@ -30,7 +30,7 @@ function ChakraMenu({ screen, open, setOpen }: { screen: string, open: boolean, 
                     }
                 </div>
                 <div className='mt-5'>
-                    <h1 className='text-xl sm:text-lg font-bold text-zinc-800 mb-2'>Advance</h1>
+                    <h1 className='text-xl sm:text-lg font-bold text-zinc-800 mb-2'>Advance Courses</h1>
                     {
                         tracks.map((val, index) => {
                             let active = pathname.startsWith(`/tracks/${val.id}`)

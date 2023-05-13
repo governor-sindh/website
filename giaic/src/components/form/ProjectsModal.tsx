@@ -26,7 +26,7 @@ export default function ProjectsModal({
   });
 
   const onFormSubmit = (data: IProjects) => {
-    setProjectsData((perv) => [...perv, { id: uuid(), ...data }]);
+    setProjectsData((perv) => [...perv, { ...data, id: uuid() }]);
     setProjectModal(false);
   };
 
@@ -89,7 +89,7 @@ export default function ProjectsModal({
                     Close
                   </button>
                   <button
-                    className="bg-main mb-1 mr-1 rounded px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-blue-700"
+                    className="mb-1 mr-1 rounded bg-main px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-blue-700"
                     type="submit"
                   >
                     Submit

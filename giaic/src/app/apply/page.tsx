@@ -18,7 +18,7 @@ export default function Page() {
   const [projectModal, setProjectModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, formState, watch } = useForm<IApplyForm>({
+  const { register, handleSubmit, formState } = useForm<IApplyForm>({
     mode: "onTouched",
     resolver: yupResolver(mainFormSchema),
   });
@@ -46,8 +46,8 @@ export default function Page() {
           : null,
         programmingProjects: projectsData.length ? projectsData : null,
       };
-      // console.log("formData", formData);
-      // console.log("formData", JSON.stringify(formData));
+      console.log("formData", formData);
+      console.log("formData", JSON.stringify(formData));
 
       const res = await fetch("/api/applyform/", {
         body: JSON.stringify(formData),
@@ -127,7 +127,7 @@ export default function Page() {
         >
           <option value="n">Please Select</option>
           {formCities.map((item, i) => (
-            <option key={i} value={item}>
+            <option key={uuid()} value={item}>
               {item}
             </option>
           ))}
@@ -196,7 +196,7 @@ export default function Page() {
         >
           <option value="n">Please Select</option>
           {formQualifications.map((item, i) => (
-            <option key={i} value={item}>
+            <option key={uuid()} value={item}>
               {item}
             </option>
           ))}
@@ -240,10 +240,10 @@ export default function Page() {
         </button>
 
         <div className="space-y-2">
-          {experienceData.map((item) => (
+          {experienceData.map((item, i) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={item.id}
+              key={uuid()}
             >
               <h4 className=" text-lg capitalize">
                 {item.title} - {item.companyName} -{" "}
@@ -293,7 +293,7 @@ export default function Page() {
           {projectsData.map((item, i) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={item.id}
+              key={uuid()}
             >
               <h4 className=" text-xl capitalize">{item.title}</h4>
               <button
@@ -312,6 +312,7 @@ export default function Page() {
             </div>
           ))}
         </div>
+
         <div className="flex w-full justify-center">
           {/* validation only allow form submission when form is valid and isSubmitting for not resubmitting form */}
           <Button

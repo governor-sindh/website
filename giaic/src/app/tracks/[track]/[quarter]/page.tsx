@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 async function Page({ params }: { params: { track: string, quarter: string } }) {
     const data: ITrackDataType = await getData(params.track, params.quarter);
 
-    console.log(params.quarter)
+    // console.log(params.quarter)
     if ((params.quarter !== '4' && params.quarter !== '5') || (params.track !== 'wmd' && params.track !== 'ai' && params.track !== 'cnc' && params.track !== 'iot' && params.track !== 'gbs' && params.track !== 'npa')) {
         return (
             <div className='w-full h-[50vh] flex justify-center items-center text-2xl font-semibold text-zinc-800'>

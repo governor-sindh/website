@@ -17,7 +17,7 @@ function Footer() {
                             {
                                 CompulsoryData.map((val, index) => {
                                     return (
-                                        <Link href={`/compulsory/${encodeURIComponent(val.id)}`} className='truncate' key={index}>Quarter {val.id}: {val.text}</Link>
+                                        <Link href={`/compulsory/${encodeURIComponent(val.id)}`} className='truncate' key={index}>{val.text}</Link>
                                     )
                                 })
                             }

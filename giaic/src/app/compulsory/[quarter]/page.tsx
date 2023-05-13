@@ -27,6 +27,8 @@ export async function generateStaticParams() {
     }));
 }
 
+const compulsoryNames = ['Programming Fundamentals', 'Web2 Using NextJS', 'Earn as You Learn']
+
 async function Page({ params }: { params: { quarter: string } }) {
 
     const data: IQuarterData = await getData(params.quarter);
@@ -50,9 +52,9 @@ async function Page({ params }: { params: { quarter: string } }) {
                             <h2 className='font-normal text-[#f1f1f1] text-sm leading-tight bg-main p-3 rounded-lg'>Compulsory Courses</h2>
                             <ul className='mt-2 text-zinc-800'>
                                 {
-                                    ['1', '2', '3'].map((val, index) => {
+                                    [1, 2, 3].map((val, index) => {
                                         return (
-                                            <Link key={index} href={`/compulsory/${encodeURIComponent(val)}`}><li className={`py-[5px] pl-5 text-sm tracking-widest border-l-[2px] ${params.quarter === val ? 'border-main text-main' : 'border-[#c2c2c2]'}`}>Course - {val}</li></Link>
+                                            <Link key={index} href={`/compulsory/${encodeURIComponent(val)}`}><li className={`py-[5px] pl-5 text-sm tracking-widest border-l-[2px] ${params.quarter === String(val) ? 'border-main text-main' : 'border-[#c2c2c2]'}`}>{compulsoryNames[index]}</li></Link>
                                         )
                                     })
                                 }

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.1",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
@@ -22,11 +23,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
-    "react-uuid": "^2.0.0",
     "react-icons": "^4.8.0",
-    "react-hook-form": "^7.43.9",
     "react-uuid": "^2.0.0",
-
     "tailwindcss": "3.3.2",
     "yup": "^1.1.1"
   },

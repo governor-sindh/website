@@ -7,7 +7,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { Button, useToast } from "@chakra-ui/react";
-import uuid from "react-uuid";
 
 export default function Page() {
   const toast = useToast();
@@ -127,7 +126,7 @@ export default function Page() {
         >
           <option value="n">Please Select</option>
           {formCities.map((item, i) => (
-            <option key={uuid()} value={item}>
+            <option key={i} value={item}>
               {item}
             </option>
           ))}
@@ -196,7 +195,7 @@ export default function Page() {
         >
           <option value="n">Please Select</option>
           {formQualifications.map((item, i) => (
-            <option key={uuid()} value={item}>
+            <option key={i} value={item}>
               {item}
             </option>
           ))}
@@ -243,7 +242,7 @@ export default function Page() {
           {experienceData.map((item, i) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={uuid()}
+              key={item.id}
             >
               <h4 className=" text-lg capitalize">
                 {item.title} - {item.companyName} -{" "}
@@ -293,7 +292,7 @@ export default function Page() {
           {projectsData.map((item, i) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={uuid()}
+              key={item.id}
             >
               <h4 className=" text-xl capitalize">{item.title}</h4>
               <button

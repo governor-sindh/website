@@ -1,23 +1,25 @@
+// export interface MyFormUnion extends IApplyForm, IExperience, IProjects {}
+
 export interface IProjects {
   title: string;
   repoLink: string;
   hostedLink?: string;
   description?: string;
-  // id: string;
+  id: string;
 }
 
 export interface IExperience {
-  // id: string;
+  id: string;
   title: string;
   employmentType:
-  | "Full-time"
-  | "Part-time"
-  | "Self-employed"
-  | "Freelance"
-  | "Contract"
-  | "Internship"
-  | "Apprenticeship"
-  | "Seasonal";
+    | "Full-time"
+    | "Part-time"
+    | "Self-employed"
+    | "Freelance"
+    | "Contract"
+    | "Internship"
+    | "Apprenticeship"
+    | "Seasonal";
   industry: string;
   companyName: string;
   startDate: string;
@@ -33,11 +35,11 @@ export interface IApplyForm {
   gender: "male" | "female";
   dateOfBirth: string;
   highestQualification:
-  | "Matric / O Levels"
-  | "Intermediate / A Levels"
-  | "Undergraduate (Bachelor's)"
-  | "Graduate (Master's)"
-  | "Post-Graduate (PhD)";
+    | "Matric / O Levels"
+    | "Intermediate / A Levels"
+    | "Undergraduate (Bachelor's)"
+    | "Graduate (Master's)"
+    | "Post-Graduate (PhD)";
   github?: string;
   linkedin?: string;
   discord?: string;

@@ -27,7 +27,6 @@ export const mainFormSchema = yup.object({
     .required("Email is required")
     .min(3, "Please enter more then 3 characters")
     .max(45, "Please enter within 45 characters"),
-  // dateOfBirth: yup.date().required("").typeError("Date is Required"),
   dateOfBirth: yup.string().required("Date of Birth if Required"),
   gender: yup.string().required("Gender is required"),
   highestQualification: yup
@@ -71,7 +70,6 @@ export const experienceSchema = yup.object({
     .max(40, "Please enter within 40 characters"),
   startDate: yup.string().required("Date is Required"),
   // endDate: yup.date().typeError("Date is Required"),
-  // currentlyWorking: yup.string().required("Please select"),
 });
 
 export const projectSchema = yup.object({
@@ -85,10 +83,10 @@ export const projectSchema = yup.object({
     .required("Full Name is required")
     .url("Enter valid URL with http")
     .min(3, "Please enter more then 3 characters")
-    .max(100, "Please enter within 100 characters"),
+    .max(120, "Please enter within 120 characters"),
   hostedLink: yup
     .string()
     .url("Enter valid URL with http")
-    .max(100, "Please enter within 100 characters"),
-  description: yup.string().max(60, "Please enter within 60 characters"),
+    .max(120, "Please enter within 120 characters"),
+  description: yup.string().max(100, "Please enter within 100 characters"),
 });

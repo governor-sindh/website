@@ -22,7 +22,7 @@ export default function Page() {
     resolver: yupResolver(mainFormSchema),
   });
 
-  const { errors, isValid, isSubmitting } = formState;
+  const { errors } = formState;
 
   const onFormSubmit = async (data: IApplyForm) => {
     try {
@@ -45,8 +45,7 @@ export default function Page() {
           : null,
         programmingProjects: projectsData.length ? projectsData : null,
       };
-      console.log("formData", formData);
-      console.log("formData", JSON.stringify(formData));
+      // console.log("formData", formData);
 
       const res = await fetch("/api/applyform/", {
         body: JSON.stringify(formData),
@@ -54,7 +53,7 @@ export default function Page() {
       });
 
       const resData = await res.json();
-      console.log(resData.message);
+      // console.log(resData.message);
 
       toast({
         title: `${resData.message}`,
@@ -81,11 +80,16 @@ export default function Page() {
   };
 
   return (
-    <main className="flex justify-center">
+    <main
+      style={{
+        backgroundImage: `url('/formBg.png')`,
+      }}
+      className="overfow-hidden mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat"
+    >
       <form
+        className=" -top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
         onSubmit={handleSubmit(onFormSubmit)}
         noValidate
-        className="mx-4 my-10 w-full max-w-2xl rounded bg-white px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
       >
         <h1 className="mb-8 text-center text-3xl font-bold  text-main md:text-lg">
           Student Course Registration Form{" "}
@@ -114,14 +118,14 @@ export default function Page() {
           register={register}
           errors={errors}
         />
-        <label htmlFor="city" className="text-md text-gray-400 md:text-xl">
+        <label htmlFor="city" className="text-md text-slate-700 md:text-xl">
           City *
         </label>
 
         <select
           {...register("city", { required: true })}
           id="city"
-          className="mb-2 mt-2 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
+          className="mb-2 mt-2 block w-full rounded border border-gray-400 bg-gray-100 p-3  md:text-lg"
           required
         >
           <option value="n">Please Select</option>
@@ -151,7 +155,7 @@ export default function Page() {
           register={register}
           errors={errors}
         />
-        <label className="text-md text-gray-400 md:text-xl"> Gender *</label>
+        <label className="text-md text-slate-700 md:text-xl"> Gender *</label>
         <div className="mb-4 flex justify-center gap-20 text-xl">
           <div className="flex items-center  ">
             <input
@@ -160,7 +164,7 @@ export default function Page() {
               value="male"
               className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
             />
-            <label className="ml-2 text-2xl font-medium text-gray-800">
+            <label className="ml-2 text-2xl font-medium text-slate-700">
               {" "}
               Male
             </label>
@@ -172,7 +176,7 @@ export default function Page() {
               value="female"
               className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
             />
-            <label className="ml-2 text-2xl font-medium text-gray-800">
+            <label className="ml-2 text-2xl font-medium text-slate-700">
               {" "}
               Female
             </label>
@@ -183,7 +187,7 @@ export default function Page() {
         )}
         <label
           htmlFor="qualification"
-          className=" text-md  text-gray-400 md:text-xl"
+          className=" text-md text-slate-700 md:text-xl"
         >
           Highest Qualification *
         </label>
@@ -191,7 +195,11 @@ export default function Page() {
         <select
           {...register("highestQualification", { required: true })}
           id="qualification"
-          className="mb-2 mt-1 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
+          className={`mb-2 mt-1 block w-full rounded border border-gray-400 bg-gray-100 p-3 md:text-lg ${
+            errors?.highestQualification
+              ? "border-red-400 ring-red-500"
+              : "focus:border-sub focus:ring-sub"
+          } outline-none focus:ring-1`}
         >
           <option value="n">Please Select</option>
           {formQualifications.map((item, i) => (
@@ -227,7 +235,7 @@ export default function Page() {
           errors={errors}
         />
 
-        <label className="text-md block text-gray-400 md:text-xl">
+        <label className="text-md block text-slate-700 md:text-xl">
           Experience (optional)
         </label>
         <button
@@ -264,7 +272,7 @@ export default function Page() {
           ))}
         </div>
 
-        <label className="text-md mb-2 block text-gray-400 md:text-xl">
+        <label className="text-md mb-2 block text-slate-700 md:text-xl">
           Programming Languages (optional)
         </label>
         <CheckBox value="JavaScript" register={register} />
@@ -277,7 +285,7 @@ export default function Page() {
         <CheckBox value="Solidity" register={register} />
         <CheckBox value="Other" register={register} />
 
-        <label className="text-md mb-4 block text-gray-400 md:text-xl">
+        <label className="text-md mb-4 block text-slate-700 md:text-xl">
           Programming projects (optional)
         </label>
         <button
@@ -313,11 +321,10 @@ export default function Page() {
         </div>
 
         <div className="flex w-full justify-center">
-          {/* validation only allow form submission when form is valid and isSubmitting for not resubmitting form */}
           <Button
             // disabled={!isValid || isSubmitting}
             type="submit"
-            className="mb-8 mt-8 w-36 rounded-3xl bg-main shadow-xl drop-shadow-md hover:bg-blue-800 hover:shadow-2xl"
+            className="text_shadow rounded_none mt-5 w-52 bg-sub py-4 text-center text-base font-semibold tracking-widest text-white transition-transform duration-1000 hover:scale-105 sm:w-36 sm:py-3 sm:text-sm"
             isLoading={loading}
             loadingText="Applying"
             colorScheme="bg-main"
@@ -327,6 +334,7 @@ export default function Page() {
           </Button>
         </div>
       </form>
+
       {experienceModal && (
         <ExperienceModal
           experienceModal={experienceModal}

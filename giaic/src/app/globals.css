@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.box_shadow {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.245);
+.box_shadow{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.245);
 }
-.rounded_none {
-  border-radius: 0 !important;
+
+.text_shadow{
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.485);
 }

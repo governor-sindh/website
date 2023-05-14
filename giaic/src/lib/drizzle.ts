@@ -19,7 +19,7 @@ export const UsersTable = pgTable("applied_users", {
   city: text("city").notNull(),
   email: text("email").notNull(),
   gender: text("gender").notNull(),
-  dateOfBirth: date("birth_date").notNull(),
+  dateOfBirth: date("date_of_birth").notNull(),
   highestQualification: text("highest_qualification").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),

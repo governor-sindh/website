@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { database } from "@/lib/drizzle";
+import { db } from "@/lib/drizzle";
 import { eq, or } from "drizzle-orm";
 
+import { UsersTable, NewUser } from "@/lib/schema/users";
 import {
-  UsersTable,
-  NewUser,
-  NewExperience,
   ExperiencesTable,
-  ProjectsTable,
-  NewProject,
-} from "@/lib/drizzle";
+  Experience,
+  NewExperience,
+} from "@/lib/schema/experiences";
+
 import type { IApplyForm } from "@/types";
 
 export async function POST(request: NextRequest) {
   const {
     fullName,
+    fatherName,
     cnic,
     phoneNumber,
     city,
@@ -22,12 +22,7 @@ export async function POST(request: NextRequest) {
     gender,
     dateOfBirth,
     highestQualification,
-    github,
-    linkedin,
-    discord,
-    programmingLanguages,
     experiences,
-    programmingProjects,
   }: IApplyForm = await request.json();
 
   // await sql.query(`
@@ -40,7 +35,7 @@ export async function POST(request: NextRequest) {
   //     );
   // `)
 
-  const oldUsers = await database
+  const oldUsers = await db
     .select()
     .from(UsersTable)
     .where(
@@ -81,6 +76,7 @@ export async function POST(request: NextRequest) {
 
   const appliedUser: NewUser = {
     fullName,
+    fatherName,
     cnic,
     phoneNumber,
     city,
@@ -88,19 +84,12 @@ export async function POST(request: NextRequest) {
     gender,
     dateOfBirth,
     highestQualification,
-    github,
-    linkedin,
-    discord,
-    programmingLanguages: programmingLanguages?.join(),
   };
 
-  const users = await database
-    .insert(UsersTable)
-    .values(appliedUser)
-    .returning();
+  const users = await db.insert(UsersTable).values(appliedUser).returning();
 
   experiences?.map(async (experience) => {
-    const users = await database
+    const users = await db
       .select({ id: UsersTable.id })
       .from(UsersTable)
       .where(eq(UsersTable.email, email));
@@ -114,32 +103,16 @@ export async function POST(request: NextRequest) {
       startDate: experience.startDate,
       endDate: experience.endDate,
     };
-    const experiencesData = await database
+    const experiencesData = await db
       .insert(ExperiencesTable)
       .values(appliedExperience)
       .returning();
     return experiencesData;
   });
 
-  programmingProjects?.map(async (project) => {
-    const users = await database
-      .select({ id: UsersTable.id })
-      .from(UsersTable)
-      .where(eq(UsersTable.email, email));
-    const user_id = users[0].id;
-    const projectsDone: NewProject = {
-      userId: user_id,
-      title: project.title,
-      repoLink: project.repoLink,
-      hostedLink: project.hostedLink,
-      description: project.description,
-    };
-    await database.insert(ProjectsTable).values(projectsDone).returning();
-  });
-
   return NextResponse.json({ message: "Applied Succesfully", users });
 }
 
 // export async function GET(request: NextRequest) {
-// await database.
+// await db.
 // }

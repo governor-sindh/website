@@ -17,7 +17,7 @@ export default function Page() {
   const [projectModal, setProjectModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, formState } = useForm<IApplyForm>({
+  const { register, handleSubmit, reset, formState } = useForm<IApplyForm>({
     mode: "onTouched",
     resolver: yupResolver(mainFormSchema),
   });
@@ -55,6 +55,8 @@ export default function Page() {
       const resData = await res.json();
       // console.log(resData.message);
 
+      if (resData.message === "Applied Succesfully") reset();
+
       toast({
         title: `${resData.message}`,
         // description: "We've created your account for you.",
@@ -81,9 +83,7 @@ export default function Page() {
 
   return (
     <main
-      style={{
-        backgroundImage: `url('/formBg.png')`,
-      }}
+      // style={{ backgroundImage: `url('/formBg.png')` }}
       className="overfow-hidden mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat"
     >
       <form
@@ -125,7 +125,11 @@ export default function Page() {
         <select
           {...register("city", { required: true })}
           id="city"
-          className="mb-2 mt-2 block w-full rounded border border-gray-400 bg-gray-100 p-3  md:text-lg"
+          className={`mb-2 mt-2 block w-full rounded border border-gray-400 bg-gray-100 p-3 md:text-lg ${
+            errors?.city
+              ? "border-red-400 ring-red-500"
+              : "focus:border-sub focus:ring-sub"
+          } outline-none focus:ring-1`}
           required
         >
           <option value="n">Please Select</option>
@@ -297,7 +301,7 @@ export default function Page() {
         </button>
 
         <div className="space-y-2">
-          {projectsData.map((item, i) => (
+          {projectsData.map((item) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
               key={item.id}
@@ -324,7 +328,7 @@ export default function Page() {
           <Button
             // disabled={!isValid || isSubmitting}
             type="submit"
-            className="text_shadow rounded_none mt-5 w-52 bg-sub py-4 text-center text-base font-semibold tracking-widest text-white transition-transform duration-1000 hover:scale-105 sm:w-36 sm:py-3 sm:text-sm"
+            className="rounded_none mt-5 h-3 w-52 bg-sub p-4 text-center text-base font-semibold tracking-widest text-white transition-transform duration-1000 hover:scale-105 sm:w-full sm:py-3 sm:text-sm"
             isLoading={loading}
             loadingText="Applying"
             colorScheme="bg-main"

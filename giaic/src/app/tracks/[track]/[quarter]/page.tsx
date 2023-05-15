@@ -1,15 +1,10 @@
 import React from 'react';
 import { Coursecontent } from '@/components';
 import { ITrackDataType } from '@/types/quarter';
-import { Roboto } from 'next/font/google';
 import Link from 'next/link';
 import { tracks } from '../../../../data/tracks';
 
 
-const roboto = Roboto({
-    weight: ['300', '400', '700', '900'],
-    subsets: ['latin']
-})
 
 
 async function getData(track: string, quarter: string) {
@@ -56,7 +51,7 @@ async function Page({ params }: { params: { track: string, quarter: string } }) 
                                 {
                                     ['4', '5'].map((val, index) => {
                                         return (
-                                            <Link key={index} href={`tracks/${encodeURIComponent(params.track)}/${encodeURIComponent(val)}`}><li className={`py-[5px] pl-5 text-sm tracking-widest border-l-[2px] ${params.quarter === val ? 'border-main text-main' : 'border-[#c2c2c2]'}`}>Course - {val}</li></Link>
+                                            <Link key={index} href={`tracks/${encodeURIComponent(params.track)}/${encodeURIComponent(val)}`}><li className={`py-[5px] pl-5 text-sm tracking-widest border-l-[2px] ${params.quarter === val ? 'border-main text-sub' : 'border-[#c2c2c2]'}`}>Course - {val}</li></Link>
                                         )
                                     })
                                 }
@@ -73,7 +68,7 @@ async function Page({ params }: { params: { track: string, quarter: string } }) 
                                                         <div className='w-2 h-2 rounded-full bg-main'></div>
                                                         <div className='flex-grow w-[1px] bg-main'></div>
                                                     </div>
-                                                    <p className={`w-4/5 pb-4 font-bold leading-none ${val.id === params.track ? 'text-main' : 'text-zinc-800'}`}>{val.name}</p>
+                                                    <p className={`w-4/5 pb-4 font-bold leading-none ${val.id === params.track ? 'text-sub' : 'text-zinc-800'}`}>{val.name}</p>
                                                 </li>
                                             </Link>
                                         )

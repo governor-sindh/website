@@ -33,10 +33,11 @@ function Header() {
             </div>
             <div className='w-full bg-main sticky top-0 backdrop-blur-3xl z-30'>
                 <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto flex justify-between items-center h-20 md:h-16'>
-                    <Link href={'/'}><Image src={Logo} alt='logo' width={90} className='mt-20 md:w-[80px]' /></Link>
-                    <h1 className='text-2xl font-extrabold text-[#b9d8f3] md:hidden text_shadow'>Tuition Free Education Program on Latest Technologies</h1>
+                    <Link href={'/'}><Image src={Logo} alt='logo' width={90} className='mt-20 md:w-[80px] sm:w-[70px] sm:mt-14' /></Link>
+                    <h1 className='text-2xl xl:text-[1.25rem] lg:text-[15px] font-extrabold text-[#b9d8f3] md:hidden text_shadow'>Tuition Free Education Program on Latest Technologies</h1>
+                    <h1 className='text-[1.125rem] hidden md:block font-extrabold text-[#b9d8f3] text_shadow'>Tuition Free Program </h1>
 
-                    <div className='flex gap-10 text-[#FAF9F6] sm:hidden'>
+                    <div className='flex gap-10 lg:gap-5 text-[#FAF9F6] sm:hidden'>
                         <Link href={'/'}>
                             <div className='menu_btns'>
                                 Home

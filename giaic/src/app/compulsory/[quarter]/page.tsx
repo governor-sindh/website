@@ -1,14 +1,8 @@
 import React from 'react';
 import { Coursecontent } from '@/components';
 import { IQuarterData } from '@/types/quarter';
-import { Roboto } from 'next/font/google';
 import Link from 'next/link';
 import { tracks } from '@/data/tracks';
-
-const roboto = Roboto({
-    weight: ['300', '400', '700', '900'],
-    subsets: ['latin']
-})
 
 
 async function getData(quarter: string) {
@@ -54,7 +48,7 @@ async function Page({ params }: { params: { quarter: string } }) {
                                 {
                                     [1, 2, 3].map((val, index) => {
                                         return (
-                                            <Link key={index} href={`/compulsory/${encodeURIComponent(val)}`}><li className={`py-[5px] pl-5 text-sm tracking-widest border-l-[2px] ${params.quarter === String(val) ? 'border-main text-main' : 'border-[#c2c2c2]'}`}>{compulsoryNames[index]}</li></Link>
+                                            <Link key={index} href={`/compulsory/${encodeURIComponent(val)}`}><li className={`py-[5px] pl-5 text-sm tracking-widest border-l-[2px] ${params.quarter === String(val) ? 'border-main text-sub' : 'border-[#c2c2c2]'}`}>{compulsoryNames[index]}</li></Link>
                                         )
                                     })
                                 }

@@ -28,6 +28,7 @@ export interface IExperience {
 
 export interface IApplyForm {
   fullName: string;
+  fatherName: string;
   cnic: string;
   phoneNumber: string;
   city: string;

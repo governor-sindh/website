@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { IExperience } from "@/types/";
 import type { Dispatch, SetStateAction } from "react";
 import { Input } from "@/components";
-import { employmentType } from "@/data";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { experienceSchema } from "@/lib/yupValidation";
 import uuid from "react-uuid";
@@ -31,6 +30,7 @@ export default function ExperienceModal({
     setExperienceModal(false);
   };
 
+  const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, "10+"];
   return (
     <>
       {experienceModal ? (
@@ -55,32 +55,33 @@ export default function ExperienceModal({
                       required={true}
                     />
                     <label
-                      htmlFor="employmentType"
-                      className="text-md mb-6 mt-4 text-slate-700 md:text-xl"
+                      htmlFor="yearsOfExperience"
+                      className="mb-6 mt-4 text-slate-700 md:text-xl"
                     >
-                      Employment Type *
+                      Years of Experience *
                     </label>
                     <select
-                      {...register("employmentType", { required: true })}
-                      id="employmentType"
+                      {...register("yearsOfExperience", { required: true })}
+                      id="yearsOfExperience"
                       className={`mb-2 mt-1 block w-full rounded border border-gray-400 bg-gray-100 p-3 text-slate-800 ${
-                        errors?.employmentType
+                        errors?.yearsOfExperience
                           ? "border-red-400 ring-red-500"
                           : "focus:border-sub focus:ring-sub"
                       } outline-none focus:ring-1 md:text-lg`}
                     >
-                      <option value="n">Please Select</option>
-                      {employmentType.map((item, i) => (
+                      {years.map((item, i) => (
                         <option key={i} value={item}>
                           {item}
                         </option>
                       ))}
                     </select>
-                    {errors.employmentType && (
+                    {errors.yearsOfExperience && (
                       <p className="mb-4 text-red-400">
-                        {errors.employmentType?.message}
+                        {errors.yearsOfExperience?.message}
                       </p>
                     )}
+                  </div>
+                  <div className="min-w-[277px]">
                     <Input
                       type="text"
                       id="industry"
@@ -89,8 +90,6 @@ export default function ExperienceModal({
                       errors={errors}
                       required={true}
                     />
-                  </div>
-                  <div className="min-w-[277px]">
                     <Input
                       type="text"
                       id="companyName"
@@ -98,21 +97,6 @@ export default function ExperienceModal({
                       register={register}
                       errors={errors}
                       required={true}
-                    />
-                    <Input
-                      type="date"
-                      id="startDate"
-                      placeholder="Start Date"
-                      register={register}
-                      errors={errors}
-                      required={true}
-                    />{" "}
-                    <Input
-                      type="date"
-                      id="endDate"
-                      placeholder="End Date"
-                      register={register}
-                      errors={errors}
                     />
                   </div>
                 </div>
@@ -126,7 +110,7 @@ export default function ExperienceModal({
                     Close
                   </button>
                   <button
-                    className="text_shadow w-32 bg-sub py-3 text-center text-base font-semibold tracking-widest text-white sm:w-36 sm:py-3 sm:text-sm"
+                    className="w-32 bg-sub py-3 text-center text-base font-semibold tracking-widest text-white sm:w-36 sm:py-3 sm:text-sm"
                     type="submit"
                   >
                     Add

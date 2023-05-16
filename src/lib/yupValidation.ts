@@ -8,7 +8,7 @@ export const mainFormSchema = yup.object({
     .max(100, "Please enter within 100 characters"),
   fatherName: yup
     .string()
-    .required("Name is required")
+    .required("Father Name is required")
     .min(3, "Please enter more then 3 characters")
     .max(100, "Please enter within 100 characters"),
   cnic: yup
@@ -32,7 +32,19 @@ export const mainFormSchema = yup.object({
     .required("Email is required")
     .min(3, "Please enter more then 3 characters")
     .max(55, "Please enter within 55 characters"),
-  dateOfBirth: yup.string().required("Date of Birth if Required"),
+  dateOfBirth: yup
+    .date()
+    .max(new Date(), "Invalid date of birth")
+    .test("dateOfBirth", "You must be at least 12 years old", (value: any) => {
+      const currentDate = new Date();
+      const userDate = new Date(value);
+      const age = currentDate.getFullYear() - userDate.getFullYear();
+      if (age > 12) return true;
+      return false;
+    })
+    .typeError("Date of Birth is Required")
+    .required("Date of Birth if Required"),
+
   gender: yup.string().required("Gender is required"),
   highestQualification: yup
     .string()
@@ -46,11 +58,6 @@ export const experienceSchema = yup.object({
     .required("Title is required")
     .min(3, "Please enter more then 3 characters")
     .max(40, "Please enter within 40 characters"),
-  employmentType: yup
-    .string()
-    .required("Employment Type is required")
-    .min(3, "Please select Employment type")
-    .max(40, "Please enter within 40 characters"),
   industry: yup
     .string()
     .required("Industry is required")
@@ -58,9 +65,7 @@ export const experienceSchema = yup.object({
     .max(40, "Please enter within 40 characters"),
   companyName: yup
     .string()
-    .required("Industry is required")
+    .required("Company Name is required")
     .min(3, "Please enter more then 3 characters")
     .max(40, "Please enter within 40 characters"),
-  // startDate: yup.string().required("Date is Required"),
-  // endDate: yup.date().typeError("Date is Required"),
 });

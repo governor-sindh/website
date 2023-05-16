@@ -40,6 +40,7 @@ module.exports = {
       'xs': { 'max': '500px' },
       // => @media (max-width: 500px) { ... }
     }
+    
   },
   plugins: [],
 };

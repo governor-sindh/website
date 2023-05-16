@@ -8,6 +8,7 @@ import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { useToast } from "@chakra-ui/react";
 import { Poppins } from "next/font/google";
+import { IoRemoveCircleOutline } from "react-icons/io5";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
@@ -49,19 +50,19 @@ export default function Page() {
         highestQualification: data.highestQualification,
         experiences: experienceData.length ? experienceData : null,
       };
-      console.log("formData", formData);
+      // console.log("formData", formData);
 
-      const sleep = () => new Promise((resolve) => setTimeout(resolve, 2500));
-      await sleep();
+      // const sleep = () => new Promise((resolve) => setTimeout(resolve, 2500));
+      // await sleep();
 
-      // const res = await fetch("/api/applyform/", {
-      //   body: JSON.stringify(formData),
-      //   method: "POST",
-      // });
+      const res = await fetch("/api/applyform/", {
+        body: JSON.stringify(formData),
+        method: "POST",
+      });
 
-      // const resData = await res.json();
-      const resData = { message: "Form testing done!" };
-      // console.log(resData.message);
+      const resData = await res.json();
+      // const resData = { message: "Form testing done!" };
+      console.log(resData.message);
 
       if (resData.message === "Applied Succesfully") reset();
 
@@ -230,7 +231,7 @@ export default function Page() {
           )}
         </div>
 
-        <div className="my-6 min-h-[8rem]">
+        <div className="mt-6 min-h-[8rem]">
           <label className="block text-slate-700 md:text-xl">
             Experience (optional)
           </label>
@@ -238,19 +239,21 @@ export default function Page() {
           <div className="mb-4 flex justify-center gap-20 text-xl">
             <label className="ml-2 cursor-pointer text-slate-700 md:text-xl">
               <input
-                onClick={() => setShowExperience(true)}
+                onClick={(e) => {
+                  setShowExperience(true);
+                }}
                 type="radio"
                 name="experience"
                 className="h-4 w-4 cursor-pointer text-sub"
               />
-              <span> Yes </span>
+              <span> Yes</span>
             </label>
             <label className="ml-2 cursor-pointer text-slate-700 md:text-xl">
               <input
                 onClick={() => setShowExperience(false)}
                 type="radio"
                 name="experience"
-                checked
+                defaultChecked
                 className="h-4 w-4 cursor-pointer text-sub"
               />
               <span> No</span>
@@ -268,14 +271,13 @@ export default function Page() {
           )}
 
           <div className="space-y-2">
-            {experienceData.map((item, i) => (
+            {experienceData.map((item) => (
               <div
-                className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
+                className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2 px-6"
                 key={item.id}
               >
-                <h4 className=" text-lg capitalize">
-                  {item.title} - {item.companyName} -{" "}
-                  {`${new Date().getDate()}-${new Date().getMonth()}-${new Date().getUTCFullYear()}`}
+                <h4 className="flex w-2/3 justify-around text-lg capitalize text-slate-700">
+                  <span>{item.title}</span> - <span>{item.companyName}</span>
                 </h4>
                 <button
                   className="px-4 py-1"
@@ -287,7 +289,7 @@ export default function Page() {
                     setExperienceData(filteredData);
                   }}
                 >
-                  X
+                  <IoRemoveCircleOutline className="text-2xl" />
                 </button>
               </div>
             ))}
@@ -308,7 +310,6 @@ export default function Page() {
 
       {experienceModal && (
         <ExperienceModal
-          experienceModal={experienceModal}
           setExperienceModal={setExperienceModal}
           setExperienceData={setExperienceData}
         />

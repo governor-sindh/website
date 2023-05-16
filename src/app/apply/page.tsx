@@ -43,17 +43,13 @@ export default function Page() {
         phoneNumber: data.phoneNumber,
         city: data.city.toLowerCase(),
         email: data.email.toLowerCase(),
-        dateOfBirth: `${String(data.dateOfBirth.getFullYear())}-${
+        dateOfBirth: `${data.dateOfBirth.getFullYear()}-${
           data.dateOfBirth.getMonth() + 1
         }-${data.dateOfBirth.getDate()}`,
         gender: data.gender,
         highestQualification: data.highestQualification,
         experiences: experienceData.length ? experienceData : null,
       };
-      // console.log("formData", formData);
-
-      // const sleep = () => new Promise((resolve) => setTimeout(resolve, 2500));
-      // await sleep();
 
       const res = await fetch("/api/applyform/", {
         body: JSON.stringify(formData),
@@ -61,14 +57,12 @@ export default function Page() {
       });
 
       const resData = await res.json();
-      // const resData = { message: "Form testing done!" };
       console.log(resData.message);
 
       if (resData.message === "Applied Succesfully") reset();
 
       toast({
         title: `${resData.message}`,
-        // description: "We've created your account for you.",
         status:
           resData.message === "User Already Exist" ||
           resData.message === "Add All Credentials"
@@ -93,7 +87,7 @@ export default function Page() {
   return (
     <main
       // style={{ backgroundImage: `url('/formBg.png')` }}
-      className="overfow-hidden mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat"
+      className="mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat"
     >
       <form
         className="-top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
@@ -102,7 +96,7 @@ export default function Page() {
       >
         <h1
           style={poppins.style}
-          className="mb-8 text-center text-3xl font-bold  text-main md:text-lg"
+          className="mb-8 text-center text-lg font-bold text-main md:text-3xl"
         >
           Student Course Registration Form{" "}
         </h1>

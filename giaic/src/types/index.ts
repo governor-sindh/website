@@ -1,13 +1,5 @@
 // export interface MyFormUnion extends IApplyForm, IExperience, IProjects {}
 
-export interface IProjects {
-  title: string;
-  repoLink: string;
-  hostedLink?: string;
-  description?: string;
-  id: string;
-}
-
 export interface IExperience {
   id: string;
   title: string;
@@ -28,6 +20,7 @@ export interface IExperience {
 
 export interface IApplyForm {
   fullName: string;
+  fatherName: string;
   cnic: string;
   phoneNumber: string;
   city: string;
@@ -40,17 +33,12 @@ export interface IApplyForm {
     | "Undergraduate (Bachelor's)"
     | "Graduate (Master's)"
     | "Post-Graduate (PhD)";
-  github?: string;
-  linkedin?: string;
-  discord?: string;
-
   experiences?: IExperience[];
-  programmingLanguages?: string[];
-  programmingProjects?: IProjects[];
 }
 
 export type TFields =
   | "fullName"
+  | "fatherName"
   | "cnic"
   | "phoneNumber"
   | "city"
@@ -58,9 +46,6 @@ export type TFields =
   | "dateOfBirth"
   | "gender"
   | "highestQualification"
-  | "github"
-  | "linkedin"
-  | "discord"
   | "experiences"
   | "programmingLanguages"
   | "programmingProjects"
@@ -70,11 +55,7 @@ export type TFields =
   | "companyName"
   | "startDate"
   | "endDate"
-  | "currentlyWorking"
-  | "title"
-  | "repoLink"
-  | "hostedLink"
-  | "description";
+  | "currentlyWorking";
 
 // export interface ISignup {
 //   fullName: string;

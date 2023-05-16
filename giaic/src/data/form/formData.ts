@@ -17,7 +17,6 @@ export const employmentType: string[] = [
   "Seasonal",
 ];
 export const formCities: string[] = [
-  "Karachi",
   "Badin",
   "Bhirkan",
   "Rajo Khanani",

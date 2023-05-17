@@ -6,7 +6,7 @@ import { Input } from "@/components";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { experienceSchema } from "@/lib/yupValidation";
 import uuid from "react-uuid";
-import { years } from "@/data";
+import { years, industries } from "@/data";
 
 export default function ExperienceModal({
   setExperienceModal,
@@ -50,42 +50,65 @@ export default function ExperienceModal({
                   errors={errors}
                   required={true}
                 />
-                <label
-                  htmlFor="yearsOfExperience"
-                  className="mb-6 mt-4 text-slate-700 md:text-xl"
-                >
-                  Years of Experience *
-                </label>
-                <select
-                  {...register("yearsOfExperience", { required: true })}
-                  id="yearsOfExperience"
-                  className={`mb-2 mt-1 block w-full rounded border border-gray-400 bg-gray-100 p-3 text-slate-800 ${
-                    errors?.yearsOfExperience
-                      ? "border-red-400 ring-red-500"
-                      : "focus:border-sub focus:ring-sub"
-                  } outline-none focus:ring-1 md:text-lg`}
-                >
-                  {years.map((item, i) => (
-                    <option key={i} value={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-                {errors.yearsOfExperience && (
-                  <p className="mb-4 text-red-400">
-                    {errors.yearsOfExperience?.message}
-                  </p>
-                )}
+                <div className="my-6">
+                  <label
+                    htmlFor="yearsOfExperience"
+                    className="mb-6 mt-4 text-slate-700 md:text-xl"
+                  >
+                    Years of Experience *
+                  </label>
+                  <select
+                    {...register("yearsOfExperience", { required: true })}
+                    id="yearsOfExperience"
+                    className={`mb-2 mt-1 block w-full rounded border border-gray-400 bg-gray-100 p-3 text-slate-800 ${
+                      errors?.yearsOfExperience
+                        ? "border-red-400 ring-red-500"
+                        : "focus:border-sub focus:ring-sub"
+                    } outline-none focus:ring-1 md:text-lg`}
+                  >
+                    {years.map((item, i) => (
+                      <option key={i} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.yearsOfExperience && (
+                    <p className="mb-4 text-red-400">
+                      {errors.yearsOfExperience?.message}
+                    </p>
+                  )}
+                </div>
               </div>
               <div className="min-w-[277px]">
-                <Input
-                  type="text"
-                  id="industry"
-                  placeholder="Industry"
-                  register={register}
-                  errors={errors}
-                  required={true}
-                />
+                <div className="my-6">
+                  <label
+                    htmlFor="industry"
+                    className="mb-6 mt-4 text-slate-700 md:text-xl"
+                  >
+                    Industries *
+                  </label>
+                  <select
+                    {...register("industry", { required: true })}
+                    id="industry"
+                    className={`mb-2 mt-1 block w-full rounded border border-gray-400 bg-gray-100 p-3 text-slate-800 ${
+                      errors?.industry
+                        ? "border-red-400 ring-red-500"
+                        : "focus:border-sub focus:ring-sub"
+                    } outline-none focus:ring-1 md:text-lg`}
+                  >
+                    {industries.map((item, i) => (
+                      <option key={i} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.industry && (
+                    <p className="mb-4 text-red-400">
+                      {errors.industry?.message}
+                    </p>
+                  )}
+                </div>
+
                 <Input
                   type="text"
                   id="companyName"

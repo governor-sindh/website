@@ -25,37 +25,31 @@ function Coursecontent({ data }: { data: ITrackDataType | IQuarterData }) {
         data = data
     }
     return (
-        <div className='w-full lg:p-3 rounded-md'>
+        <div className='w-full lg:p-0 p-3 rounded-md'>
 
             {/* Course Info */}
-            <div className='flex py-3 justify-between mt-5 sm:block border-b border-zinc-300 mb-5 pb-3'>
+            <div className='sm:flex block py-3 justify-between mt-5 border-b border-zinc-300 mb-5 pb-3'>
                 {
                     data.id > 3 ?
-                        <h1 className='text-5xl xs:text-3xl text-zinc-800 font-bold'>Course: {data.id}</h1> :
-                        <h1 className='text-3xl lg:text-xl md:text-3xl text-zinc-800 font-bold'>{compulsoryNames[data.id - 1]}</h1>
+                        <h1 className='xs:text-5xl text-3xl text-zinc-800 font-bold'>Course: {data.id}</h1> :
+                        <h1 className='lg:text-3xl md:text-xl text-3xl text-zinc-800 font-bold'>{compulsoryNames[data.id - 1]}</h1>
                 }
-                {/* <p className='text-lg xs:text-base text-zinc-800 font-bold'>Course: {data.id}</p> */}
-                <div className='text-sm text-center sm:mt-5 rounded-lg text-zinc-800 flex gap-5 xs:gap-2 items-center w-fit'><span className='w-4'><MdOutlineAccessTimeFilled size={20} /></span><p><span className='font-bold'>Duration: </span>( 13 Weeks )</p> </div>
+                <div className='text-sm text-center sm:mt-0 mt-5 rounded-lg text-zinc-800 flex xs:gap-5 gap-2 items-center w-fit'><span className='w-4'><MdOutlineAccessTimeFilled size={20} /></span><p><span className='font-bold'>Duration: </span>( 13 Weeks )</p> </div>
             </div>
-            <div className='border-b-8 border-zinc-900 px-5 py-5 md:px-3 rounded-md bg-gray-50 mb-14 relative overflow-hidden'>
-                {/* <div className='w-40 h-40 absolute rounded-full top-1/2 right-0 -translate-y-1/2 bg-[#734f0c] blur-[200px]'></div> */}
-                <h1 className='text-4xl lg:text-3xl text font-bold text-zinc-800'>{trackName ? trackName : 'Common In All Specializations'}</h1>
+            <div className='border-b-8 border-zinc-900 md:px-5 px-3 py-5 rounded-md bg-gray-50 mb-14 relative overflow-hidden'>
+                <h1 className='lg:text-4xl text-3xl font-bold text-zinc-800'>{trackName ? trackName : 'Common In All Specializations'}</h1>
                 <p className='text-zinc-800 mt-2'>{data.objective}</p>
-                {/* <div className='flex py-3 justify-between mt-5 border-t border-zinc-500  '>
-                    <p className='text-lg xs:text-base text-zinc-800 font-bold'>Course: {data.id}</p>
-                    <div className='text-sm text-center rounded-lg text-zinc-800 flex gap-5 xs:gap-2 items-center w-fit'><span className='w-4'><MdOutlineAccessTimeFilled size={20} /></span><p><span className='font-bold'>Duration: </span>( 13 Weeks )</p> </div>
-                </div> */}
             </div>
 
             {/* Course Description */}
 
             <div className='text-zinc-800'>
-                <h1 className='text-4xl lg:text-3xl font-bold pb-3 border-b border-zinc-500 '>Course Description</h1>
+                <h1 className='lg:text-4xl text-3xl font-bold pb-3 border-b border-zinc-500 '>Course Description</h1>
                 <div className='mt-5'>
                     {
                         data.description.map((val, index) => {
                             return (
-                                <p key={index} className='mb-5 text-base lg:text-sm text-zinc-800 font-normal bg-gray-50 p-5 md:p-3 rounded-md'>{val}</p>
+                                <p key={index} className='mb-5 lg:text-base text-sm text-zinc-800 font-normal bg-gray-50 md:p-5 p-3 rounded-md'>{val}</p>
                             )
                         })
                     }
@@ -65,14 +59,14 @@ function Coursecontent({ data }: { data: ITrackDataType | IQuarterData }) {
             {/* Course Outline */}
 
             <div className='mt-12'>
-                <h1 className='text-4xl lg:text-3xl font-bold pb-3 border-b border-zinc-500 text-zinc-800'>Course Outline</h1>
+                <h1 className='lg:text-4xl text-3xl font-bold pb-3 border-b border-zinc-500 text-zinc-800'>Course Outline</h1>
                 <div className='mt-10'>
                     {
                         data.outline.map((val, index) => {
                             return (
                                 <div key={index}>
-                                    <h1 className='text-2xl text-[#045084] font-extrabold mb-5 mt-10 sm:text-xl'>{index + 1}. {val.title}</h1>
-                                    <div className={val.children?.length ? 'text-base lg:text-sm font-normal text-zinc-800 bg-gray-50 p-5 md:p-3 rounded-md' : ''}>
+                                    <h1 className='sm:text-2xl text-xl text-[#045084] font-extrabold mb-5 mt-10'>{index + 1}. {val.title}</h1>
+                                    <div className={val.children?.length ? 'lg:text-base text-sm font-normal text-zinc-800 bg-gray-50 md:p-5 p-3 rounded-md' : ''}>
                                         {
                                             val.children?.map((child, childIndex) => {
                                                 return (

@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Roboto } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import { Footer, Header, ChakraWrapper } from "@/components";
 
 const roboto = Roboto({

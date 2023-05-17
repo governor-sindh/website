@@ -9,11 +9,11 @@ import { CompulsoryData } from '@/data/compulsory';
 function Footer() {
     return (
         <div className='w-full bg-zinc-100 mt-20'>
-            <div className='xl:w-[1300px] lg:w-[90%] w-[95%] m-auto py-20'>
-                <div className='grid md:grid-cols-3 grid-cols-1 gap-10'>
+            <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto py-20'>
+                <div className='grid grid-cols-3 md:grid-cols-1 gap-10'>
                     <div className='text-zinc-800'>
                         <h1 className='font-bold text-xl'>Core Courses</h1>
-                        <div className='mt-5 flex flex-col gap-3 md:text-base text-sm'>
+                        <div className='mt-5 flex flex-col gap-3 md:text-sm'>
                             {
                                 CompulsoryData.map((val, index) => {
                                     return (
@@ -25,7 +25,7 @@ function Footer() {
                     </div>
                     <div className='text-zinc-800'>
                         <h1 className='font-bold text-xl'>Advance Courses</h1>
-                        <div className='mt-5 flex flex-col gap-3 md:text-base text-sm'>
+                        <div className='mt-5 flex flex-col gap-3  md:text-sm'>
                             {
                                 tracks.map((val, index) => {
                                     return (

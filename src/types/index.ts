@@ -1,13 +1,15 @@
+// export interface MyFormUnion extends IApplyForm, IExperience, IProjects {}
+
 export interface IProjects {
   title: string;
   repoLink: string;
   hostedLink?: string;
   description?: string;
-  // id: string;
+  id: string;
 }
 
 export interface IExperience {
-  // id: string;
+  id: string;
   title: string;
   employmentType:
     | "Full-time"

@@ -7,8 +7,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { Button, useToast } from "@chakra-ui/react";
-import uuid from "react-uuid";
-// #044e83
 
 export default function Page() {
   const toast = useToast();
@@ -19,17 +17,17 @@ export default function Page() {
   const [projectModal, setProjectModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, formState } = useForm<IApplyForm>({
+  const { register, handleSubmit, reset, formState } = useForm<IApplyForm>({
     mode: "onTouched",
     resolver: yupResolver(mainFormSchema),
   });
 
-  const { errors, isValid, isSubmitting } = formState;
+  const { errors } = formState;
 
   const onFormSubmit = async (data: IApplyForm) => {
     try {
       setLoading(true);
-      console.log({
+      const formData = {
         fullName: data.fullName.toLowerCase(),
         cnic: data.cnic,
         phoneNumber: data.phoneNumber,
@@ -46,37 +44,27 @@ export default function Page() {
           ? data?.programmingLanguages
           : null,
         programmingProjects: projectsData.length ? projectsData : null,
-      });
+      };
+      // console.log("formData", formData);
 
       const res = await fetch("/api/applyform/", {
-        body: JSON.stringify({
-          fullName: data.fullName.toLowerCase(),
-          cnic: data.cnic,
-          phoneNumber: data.phoneNumber,
-          city: data.city.toLowerCase(),
-          email: data.email.toLowerCase(),
-          dateOfBirth: data.dateOfBirth,
-          gender: data.gender,
-          highestQualification: data.highestQualification,
-          github: data?.github,
-          linkedin: data?.linkedin,
-          discord: data?.discord,
-          experiences: experienceData,
-          programmingLanguages: data?.programmingLanguages
-            ? data?.programmingLanguages
-            : [],
-          programmingProjects: projectsData,
-        }),
+        body: JSON.stringify(formData),
         method: "POST",
       });
 
       const resData = await res.json();
-      console.log(resData.message);
+      // console.log(resData.message);
+
+      if (resData.message === "Applied Succesfully") reset();
 
       toast({
         title: `${resData.message}`,
         // description: "We've created your account for you.",
-        status: resData.message === "User Already Exist" ? "error" : "success",
+        status:
+          resData.message === "User Already Exist" ||
+          resData.message === "Add All Credentials"
+            ? "error"
+            : "success",
         duration: 9000,
         isClosable: true,
       });
@@ -94,13 +82,16 @@ export default function Page() {
   };
 
   return (
-    <main className="flex justify-center">
+    <main
+      // style={{ backgroundImage: `url('/formBg.png')` }}
+      className="overfow-hidden mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat"
+    >
       <form
+        className=" -top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
         onSubmit={handleSubmit(onFormSubmit)}
         noValidate
-        className="container mx-4 my-10 w-full max-w-2xl rounded bg-white px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
       >
-        <h1 className="text-main mb-8 text-center text-3xl font-bold text-green-700 md:text-lg">
+        <h1 className="mb-8 text-center text-3xl font-bold  text-main md:text-lg">
           Student Course Registration Form{" "}
         </h1>
         <Input
@@ -127,19 +118,23 @@ export default function Page() {
           register={register}
           errors={errors}
         />
-        <label htmlFor="city" className="text-md text-gray-400 md:text-xl">
+        <label htmlFor="city" className="text-md text-slate-700 md:text-xl">
           City *
         </label>
 
         <select
           {...register("city", { required: true })}
           id="city"
-          className="mb-2 mt-2 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
+          className={`mb-2 mt-2 block w-full rounded border border-gray-400 bg-gray-100 p-3 md:text-lg ${
+            errors?.city
+              ? "border-red-400 ring-red-500"
+              : "focus:border-sub focus:ring-sub"
+          } outline-none focus:ring-1`}
           required
         >
           <option value="n">Please Select</option>
           {formCities.map((item, i) => (
-            <option key={uuid()} value={item}>
+            <option key={i} value={item}>
               {item}
             </option>
           ))}
@@ -164,7 +159,7 @@ export default function Page() {
           register={register}
           errors={errors}
         />
-        <label className="text-md text-gray-400 md:text-xl"> Gender *</label>
+        <label className="text-md text-slate-700 md:text-xl"> Gender *</label>
         <div className="mb-4 flex justify-center gap-20 text-xl">
           <div className="flex items-center  ">
             <input
@@ -173,7 +168,7 @@ export default function Page() {
               value="male"
               className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
             />
-            <label className="ml-2 text-2xl font-medium text-gray-800">
+            <label className="ml-2 text-2xl font-medium text-slate-700">
               {" "}
               Male
             </label>
@@ -185,7 +180,7 @@ export default function Page() {
               value="female"
               className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
             />
-            <label className="ml-2 text-2xl font-medium text-gray-800">
+            <label className="ml-2 text-2xl font-medium text-slate-700">
               {" "}
               Female
             </label>
@@ -196,7 +191,7 @@ export default function Page() {
         )}
         <label
           htmlFor="qualification"
-          className=" text-md  text-gray-400 md:text-xl"
+          className=" text-md text-slate-700 md:text-xl"
         >
           Highest Qualification *
         </label>
@@ -204,11 +199,15 @@ export default function Page() {
         <select
           {...register("highestQualification", { required: true })}
           id="qualification"
-          className="mb-2 mt-1 block w-full border border-gray-400 bg-gray-100 p-3  md:text-lg"
+          className={`mb-2 mt-1 block w-full rounded border border-gray-400 bg-gray-100 p-3 md:text-lg ${
+            errors?.highestQualification
+              ? "border-red-400 ring-red-500"
+              : "focus:border-sub focus:ring-sub"
+          } outline-none focus:ring-1`}
         >
-          <option value="null">Please Select</option>
+          <option value="n">Please Select</option>
           {formQualifications.map((item, i) => (
-            <option key={uuid()} value={item}>
+            <option key={i} value={item}>
               {item}
             </option>
           ))}
@@ -240,13 +239,13 @@ export default function Page() {
           errors={errors}
         />
 
-        <label className="text-md block text-gray-400 md:text-xl">
+        <label className="text-md block text-slate-700 md:text-xl">
           Experience (optional)
         </label>
         <button
           type="button"
           onClick={() => setExperienceModal(!experienceModal)}
-          className="text-main mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          className="mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-main hover:bg-gray-100 hover:text-blue-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
         >
           Add Work Experience
         </button>
@@ -255,7 +254,7 @@ export default function Page() {
           {experienceData.map((item, i) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={uuid()}
+              key={item.id}
             >
               <h4 className=" text-lg capitalize">
                 {item.title} - {item.companyName} -{" "}
@@ -266,7 +265,6 @@ export default function Page() {
                 type="button"
                 onClick={() => {
                   const filteredData = experienceData.filter(
-                    // @ts-expect-error
                     (value) => value.id !== item.id
                   );
                   setExperienceData(filteredData);
@@ -278,7 +276,7 @@ export default function Page() {
           ))}
         </div>
 
-        <label className="text-md mb-2 block text-gray-400 md:text-xl">
+        <label className="text-md mb-2 block text-slate-700 md:text-xl">
           Programming Languages (optional)
         </label>
         <CheckBox value="JavaScript" register={register} />
@@ -291,22 +289,22 @@ export default function Page() {
         <CheckBox value="Solidity" register={register} />
         <CheckBox value="Other" register={register} />
 
-        <label className="text-md mb-4 block text-gray-400 md:text-xl">
+        <label className="text-md mb-4 block text-slate-700 md:text-xl">
           Programming projects (optional)
         </label>
         <button
           type="button"
           onClick={() => setProjectModal(!projectModal)}
-          className="text-main mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium hover:bg-gray-100 hover:text-green-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          className="mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-main hover:bg-gray-100 hover:text-blue-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
         >
           Add Programming projects
         </button>
 
         <div className="space-y-2">
-          {projectsData.map((item, i) => (
+          {projectsData.map((item) => (
             <div
               className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2"
-              key={uuid()}
+              key={item.id}
             >
               <h4 className=" text-xl capitalize">{item.title}</h4>
               <button
@@ -314,7 +312,6 @@ export default function Page() {
                 className="px-4 py-1"
                 onClick={() => {
                   const filteredData = projectsData.filter(
-                    // @ts-expect-error
                     (value) => value.id !== item.id
                   );
                   setProjectsData(filteredData);
@@ -328,12 +325,10 @@ export default function Page() {
         </div>
 
         <div className="flex w-full justify-center">
-          {/* validation is only allow form submission when form is valid and isSubmitting for not resubmitting form */}
-
           <Button
             // disabled={!isValid || isSubmitting}
             type="submit"
-            className="bg-main mb-8 mt-8 w-36 rounded-3xl shadow-xl"
+            className="rounded_none mt-5 h-3 w-52 bg-sub p-4 text-center text-base font-semibold tracking-widest text-white transition-transform duration-1000 hover:scale-105 sm:w-full sm:py-3 sm:text-sm"
             isLoading={loading}
             loadingText="Applying"
             colorScheme="bg-main"
@@ -343,6 +338,7 @@ export default function Page() {
           </Button>
         </div>
       </form>
+
       {experienceModal && (
         <ExperienceModal
           experienceModal={experienceModal}

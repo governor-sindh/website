@@ -26,7 +26,7 @@ export default function ProjectsModal({
   });
 
   const onFormSubmit = (data: IProjects) => {
-    setProjectsData((perv) => [...perv, { id: uuid(), ...data }]);
+    setProjectsData((perv) => [...perv, { ...data, id: uuid() }]);
     setProjectModal(false);
   };
 
@@ -37,7 +37,7 @@ export default function ProjectsModal({
           <div className="relative mx-auto my-6 w-auto max-w-3xl">
             <div className="relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none">
               <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
-                <h3 className="font=semibold text-3xl">Programming projects</h3>
+                <h3 className="text-3xl">Programming projects</h3>
               </div>
               <form
                 onSubmit={handleSubmit(onFormSubmit)}
@@ -82,17 +82,17 @@ export default function ProjectsModal({
 
                 <div className="flex items-center justify-center border-t border-solid p-4">
                   <button
-                    className="background-transparent mb-1 mr-1 px-6 py-2 text-sm font-bold uppercase text-red-500 outline-none focus:outline-none"
+                    className="mb-1 mr-1 px-6 py-2 text-sm font-bold uppercase text-red-500 outline-none focus:outline-none"
                     type="button"
                     onClick={() => setProjectModal(false)}
                   >
                     Close
                   </button>
                   <button
-                    className="bg-main mb-1 mr-1 rounded px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:shadow-lg focus:outline-none active:bg-blue-700"
+                    className="text_shadow w-32 bg-sub py-3 text-center text-base font-semibold tracking-widest text-white sm:w-36 sm:py-3 sm:text-sm"
                     type="submit"
                   >
-                    Submit
+                    Add
                   </button>
                 </div>
               </form>

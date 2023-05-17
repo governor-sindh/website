@@ -8,6 +8,9 @@ interface ITrackDataType {
     data: IQuarterData
 }
 
+const compulsoryNames = ['Programming Fundamentals', 'Web2 Using NextJS', 'Earn as You Learn']
+
+
 function Coursecontent({ data }: { data: ITrackDataType | IQuarterData }) {
 
     function isTrack(track: ITrackDataType | IQuarterData): track is ITrackDataType {
@@ -25,10 +28,14 @@ function Coursecontent({ data }: { data: ITrackDataType | IQuarterData }) {
         <div className='w-full lg:p-3 rounded-md'>
 
             {/* Course Info */}
-            <div className='flex py-3 justify-between mt-5 border-b border-zinc-300 mb-5 pb-3'>
-                <h1 className='text-5xl xs:text-3xl text-zinc-800 font-bold'>Course: {data.id}</h1>
+            <div className='flex py-3 justify-between mt-5 sm:block border-b border-zinc-300 mb-5 pb-3'>
+                {
+                    data.id > 3 ?
+                        <h1 className='text-5xl xs:text-3xl text-zinc-800 font-bold'>Course: {data.id}</h1> :
+                        <h1 className='text-3xl lg:text-xl md:text-3xl text-zinc-800 font-bold'>{compulsoryNames[data.id - 1]}</h1>
+                }
                 {/* <p className='text-lg xs:text-base text-zinc-800 font-bold'>Course: {data.id}</p> */}
-                <div className='text-sm text-center rounded-lg text-zinc-800 flex gap-5 xs:gap-2 items-center w-fit'><span className='w-4'><MdOutlineAccessTimeFilled size={20} /></span><p><span className='font-bold'>Duration: </span>( 13 Weeks )</p> </div>
+                <div className='text-sm text-center sm:mt-5 rounded-lg text-zinc-800 flex gap-5 xs:gap-2 items-center w-fit'><span className='w-4'><MdOutlineAccessTimeFilled size={20} /></span><p><span className='font-bold'>Duration: </span>( 13 Weeks )</p> </div>
             </div>
             <div className='border-b-8 border-zinc-900 px-5 py-5 md:px-3 rounded-md bg-gray-50 mb-14 relative overflow-hidden'>
                 {/* <div className='w-40 h-40 absolute rounded-full top-1/2 right-0 -translate-y-1/2 bg-[#734f0c] blur-[200px]'></div> */}

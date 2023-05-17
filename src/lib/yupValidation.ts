@@ -19,32 +19,32 @@ export const mainFormSchema = yup.object({
   city: yup
     .string()
     .required("City is required")
-    .min(2, "Please select your City"),
-  // .max(25, "Please enter within 25 characters"),
+    .min(2, "Please select your City")
+    .max(45, "Please enter within 45 characters"),
   email: yup
     .string()
     .email("Email is not valid")
     .required("Email is required")
     .min(3, "Please enter more then 3 characters")
     .max(45, "Please enter within 45 characters"),
-
+  dateOfBirth: yup.string().required("Date of Birth if Required"),
   gender: yup.string().required("Gender is required"),
   highestQualification: yup
     .string()
     .required("Qualification is required")
-    .min(5, "Qualification is required"),
+    .min(2, "Qualification is required"),
   github: yup
     .string()
     .url("Enter valid URL with http")
-    .max(60, "Website URL can't be more then 60"),
+    .max(120, "Website URL can't be more then 120"),
   linkedin: yup
     .string()
     .url("Enter valid URL with http")
-    .max(60, "Website URL can't be more then 60"),
+    .max(120, "Website URL can't be more then 120"),
   discord: yup
     .string()
     .url("Enter valid URL with http")
-    .max(60, "Website URL can't be more then 60"),
+    .max(120, "Website URL can't be more then 120"),
 });
 
 export const experienceSchema = yup.object({
@@ -68,9 +68,8 @@ export const experienceSchema = yup.object({
     .required("Industry is required")
     .min(3, "Please enter more then 3 characters")
     .max(40, "Please enter within 40 characters"),
-  startDate: yup.date().typeError("Date is Required").required("Require daa"),
+  startDate: yup.string().required("Date is Required"),
   // endDate: yup.date().typeError("Date is Required"),
-  // currentlyWorking: yup.string().required("Please select"),
 });
 
 export const projectSchema = yup.object({
@@ -84,10 +83,10 @@ export const projectSchema = yup.object({
     .required("Full Name is required")
     .url("Enter valid URL with http")
     .min(3, "Please enter more then 3 characters")
-    .max(40, "Please enter within 40 characters"),
+    .max(120, "Please enter within 120 characters"),
   hostedLink: yup
     .string()
     .url("Enter valid URL with http")
-    .max(40, "Please enter within 40 characters"),
-  description: yup.string().max(60, "Please enter within 60 characters"),
+    .max(120, "Please enter within 120 characters"),
+  description: yup.string().max(100, "Please enter within 100 characters"),
 });

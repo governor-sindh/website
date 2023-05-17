@@ -1,11 +1,13 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-import { Client } from "pg";
-const client = new Client({
-  connectionString:
-    "postgres://hamzaadil56:aSBW7CF0GUTl@ep-wispy-snowflake-401377-pooler.ap-southeast-1.aws.neon.tech/giaic?sslmode=require",
-});
-client.connect();
-export const db = drizzle(client);
+// import { Client } from "pg";
+// const client = new Client({
+//   connectionString:
+//     "postgres://hamzaadil56:aSBW7CF0GUTl@ep-wispy-snowflake-401377-pooler.ap-southeast-1.aws.neon.tech/giaic?sslmode=require",
+// });
+// client.connect();
+
+import { sql } from "@vercel/postgres"
+export const db = drizzle(sql);
 
 // export const ProjectsTable = pgTable("programming_projects", {
 //   id: serial("id").primaryKey(),

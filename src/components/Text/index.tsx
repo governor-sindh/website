@@ -1,8 +1,8 @@
-import React from 'react';
-import Solo1 from '../../../public/solo1.jpeg'
-import Solo2 from '../../../public/solo2.jpg'
-import Solo3 from '../../../public/solo3.jpg'
-import Image from 'next/image';
+import React from "react";
+import Solo1 from "../../../public/solo1.jpeg";
+import Solo2 from "../../../public/solo2.jpg";
+import Solo3 from "../../../public/solo3.jpg";
+import Image from "next/image";
 
 function Text() {
     return (

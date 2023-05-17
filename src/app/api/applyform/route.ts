@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { eq, or } from "drizzle-orm";
+import { sql } from "@vercel/postgres";
 
 import { UsersTable, NewUser } from "@/lib/schema/users";
-import {
-  ExperiencesTable,
-  Experience,
-  NewExperience,
-} from "@/lib/schema/experiences";
+import { ExperiencesTable, NewExperience } from "@/lib/schema/experiences";
 
 import type { IApplyForm } from "@/types";
 
@@ -25,15 +22,49 @@ export async function POST(request: NextRequest) {
     experiences,
   }: IApplyForm = await request.json();
 
-  // await sql.query(`
-  //     CREATE TABLE IF NOT EXISTS users (
-  //       id SERIAL PRIMARY KEY,
-  //       name VARCHAR(255) NOT NULL,
-  //       email VARCHAR(255) UNIQUE NOT NULL,
-  //       image VARCHAR(255),
-  //       "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-  //     );
-  // `)
+  try {
+    await db.select().from(UsersTable);
+  } catch (e: any) {
+    if (e.message === `relation "applied_users" does not exist`) {
+      console.log(
+        "Table does not exist, creating and seeding it with dummy data now..."
+      );
+
+      await sql.query(`
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE TABLE IF NOT EXISTS applied_users (
+      id uuid DEFAULT uuid_generate_v1() PRIMARY KEY,
+      full_name TEXT NOT NULL,
+      father_name TEXT NOT NULL,
+      cnic VARCHAR(255) NOT NULL,
+      phone_number VARCHAR(255) NOT NULL,
+      city TEXT NOT NULL,
+      email TEXT NOT NULL,
+      gender TEXT NOT NULL,
+      date_of_birth TIMESTAMP NOT NULL,
+      highest_qualification TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW()
+    );
+    CREATE TABLE IF NOT EXISTS experiences (
+      id SERIAL PRIMARY KEY,
+      user_id uuid REFERENCES applied_users(id),
+      title VARCHAR(50) NOT NULL,
+      employment_type VARCHAR(255) NOT NULL,
+      industry VARCHAR(255) NOT NULL,
+      company_name VARCHAR(255) NOT NULL,
+      start_date DATE NOT NULL,
+      end_date DATE,
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW()
+    );
+    `);
+
+      console.log("Table Created");
+    } else {
+      throw e;
+    }
+  }
 
   const oldUsers = await db
     .select()
@@ -112,7 +143,3 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({ message: "Applied Succesfully", users });
 }
-
-// export async function GET(request: NextRequest) {
-// await db.
-// }

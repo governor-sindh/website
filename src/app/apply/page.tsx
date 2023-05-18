@@ -60,7 +60,7 @@ export default function Page() {
       const resData = await res.json();
       console.log(resData.message);
 
-      if (resData.message === "Applied Succesfully") reset();
+      if (resData.message === "Applied Successfully") reset();
 
       toast({
         title: `${resData.message}`,

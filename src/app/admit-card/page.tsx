@@ -6,6 +6,7 @@ import { admitCardRequirementsSchema } from "@/lib/yupValidation";
 import { IAdmitCard, IAdmitCardRequirements } from "@/types";
 import { Poppins } from "next/font/google";
 import { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
@@ -13,14 +14,11 @@ const poppins = Poppins({
 });
 
 export default function Page() {
+  const toast = useToast();
+
   const [loading, setLoading] = useState<boolean>(false);
-  const [formDisable, setFormDisable] = useState<boolean>(false);
-  const [data, setData] = useState<IAdmitCard>({
-    fullName: "Shehzad",
-    fatherName: "dfdfdfdfdf",
-    cnic: "string",
-    dateOfRegistration: "date",
-  });
+  const [verified, setVerified] = useState<boolean>(false);
+  const [data, setData] = useState<IAdmitCard>();
 
   const {
     register,
@@ -34,20 +32,32 @@ export default function Page() {
   const onFormSubmit = async (formData: IAdmitCardRequirements) => {
     try {
       setLoading(true);
-      console.log(formData);
-      const sleep = () => new Promise((resolve) => setTimeout(resolve, 2500));
-      await sleep();
 
       const res = await fetch("/api/admitcard", {
-        body: JSON.stringify(formData.email),
+        body: JSON.stringify({ email: formData.email.toLowerCase() }),
         method: "POST",
       });
-      //  setData(await res.json())
+      const data = await res.json();
+      if (
+        data.message === "User not found" ||
+        data.message === "Add your credentials"
+      ) {
+        toast({
+          title: `${data.message}`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+        return;
+      }
+      setData(data);
     } catch (err) {
+      console.log("err", err);
     } finally {
       setLoading(false);
     }
   };
+  console.log("data", data);
 
   return (
     <main className="flex flex-col items-center justify-center">
@@ -57,12 +67,12 @@ export default function Page() {
       >
         Download Admit Card
       </h1>
-      {formDisable ? (
+      {data ? (
         <>
           <AdmitCard data={data} />
           <PrintableAdmitCard data={data} />
           <button
-            className="mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
+            className="mx-8 mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
             onClick={() => window.print()}
           >
             DOWNLOAD{" "}
@@ -81,14 +91,16 @@ export default function Page() {
             register={register}
             errors={errors}
           />
-          <button
-            type="submit"
-            style={poppins.style}
-            disabled={loading || formDisable}
-            className="text mt-5 w-52 bg-sub py-4 text-center text-base font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-full sm:py-3 sm:text-sm"
-          >
-            {loading ? <Loader width="w-4" height="h-4" /> : "GET CARD"}
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              style={poppins.style}
+              disabled={loading || verified}
+              className="mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-52 sm:py-4 sm:text-base"
+            >
+              {loading ? <Loader width="w-4" height="h-4" /> : "GET CARD"}
+            </button>
+          </div>
         </form>
       )}
     </main>

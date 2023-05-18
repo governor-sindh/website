@@ -32,57 +32,54 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
       >
         Entry Test Admit Card
       </h2>
-      <div className="flex items-center justify-evenly">
-        <div className="image flex h-40 w-40 items-center justify-center border-2 border-dotted border-gray-900 text-center md:order-last">
+      <div className="mb-6 flex flex-col items-center justify-evenly border-b border-zinc-500 pb-6 md:flex-row">
+        <div className="image flex h-40 w-32 items-center justify-center border-2 border-dotted border-gray-900 text-center md:order-last md:w-40">
           Paste
           <br />
           Photograph
           <br />1 X 1
         </div>
         <div className="fields">
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Student Name :</h6>
-            <p className="w-32 capitalize md:w-60">
+            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60">
               {data.fullName}
-              <div className="h-[2px] w-full bg-gray-700"></div>
+              <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
           </div>
 
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Father&apos;s Name :</h6>
-            <p className="w-32 capitalize md:w-60 ">
+            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60 ">
               {data.fatherName}
-              <div className="h-[2px] w-full bg-gray-700"></div>
+              <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
           </div>
 
-          <div className="flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Student CNIC Number :</h6>
-            <p className="w-32 capitalize md:w-60 ">
+          <div className="my-1 flex text-lg">
+            <h6 className="w-24 font-bold md:w-52">Student CNIC No. :</h6>
+            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60">
               {data.cnic}
-              <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
 
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Date of Registration :</h6>
-            <p className="w-32 capitalize md:w-60 ">
-              {`${data.dateOfRegistration}`}
-              <div className="h-[2px] w-full bg-gray-700"></div>
+            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60">
+              {`${new Date(data.dateOfRegistration).toLocaleDateString()}`}
+              <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
           </div>
 
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Venue :</h6>
-            <p className="w-32 capitalize md:w-60 ">
+            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60 ">
               Governor House Sindh
-              <div className="h-[2px] w-full bg-gray-700"></div>
+              <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
           </div>
         </div>
       </div>
-
-      <div className="my-6 h-[1px] w-full bg-zinc-500"></div>
 
       <h2 className="my-2 text-lg font-bold">Instruction :</h2>
       <ul className="my-2 pl-6">

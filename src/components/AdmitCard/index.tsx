@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export default function AdmitCard({ data }: { data: IAdmitCard }) {
- console.log("data ::::::::::" , data);
+//  console.log("data ::::::::::" , data);
  
   return (
     <div className="w-[75%] border-2 border-gray-800 p-10 print:hidden">

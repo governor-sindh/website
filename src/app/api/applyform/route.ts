@@ -50,11 +50,9 @@ export async function POST(request: NextRequest) {
       id SERIAL PRIMARY KEY,
       user_id uuid REFERENCES applied_users(id),
       title VARCHAR(50) NOT NULL,
-      employment_type VARCHAR(255) NOT NULL,
       industry VARCHAR(255) NOT NULL,
       company_name VARCHAR(255) NOT NULL,
-      start_date DATE NOT NULL,
-      end_date DATE,
+      years_of_experience VARCHAR(50) NOT NULL,
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
     );
@@ -128,11 +126,9 @@ export async function POST(request: NextRequest) {
     const appliedExperience: NewExperience = {
       userId: user_id,
       title: experience.title,
-      employment_type: experience.employmentType,
       industry: experience.industry,
       companyName: experience.companyName,
-      startDate: experience.startDate,
-      endDate: experience.endDate,
+      yearsOfExperience: experience.yearsOfExperience,
     };
     const experiencesData = await db
       .insert(ExperiencesTable)

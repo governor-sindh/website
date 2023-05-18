@@ -38,10 +38,11 @@ async function Page({ params }: { params: { quarter: string } }) {
 
     return (
 
+
         <>
             <div className={`w-full mb-20`}>
-                <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto flex md:block justify-between mt-20 gap-10 relative'>
-                    <div className='w-[270px] md:w-full h-fit md:border border-zinc-300 md:rounded-lg flex-shrink-0 sticky md:relative md:top-0 top-40'>
+                <div className='xl:w-[1300px] lg:w-[90%] w-[95%] m-auto md:flex block justify-between mt-20 gap-10 relative'>
+                    <div className='md:w-[270px] w-full h-fit md:border-none border border-zinc-300 md:rounded-none rounded-lg flex-shrink-0 md:sticky relative md:top-40 top-0'>
                         <div className='h-fit rounded-lg p-3 bg-gray-50 '>
                             <h2 className='font-normal text-[#f1f1f1] text-sm leading-tight bg-main p-3 rounded-lg'>Core Courses Sequence</h2>
                             <ul className='mt-2 text-zinc-800'>
@@ -54,7 +55,7 @@ async function Page({ params }: { params: { quarter: string } }) {
                                 }
                             </ul>
                         </div>
-                        <div className='mt-8 md:p-2'>
+                        <div className='mt-8 md:p-0 p-2'>
                             <h3 className='font-bold text-zinc-800 text-base leading-tight'>Advance Courses</h3>
                             <div className='flex flex-col gap-2 mt-3'>
                                 {
@@ -67,7 +68,7 @@ async function Page({ params }: { params: { quarter: string } }) {
                             </div>
                         </div>
                     </div>
-                    <div className='w-[80%] md:w-full md:mt-14'>
+                    <div className='md:w-[80%] w-full md:mt-0 mt-14'>
                         <Coursecontent data={data} />
                     </div>
                 </div>

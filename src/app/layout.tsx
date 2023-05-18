@@ -9,7 +9,8 @@ const roboto = Roboto({
 
 export const metadata = {
   title: "Governor Initiative",
-  description: "Governor Initiative for Artificial Intelligence, Web 3.0 and Metaverse",
+  description:
+    "Governor Initiative for Artificial Intelligence, Web 3.0 and Metaverse",
 };
 
 export default function RootLayout({

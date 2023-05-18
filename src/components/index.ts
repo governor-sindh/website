@@ -9,6 +9,7 @@ import Advance from "./Advance";
 import Footer from "./Footer";
 import Text from "./Text";
 import Loader from "./Loader";
+import AdmitCard from "./AdmitCard";
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   ChakraWrapper,
   Text,
   Loader,
+  AdmitCard,
 };

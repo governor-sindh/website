@@ -1,3 +1,4 @@
+// "use client";
 import { IAdmitCard } from "@/types";
 import { Poppins } from "next/font/google";
 import govtLogo from "../../../public/logo.png";
@@ -8,9 +9,9 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-export default function AdmitCard({ data }: { data: IAdmitCard }) {
+export default function PrintableAdmitCard({ data }: { data: IAdmitCard }) {
   return (
-    <div className="w-[75%] border-2 border-gray-800 p-10 print:hidden">
+    <div className="hidden w-[800px] border-2 border-gray-800 bg-red-400 p-10 print:block">
       <div className="flex items-center">
         <Image
           src={govtLogo}
@@ -20,7 +21,7 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
         />
         <h1
           style={poppins.style}
-          className="text-center text-lg font-bold text-main md:text-3xl"
+          className="text-center text-3xl font-bold text-main"
         >
           Governor Sindh Initiative for Artificial Intelligence, Web 3.0 &
           Metaverse
@@ -28,57 +29,57 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
       </div>
       <h2
         style={poppins.style}
-        className="my-7 text-center text-lg font-bold text-black md:text-3xl"
+        className="my-7 text-center text-3xl font-bold text-black"
       >
         Entry Test Admit Card
       </h2>
       <div className="flex items-center justify-evenly">
-        <div className="image flex h-40 w-40 items-center justify-center border-2 border-dotted border-gray-900 text-center md:order-last">
-          Paste
-          <br />
-          Photograph
-          <br />1 X 1
-        </div>
         <div className="fields">
           <div className="flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Student Name :</h6>
-            <p className="w-32 capitalize md:w-60">
+            <h6 className="w-52 font-bold">Student Name :</h6>
+            <p className="w-60 capitalize">
               {data.fullName}
               <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
 
           <div className="flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Father&apos;s Name :</h6>
-            <p className="w-32 capitalize md:w-60 ">
+            <h6 className="w-52 font-bold">Father&apos;s Name :</h6>
+            <p className="w-60 capitalize ">
               {data.fatherName}
               <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
 
           <div className="flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Student CNIC Number :</h6>
-            <p className="w-32 capitalize md:w-60 ">
+            <h6 className="w-52 font-bold">Student CNIC Number :</h6>
+            <p className="w-60 capitalize ">
               {data.cnic}
               <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
 
           <div className="flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Date of Registration :</h6>
-            <p className="w-32 capitalize md:w-60 ">
+            <h6 className="w-52 font-bold">Date of Registration :</h6>
+            <p className="w-60 capitalize ">
               {`${data.dateOfRegistration}`}
               <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
 
           <div className="flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Venue :</h6>
-            <p className="w-32 capitalize md:w-60 ">
+            <h6 className="w-52 font-bold">Venue :</h6>
+            <p className="w-60 capitalize ">
               Governor House Sindh
               <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
+        </div>
+        <div className="image order-last flex h-40 w-40 items-center justify-center border-2 border-dotted border-gray-900 text-center">
+          Paste
+          <br />
+          Photograph
+          <br />1 X 1
         </div>
       </div>
 

@@ -33,45 +33,40 @@ export default function PrintableAdmitCard({ data }: { data: IAdmitCard }) {
       >
         Entry Test Admit Card
       </h2>
-      <div className="flex items-center justify-evenly">
+      <div className="mb-6 flex items-center justify-evenly border-b border-zinc-500 pb-6">
         <div className="fields">
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-52 font-bold">Student Name :</h6>
-            <p className="w-60 capitalize">
+            <p className="w-60 border-b-2 border-gray-700 capitalize">
               {data.fullName}
-              <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
 
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-52 font-bold">Father&apos;s Name :</h6>
-            <p className="w-60 capitalize ">
+            <p className="w-60 border-b-2 border-gray-700 capitalize">
               {data.fatherName}
-              <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
 
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-52 font-bold">Student CNIC Number :</h6>
-            <p className="w-60 capitalize ">
+            <p className="w-60 border-b-2 border-gray-700 capitalize">
               {data.cnic}
-              <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
 
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-52 font-bold">Date of Registration :</h6>
-            <p className="w-60 capitalize ">
-              {`${data.dateOfRegistration}`}
-              <div className="h-[2px] w-full bg-gray-700"></div>
+            <p className="w-60 border-b-2 border-gray-700 capitalize">
+              {`${new Date(data.dateOfRegistration).toLocaleDateString()}`}
             </p>
           </div>
 
-          <div className="flex text-lg">
+          <div className="my-1 flex text-lg">
             <h6 className="w-52 font-bold">Venue :</h6>
-            <p className="w-60 capitalize ">
+            <p className="w-60 border-b-2 border-gray-700 capitalize">
               Governor House Sindh
-              <div className="h-[2px] w-full bg-gray-700"></div>
             </p>
           </div>
         </div>
@@ -82,8 +77,6 @@ export default function PrintableAdmitCard({ data }: { data: IAdmitCard }) {
           <br />1 X 1
         </div>
       </div>
-
-      <div className="my-6 h-[1px] w-full bg-zinc-500"></div>
 
       <h2 className="my-2 text-lg font-bold">Instruction :</h2>
       <ul className="my-2 pl-6">

@@ -14,6 +14,7 @@ const poppins = Poppins({
 
 export default function Page() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [formDisable, setFormDisable] = useState<boolean>(true);
   const [data, setData] = useState<IAdmitCard>({
     fullName: "Shehzad",
     fatherName: "string",
@@ -62,45 +63,40 @@ export default function Page() {
         className="-top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
         onSubmit={handleSubmit(onFormSubmit)}
       >
-        <div className="border-2 border-red-500">
-          <div className="my-6">
-            <label
-              htmlFor="phoneNumber"
-              className="mb-6 mt-4 text-slate-700 md:text-xl"
-            >
-              Phone Number *
-            </label>
+        <div className="my-6">
+          <label
+            htmlFor="phoneNumber"
+            className="mb-6 mt-4 text-slate-700 md:text-xl"
+          >
+            Phone Number *
+          </label>
+          <div className="mb-2 mt-1 flex">
+            <div className="flex h-12 w-[10%] flex-shrink-0 items-center justify-center rounded-l border  border-gray-400 p-3 text-gray-400 md:text-xl">
+              +92
+            </div>
             <input
-              type="phoneNumber"
+              type="tel"
               id="phoneNumber"
-              className={`mb-2 mt-1 block h-12 w-full rounded border border-gray-400 bg-gray-100 p-3 ${
+              className={`block h-12 w-[72%] border border-gray-400 bg-gray-100 p-3 ring-inset ${
                 errors?.phoneNumber
                   ? "border-red-400 ring-red-500"
                   : "focus:border-sub focus:ring-sub"
               } outline-none focus:ring-1 md:text-xl`}
-              placeholder=" phoneNumber"
+              placeholder=" Phone Number"
               {...register("phoneNumber", { valueAsDate: false })}
             />
-            {errors?.phoneNumber && (
-              <p className="mb-4 text-red-400">
-                {errors?.phoneNumber?.message}
-              </p>
-            )}
+            <button className="w-[20%] rounded-r bg-sub text-white">
+              Get OTP
+            </button>
           </div>
-          <button className="border-2 border-green-500">Get OTP</button>
+          {errors?.phoneNumber && (
+            <p className="mb-4 text-red-400">{errors?.phoneNumber?.message}</p>
+          )}
         </div>
-        <Input
-          type="email"
-          id="email"
-          placeholder="Email"
-          required={true}
-          register={register}
-          errors={errors}
-        />
         <button
           type="submit"
           style={poppins.style}
-          disabled={loading}
+          disabled={loading || formDisable}
           className="text mt-5 w-52 bg-sub py-4 text-center text-base font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-full sm:py-3 sm:text-sm"
         >
           {loading ? <Loader width="w-4" height="h-4" /> : "GET CARD"}

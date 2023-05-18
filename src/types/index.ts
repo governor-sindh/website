@@ -39,3 +39,14 @@ export type TFields =
   | "yearsOfExperience"
   | "industry"
   | "companyName";
+
+export interface IAdmitCard {
+  fullName: string;
+  fatherName: string;
+  cnic: string;
+  dateOfRegistration: any;
+  // I think name, father name, cnic number, mobile number, email address, date, and pic
+}
+export interface IAdmitCardRequirements {
+  phoneNumber: string;
+}

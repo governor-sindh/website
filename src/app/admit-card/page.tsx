@@ -75,7 +75,7 @@ export default function Page() {
             className="mx-8 mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
             onClick={() => window.print()}
           >
-            DOWNLOAD{" "}
+            DOWNLOAD
           </button>
         </>
       ) : (

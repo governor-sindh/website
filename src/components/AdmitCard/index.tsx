@@ -9,6 +9,8 @@ const poppins = Poppins({
 });
 
 export default function AdmitCard({ data }: { data: IAdmitCard }) {
+ console.log("data ::::::::::" , data);
+ 
   return (
     <div className="w-[75%] border-2 border-gray-800 p-10 print:hidden">
       <div className="flex items-center">
@@ -60,6 +62,13 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
             <h6 className="w-24 font-bold md:w-52">Student CNIC No. :</h6>
             <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {data.cnic}
+            </p>
+          </div>
+
+          <div className="my-1 flex text-lg">
+            <h6 className="w-24 font-bold md:w-52">Student Reg Number :</h6>
+            <p className=" border-b-2 border-gray-700 capitalize xs:w-48 md:w-60">
+              {data.studentId}
             </p>
           </div>
 

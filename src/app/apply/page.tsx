@@ -1,5 +1,5 @@
 "use client";
-import { ExperienceModal, Input, Loader } from "@/components";
+import { AdmitCard, ExperienceModal, Input, Loader, PrintableAdmitCard } from "@/components";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IApplyForm, IExperience } from "@/types";
@@ -23,14 +23,17 @@ export default function Page() {
   const [experienceData, setExperienceData] = useState<IExperience[]>([]);
   const [experienceModal, setExperienceModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+  const [isApplied, setIsApplied] = useState<boolean>(false);
+  const [formValues, setFormValues] = useState<any>();
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
+    getValues
   } = useForm<IApplyForm>({
-    mode: "onTouched",
+    mode: "onChange",
     resolver: yupResolver(mainFormSchema),
   });
 
@@ -44,34 +47,39 @@ export default function Page() {
         phoneNumber: data.phoneNumber,
         city: data.city.toLowerCase(),
         email: data.email.toLowerCase(),
-        dateOfBirth: `${data.dateOfBirth.getFullYear()}-${
-          data.dateOfBirth.getMonth() + 1
-        }-${data.dateOfBirth.getDate()}`,
+        dateOfBirth: `${data.dateOfBirth.getFullYear()}-${data.dateOfBirth.getMonth() + 1
+          }-${data.dateOfBirth.getDate()}`,
         gender: data.gender,
         highestQualification: data.highestQualification,
         experiences: experienceData.length ? experienceData : null,
       };
-
-      const res = await fetch("/api/applyform/", {
+      const res = await fetch("/api/applyform", {
         body: JSON.stringify(formData),
         method: "POST",
       });
 
-      const resData = await res.json();
+      const resData: any = await res.json();
       console.log(resData.message);
-
-      if (resData.message === "Applied Successfully") reset();
+      setFormValues({ ...formData, ...(resData.users[0] && { users: resData.users[0] }) });
 
       toast({
         title: `${resData.message}`,
         status:
           resData.message === "User Already Exist" ||
-          resData.message === "Add All Credentials"
+            resData.message === "Add All Credentials"
             ? "error"
             : "success",
         duration: 9000,
         isClosable: true,
       });
+
+      setIsApplied(true);
+      console.log("form values :L:::",formValues)
+
+      if (resData.message === "Applied Successfully") {
+        reset()
+      }
+      console.log("form values set :::::", formValues)
     } catch (err: any) {
       console.log(err);
       toast({
@@ -90,7 +98,36 @@ export default function Page() {
       // style={{ backgroundImage: `url('/formBg.png')` }}
       className="mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat"
     >
-      <form
+
+      {isApplied && formValues && formValues.users && (
+        <div className="mt-10 flex flex-col gap-6 items-center justify-center">
+          <AdmitCard data={{
+            cnic: formValues.cnic,
+            dateOfRegistration: formValues.users.createdAt,
+            fatherName: formValues.fatherName,
+            fullName: formValues.fullName,
+            studentId: formValues.users.id
+          }} />
+
+          <PrintableAdmitCard data={{
+            cnic: formValues.cnic,
+            dateOfRegistration: formValues.users.createdAt,
+            fatherName: formValues.fatherName,
+            fullName: formValues.fullName,
+            studentId: formValues.users.id
+          }} />
+          <button
+            className="mx-8 mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
+            onClick={() => window.print()}
+          >
+            DOWNLOAD
+          </button>
+
+        </div>
+
+      )}
+
+      {!isApplied && (<form
         className="-top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
         onSubmit={handleSubmit(onFormSubmit)}
         noValidate
@@ -145,11 +182,10 @@ export default function Page() {
         <select
           {...register("city", { required: true })}
           id="city"
-          className={`mb-2 mt-2 block w-full rounded border border-gray-400 bg-gray-100 p-3 md:text-lg ${
-            errors?.city
-              ? "border-red-400 ring-red-500"
-              : "focus:border-sub focus:ring-sub"
-          } outline-none focus:ring-1`}
+          className={`mb-2 mt-2 block w-full rounded border border-gray-400 bg-gray-100 p-3 md:text-lg ${errors?.city
+            ? "border-red-400 ring-red-500"
+            : "focus:border-sub focus:ring-sub"
+            } outline-none focus:ring-1`}
           required
         >
           <option value="karachi">Karachi</option>
@@ -209,11 +245,10 @@ export default function Page() {
           <select
             {...register("highestQualification", { required: true })}
             id="qualification"
-            className={`mb-2 mt-1 block w-full cursor-pointer rounded border border-gray-400 bg-gray-100 p-3 md:text-lg ${
-              errors?.highestQualification
-                ? "border-red-400 ring-red-500"
-                : "focus:border-sub focus:ring-sub"
-            } outline-none focus:ring-1`}
+            className={`mb-2 mt-1 block w-full cursor-pointer rounded border border-gray-400 bg-gray-100 p-3 md:text-lg ${errors?.highestQualification
+              ? "border-red-400 ring-red-500"
+              : "focus:border-sub focus:ring-sub"
+              } outline-none focus:ring-1`}
           >
             <option value="n">Please Select</option>
             {formQualifications.map((item, i) => (
@@ -303,7 +338,7 @@ export default function Page() {
           </button>
         </div>
       </form>
-
+      )}
       {/* <button className="mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:w-52 sm:py-4 sm:text-base">
         </button> */}
 

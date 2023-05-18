@@ -57,6 +57,13 @@ export default function PrintableAdmitCard({ data }: { data: IAdmitCard }) {
           </div>
 
           <div className="my-1 flex text-lg">
+            <h6 className="w-52 font-bold">Student Reg Number :</h6>
+            <p className="w-60 border-b-2 border-gray-700 capitalize">
+              {data.studentId}
+            </p>
+          </div>
+
+          <div className="my-1 flex text-lg">
             <h6 className="w-52 font-bold">Date of Registration :</h6>
             <p className="w-60 border-b-2 border-gray-700 capitalize">
               {`${new Date(data.dateOfRegistration).toLocaleDateString()}`}

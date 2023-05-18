@@ -55,13 +55,7 @@ export async function POST(request: NextRequest) {
     const users = await db.insert(UsersTable).values(appliedUser).returning();
 
     experiences?.map(async (experience) => {
-      const users = await db
-        .select({ id: UsersTable.id })
-        .from(UsersTable)
-        .where(eq(UsersTable.email, email));
-      const user_id = users[0].id;
       const appliedExperience: NewExperience = {
-        userId: user_id,
         title: experience.title,
         industry: experience.industry,
         companyName: experience.companyName,
@@ -73,10 +67,20 @@ export async function POST(request: NextRequest) {
         .returning();
       return experiencesData;
     });
-    return NextResponse.json({ message: "Applied Succesfully", users });
+
+    return NextResponse.json({ message: "Applied Successfully", users });
   } catch (error) {
-    return NextResponse.json({
-      message: "User Already Exist",
-    });
+    return NextResponse.json(
+      {
+        message: "User Already Exist",
+      },
+      {
+        status: 409,
+      }
+    );
+
+    // return new Response("User Already Exist", {
+    //   status: 409,
+    // });
   }
 }

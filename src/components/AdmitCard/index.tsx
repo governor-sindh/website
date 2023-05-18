@@ -28,7 +28,7 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
       </div>
       <h2
         style={poppins.style}
-        className="my-7 text-center text-lg font-bold text-black md:text-3xl"
+        className="my-7 text-center text-sm font-bold text-black xs:text-lg md:text-3xl"
       >
         Entry Test Admit Card
       </h2>
@@ -42,7 +42,7 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
         <div className="fields">
           <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Student Name :</h6>
-            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60">
+            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {data.fullName}
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
@@ -50,7 +50,7 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
 
           <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Father&apos;s Name :</h6>
-            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60 ">
+            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
               {data.fatherName}
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
@@ -58,14 +58,14 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
 
           <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Student CNIC No. :</h6>
-            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60">
+            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {data.cnic}
             </p>
           </div>
 
           <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Date of Registration :</h6>
-            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60">
+            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {`${new Date(data.dateOfRegistration).toLocaleDateString()}`}
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
@@ -73,7 +73,7 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
 
           <div className="my-1 flex text-lg">
             <h6 className="w-24 font-bold md:w-52">Venue :</h6>
-            <p className="w-32 border-b-2 border-gray-700 capitalize md:w-60 ">
+            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
               Governor House Sindh
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>

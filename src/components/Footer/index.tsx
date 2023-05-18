@@ -8,7 +8,7 @@ import { CompulsoryData } from '@/data/compulsory';
 
 function Footer() {
     return (
-        <div className='w-full bg-zinc-100 mt-20'>
+        <div className='w-full bg-zinc-100 mt-20 print:hidden'>
             <div className='xl:w-[1300px] lg:w-[90%] w-[95%] m-auto py-20'>
                 <div className='grid md:grid-cols-3 grid-cols-1 gap-10'>
                     <div className='text-zinc-800'>

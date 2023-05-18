@@ -39,3 +39,14 @@ export type TFields =
   | "yearsOfExperience"
   | "industry"
   | "companyName";
+
+export interface IAdmitCard {
+  fullName: string;
+  fatherName: string;
+  cnic: string;
+  dateOfRegistration: any;
+  studentId: string;
+}
+export interface IAdmitCardRequirements {
+  email: string;
+}

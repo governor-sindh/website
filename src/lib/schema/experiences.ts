@@ -4,9 +4,6 @@ import { UsersTable } from "./users";
 
 export const ExperiencesTable = pgTable("experiences", {
   id: serial("id").primaryKey(),
-  userId: serial("user_id")
-    .references(() => UsersTable.id)
-    .notNull(),
   title: varchar("title").notNull(),
   industry: varchar("industry").notNull(),
   companyName: varchar("company_name").notNull(),

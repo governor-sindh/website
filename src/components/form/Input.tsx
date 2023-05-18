@@ -10,7 +10,7 @@ export default function Input({
 }: {
   id: TFields;
   placeholder: string;
-  type: "text" | "number" | "email" | "date";
+  type: "text" | "number" | "email" | "date" | "tel";
   required?: boolean;
   register: any;
   errors: any;

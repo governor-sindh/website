@@ -9,7 +9,30 @@
 .text_shadow {
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.485);
 }
+
 .rounded_none {
   border-radius: 0 !important;
   height: 3rem !important;
+}
+
+.line-indicator li {
+  width: 70px !important;
+  height: 4px !important;
+  border-radius: 10px;
+  background-color: rgba(142, 142, 142, 0.5);
+}
+
+.line-indicator li:hover {
+  background-color: rgba(168, 167, 167, 0.4);
+}
+
+.line-indicator li.slick-active {
+  background-color: #000000;
+}
+
+
+@media (max-width:1000px) {
+  .line-indicator li {
+    display: none !important;
+  }
 }

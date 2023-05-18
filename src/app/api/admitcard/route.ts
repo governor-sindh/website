@@ -4,9 +4,9 @@ import { UsersTable } from "@/lib/schema/users";
 import { and, eq } from "drizzle-orm";
 
 export async function POST(request: NextRequest) {
-  const { cnic, phoneNumber, email } = await request.json();
+  const { phoneNumber } = await request.json();
 
-  if (!cnic || !phoneNumber || !email) {
+  if (!phoneNumber) {
     return NextResponse.json(
       {
         message: "Add your credentials",
@@ -17,20 +17,28 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const users = await db
-    .select()
-    .from(UsersTable)
-    .where(
-      and(
-        eq(UsersTable.cnic, cnic),
-        eq(UsersTable.phoneNumber, phoneNumber),
-        eq(UsersTable.email, email)
-      )
-    );
-  const user = users[0];
+  try {
+    const users = await db
+      .select()
+      .from(UsersTable)
+      .where(eq(UsersTable.phoneNumber, phoneNumber));
+    const user = users[0];
 
-  return NextResponse.json({
-    message: "Download your admit card",
-    user: user,
-  });
+    const { fullName, fatherName, cnic, createdAt } = user;
+    return NextResponse.json({
+      fullName,
+      fatherName,
+      cnic,
+      dateOfRegistration: createdAt,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: "User not found",
+      },
+      {
+        status: 404,
+      }
+    );
+  }
 }

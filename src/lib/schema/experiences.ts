@@ -1,12 +1,4 @@
-import {
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  varchar,
-  boolean,
-  date,
-} from "drizzle-orm/pg-core";
+import { pgTable, serial, timestamp, varchar, date } from "drizzle-orm/pg-core";
 import { InferModel } from "drizzle-orm";
 import { UsersTable } from "./users";
 
@@ -16,11 +8,9 @@ export const ExperiencesTable = pgTable("experiences", {
     .references(() => UsersTable.id)
     .notNull(),
   title: varchar("title").notNull(),
-  employment_type: varchar("employment_type").notNull(),
   industry: varchar("industry").notNull(),
   companyName: varchar("company_name").notNull(),
-  startDate: date("start_date").notNull(),
-  endDate: date("end_date"),
+  yearsOfExperience: varchar("years_of_experience").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

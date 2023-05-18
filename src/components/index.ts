@@ -1,7 +1,5 @@
 import ChakraWrapper from "./form/ChakraWrapper";
 import ExperienceModal from "./form/ExperienceModal";
-import ProjectsModal from "./form/ProjectsModal";
-import CheckBox from "./form/CheckBox";
 import Input from "./form/Input";
 import Header from "./Header";
 import Hero from "./Hero";
@@ -10,6 +8,7 @@ import Coursecontent from "./courseContent";
 import Advance from "./Advance";
 import Footer from "./Footer";
 import Text from "./Text";
+import Loader from "./Loader";
 
 export {
   Header,
@@ -20,8 +19,7 @@ export {
   Footer,
   Input,
   ExperienceModal,
-  CheckBox,
   ChakraWrapper,
-  ProjectsModal,
-  Text
+  Text,
+  Loader,
 };

@@ -39,6 +39,7 @@ async function Page({ params }: { params: { quarter: string } }) {
     return (
         
 
+
         <>
             <div className={`w-full mb-20`}>
                 <div className='xl:w-[1300px] lg:w-[90%] w-[95%] m-auto md:flex block justify-between mt-20 gap-10 relative'>

@@ -1,29 +1,9 @@
-// export interface MyFormUnion extends IApplyForm, IExperience, IProjects {}
-
-export interface IProjects {
-  title: string;
-  repoLink: string;
-  hostedLink?: string;
-  description?: string;
-  id: string;
-}
-
 export interface IExperience {
   id: string;
   title: string;
-  employmentType:
-    | "Full-time"
-    | "Part-time"
-    | "Self-employed"
-    | "Freelance"
-    | "Contract"
-    | "Internship"
-    | "Apprenticeship"
-    | "Seasonal";
   industry: string;
   companyName: string;
-  startDate: string;
-  endDate: string;
+  yearsOfExperience: string;
 }
 
 export interface IApplyForm {
@@ -34,24 +14,19 @@ export interface IApplyForm {
   city: string;
   email: string;
   gender: "male" | "female";
-  dateOfBirth: string;
+  dateOfBirth: any;
   highestQualification:
     | "Matric / O Levels"
     | "Intermediate / A Levels"
     | "Undergraduate (Bachelor's)"
     | "Graduate (Master's)"
     | "Post-Graduate (PhD)";
-  github?: string;
-  linkedin?: string;
-  discord?: string;
-
   experiences?: IExperience[];
-  programmingLanguages?: string[];
-  programmingProjects?: IProjects[];
 }
 
 export type TFields =
   | "fullName"
+  | "fatherName"
   | "cnic"
   | "phoneNumber"
   | "city"
@@ -59,27 +34,8 @@ export type TFields =
   | "dateOfBirth"
   | "gender"
   | "highestQualification"
-  | "github"
-  | "linkedin"
-  | "discord"
   | "experiences"
-  | "programmingLanguages"
-  | "programmingProjects"
   | "title"
-  | "employmentType"
+  | "yearsOfExperience"
   | "industry"
-  | "companyName"
-  | "startDate"
-  | "endDate"
-  | "currentlyWorking"
-  | "title"
-  | "repoLink"
-  | "hostedLink"
-  | "description";
-
-// export interface ISignup {
-//   fullName: string;
-//   CNIC: string;
-//   email: string;
-//   password: string;
-// }
+  | "companyName";

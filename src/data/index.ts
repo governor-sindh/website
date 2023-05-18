@@ -7,6 +7,8 @@ import {
   formCities,
   formQualifications,
   employmentType,
+  industries,
+  years,
 } from "./form/formData";
 
 export {
@@ -16,4 +18,6 @@ export {
   formCities,
   formQualifications,
   employmentType,
+  industries,
+  years,
 };

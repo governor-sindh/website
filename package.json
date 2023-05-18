@@ -25,7 +25,9 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
+    "react-slick": "^0.29.0",
     "react-uuid": "^2.0.0",
+    "slick-carousel": "^1.8.1",
     "tailwindcss": "3.3.2",
     "yup": "^1.1.1"
   },
@@ -34,6 +36,7 @@
     "@types/pg": "^8.6.6",
     "@types/react": "18.2.4",
     "@types/react-dom": "18.2.3",
+    "@types/react-slick": "^0.23.10",
     "drizzle-kit": "^0.17.6",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",

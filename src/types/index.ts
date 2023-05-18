@@ -45,7 +45,7 @@ export interface IAdmitCard {
   fatherName: string;
   cnic: string;
   dateOfRegistration: any;
-  // I think name, father name, cnic number, mobile number, email address, date, and pic
+  studentId: string;
 }
 export interface IAdmitCardRequirements {
   email: string;

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { UsersTable } from "@/lib/schema/users";
 import { eq } from "drizzle-orm";
+import { IAdmitCard } from "@/types";
 
 export async function POST(request: NextRequest) {
   const { email } = await request.json();
@@ -24,12 +25,13 @@ export async function POST(request: NextRequest) {
       .where(eq(UsersTable.email, email));
     const user = users[0];
 
-    const { fullName, fatherName, cnic, createdAt } = user;
+    const { fullName, fatherName, cnic, createdAt, id } = user;
     return NextResponse.json({
       fullName,
       fatherName,
       cnic,
       dateOfRegistration: createdAt,
+      studentId: id,
     });
   } catch (error) {
     return NextResponse.json(
@@ -40,5 +42,8 @@ export async function POST(request: NextRequest) {
         status: 404,
       }
     );
+    // return new Response("User not found", {
+    //   status: 404,
+    // });
   }
 }

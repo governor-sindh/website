@@ -59,9 +59,16 @@ export default function Page() {
       });
 
       const resData: any = await res.json();
-      console.log(resData.message);
-      setFormValues({ ...formData, ...(resData.users[0] && { users: resData.users[0] }) });
 
+      // console.log("res data:::::", resData);
+
+      if (!resData.users || resData.message == "User Already Exist" ||
+        resData.message == "Add All Credentials") {
+        // console.log("from error throw ::::::");
+        throw new Error(resData.message);
+      }
+
+      setFormValues({ ...formData, ...(resData.users[0] && { users: resData.users[0] }) });
       toast({
         title: `${resData.message}`,
         status:
@@ -74,16 +81,16 @@ export default function Page() {
       });
 
       setIsApplied(true);
-      console.log("form values :L:::",formValues)
+      console.log("form values :L:::", formValues)
 
       if (resData.message === "Applied Successfully") {
         reset()
       }
       console.log("form values set :::::", formValues)
     } catch (err: any) {
-      console.log(err);
+      console.log("Erro from catch", JSON.stringify(err));
       toast({
-        title: `Unknown error`,
+        title: `Error`,
         description: `${err?.message}`,
         status: "error",
         isClosable: true,

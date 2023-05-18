@@ -3,9 +3,9 @@ import React from 'react';
 
 function Advance() {
     return (
-        <div className='w-[1300px] xl:w-[90%] lg:w-[95%] m-auto mt-20 mb-10'>
-            <h1 className='text-4xl lg:text-4xl sm:text-3xl text-main font-extrabold mt-10'>Advance Courses</h1>
-            <div className='grid grid-cols-4 xl-lg:grid-cols-3 sm:grid-cols-1 gap-10 xl-lg:gap-5 mt-7'>
+        <div className='xl:w-[1300px] lg:w-[90%] w-[95%] m-auto mt-20 mb-10'>
+            <h1 className='lg:text-4xl sm:text-4xl text-2xl sm:text-left text-center text-main font-extrabold mt-10'>Advance Courses</h1>
+            <div className='grid xl-lg:grid-cols-4 sm:grid-cols-3 grid-cols-1 xl-lg:gap-10 gap-5 mt-10'>
                 <Link href={'/tracks/ai/4'} className='hover:scale-110 duration-300 transition-all'>
                     <div className='h-[150px] box_shadow rounded-lg border-t-[40px] border-zinc-800 flex justify-center items-center text-zinc-600 text-lg text-center font-bold'>
                         Artificial Intelligence

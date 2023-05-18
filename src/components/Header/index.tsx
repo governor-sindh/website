@@ -27,15 +27,20 @@ function Header() {
                         </div>
                     </Link>
                     <ChakraMenu screen='small' open={open} setOpen={setOpen} />
+                    <Link href={'/jobs'} onClick={() => setOpen(false)}>
+                        <div className='py-5 border-b border-[#1468a5]'>
+                            Jobs
+                        </div>
+                    </Link>
                 </div>
             </div>
             <div className='w-full bg-main sticky top-0 backdrop-blur-3xl z-30'>
                 <div className='xl:w-[1300px] lg:w-[90%] w-[95%] m-auto flex justify-between items-center md:h-20 h-16'>
                     <Link href={'/'}><Image src={Logo} alt='logo' width={90} className='sm:mt-20 mt-14 md:w-[90px] sm:w-[80px] w-[70px]' /></Link>
-                    <h1 className='xl:text-2xl lg:text-xl text-[15px] font-extrabold text-[#b9d8f3] md:block hidden text_shadow'>Tuition Free Education Program on Latest Technologies</h1>
-                    <h1 className='text-[1.125rem] md:hidden font-extrabold text-[#b9d8f3] text_shadow'>Tuition Free Program </h1>
+                    <h1 className='xl:text-2xl xl-lg:text-xl text-[15px] font-extrabold text-[#b9d8f3] lg:block hidden text_shadow'>Tuition Free Education Program on Latest Technologies</h1>
+                    <h1 className='text-[1.125rem] lg:hidden font-extrabold text-[#b9d8f3] text_shadow'>Tuition Free Program </h1>
 
-                    <div className='sm:flex hidden lg:gap-10 gap-5 text-[#FAF9F6]'>
+                    <div className='sm:flex items-center hidden lg:gap-10 gap-5 text-[#FAF9F6]'>
                         <Link href={'/'}>
                             <div className='menu_btns'>
                                 Home
@@ -47,7 +52,14 @@ function Header() {
                                 Apply
                             </div>
                         </Link>
+
                         <ChakraMenu screen='large' open={open} setOpen={setOpen} />
+
+                        <Link href={'/jobs'}>
+                            <div className='menu_btns'>
+                                Jobs
+                            </div>
+                        </Link>
 
                     </div>
                     <div className='sm:hidden block'>

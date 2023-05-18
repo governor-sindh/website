@@ -1,12 +1,4 @@
-import {
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  varchar,
-  boolean,
-  date,
-} from "drizzle-orm/pg-core";
+import { pgTable, serial, timestamp, varchar, date } from "drizzle-orm/pg-core";
 import { InferModel } from "drizzle-orm";
 import { UsersTable } from "./users";
 

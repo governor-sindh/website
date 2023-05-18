@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import Text from "./Text";
 import Loader from "./Loader";
 import AdmitCard from "./AdmitCard";
+import PrintableAdmitCard from "./AdmitCard/PrintableAdmitCard";
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   Text,
   Loader,
   AdmitCard,
+  PrintableAdmitCard,
 };

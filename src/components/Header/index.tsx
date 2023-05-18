@@ -11,7 +11,7 @@ function Header() {
     const [open, setOpen] = useState(false);
     return (
         <>
-            <div className={`fixed top-0 left-0 w-full h-full bg-main z-40 ${!open && 'hidden'}`}>
+            <div className={`fixed top-0 print:hidden left-0 w-full h-full bg-main z-40 ${!open && 'hidden'}`}>
                 <div className='absolute top-5 right-5 '>
                     <RxCross1 className='text-white' size={25} onClick={() => setOpen(false)} />
                 </div>
@@ -34,7 +34,7 @@ function Header() {
                     </Link>
                 </div>
             </div>
-            <div className='w-full bg-main sticky top-0 backdrop-blur-3xl z-30'>
+            <div className='w-full print:hidden bg-main sticky top-0 backdrop-blur-3xl z-30'>
                 <div className='xl:w-[1300px] lg:w-[90%] w-[95%] m-auto flex justify-between items-center md:h-20 h-16'>
                     <Link href={'/'}><Image src={Logo} alt='logo' width={90} className='sm:mt-20 mt-14 md:w-[90px] sm:w-[80px] w-[70px]' /></Link>
                     <h1 className='xl:text-2xl xl-lg:text-xl text-[15px] font-extrabold text-[#b9d8f3] lg:block hidden text_shadow'>Tuition Free Education Program on Latest Technologies</h1>

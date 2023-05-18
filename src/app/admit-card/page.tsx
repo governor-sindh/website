@@ -19,9 +19,7 @@ export default function Page() {
     fullName: "Shehzad",
     fatherName: "string",
     cnic: "string",
-    phoneNumber: "string",
-    email: "string",
-    dateOfRegistration: "any",
+    dateOfRegistration: "date",
   });
 
   const {
@@ -54,12 +52,17 @@ export default function Page() {
     <main className="flex flex-col items-center justify-center">
       <h1
         style={poppins.style}
-        className="my-8 text-center text-lg font-bold text-main md:text-3xl"
+        className="my-8 text-center text-lg font-bold text-main print:hidden md:text-3xl"
       >
         Download Admit Card
       </h1>
-      {/* <AdmitCard data={data} /> */}
-      <form
+      <AdmitCard data={data} />
+      {/* <PrintAdmitCard data={data} /> */}
+      <button className="print:hidden" onClick={() => window.print()}>
+        Download card
+      </button>
+
+      {/* <form
         className="-top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
         onSubmit={handleSubmit(onFormSubmit)}
       >
@@ -101,7 +104,7 @@ export default function Page() {
         >
           {loading ? <Loader width="w-4" height="h-4" /> : "GET CARD"}
         </button>
-      </form>
+      </form> */}
     </main>
   );
 }

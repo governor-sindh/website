@@ -44,8 +44,6 @@ export interface IAdmitCard {
   fullName: string;
   fatherName: string;
   cnic: string;
-  phoneNumber: string;
-  email: string;
   dateOfRegistration: any;
   // I think name, father name, cnic number, mobile number, email address, date, and pic
 }

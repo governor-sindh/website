@@ -9,6 +9,7 @@ import { formCities, formQualifications } from "@/data";
 import { useToast } from "@chakra-ui/react";
 import { Poppins } from "next/font/google";
 import { IoRemoveCircleOutline } from "react-icons/io5";
+import Link from "next/link";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
@@ -100,6 +101,12 @@ export default function Page() {
         >
           Student Course Registration Form{" "}
         </h1>
+        <p className="text-center">
+          Already applied?{" "}
+          <Link className="text-blue-400 underline" href={"/admit-card"}>
+            Get Admit Card
+          </Link>
+        </p>
         <Input
           type="text"
           id="fullName"
@@ -135,7 +142,6 @@ export default function Page() {
         <label htmlFor="city" className="text-slate-700 md:text-xl">
           City *
         </label>
-
         <select
           {...register("city", { required: true })}
           id="city"
@@ -156,7 +162,6 @@ export default function Page() {
         {errors.city && (
           <p className="mb-4 text-red-400">{errors.city?.message}</p>
         )}
-
         <Input
           type="email"
           id="email"
@@ -197,7 +202,6 @@ export default function Page() {
         {errors.gender && (
           <p className="mb-4 text-red-400">{errors.gender?.message}</p>
         )}
-
         <div className="my-6">
           <label htmlFor="qualification" className="text-slate-700 md:text-xl">
             Highest Qualification *
@@ -224,7 +228,6 @@ export default function Page() {
             </p>
           )}
         </div>
-
         <div className="mt-6 min-h-[8rem]">
           <label className="block text-slate-700 md:text-xl">
             Experience (optional)
@@ -289,7 +292,6 @@ export default function Page() {
             ))}
           </div>
         </div>
-
         <div className="flex w-full justify-center">
           <button
             type="submit"
@@ -301,6 +303,9 @@ export default function Page() {
           </button>
         </div>
       </form>
+
+      {/* <button className="mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:w-52 sm:py-4 sm:text-base">
+        </button> */}
 
       {experienceModal && (
         <ExperienceModal

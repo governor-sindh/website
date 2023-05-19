@@ -57,7 +57,6 @@ export default function Page() {
       setLoading(false);
     }
   };
-  console.log("data", data);
 
   return (
     <main className="flex flex-col items-center justify-center">

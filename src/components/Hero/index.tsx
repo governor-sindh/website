@@ -15,7 +15,7 @@ function Hero() {
     <div
       className={` relative z-0 w-full overflow-hidden bg-opacity-75 bg-[url('/bg_house.jpg')] bg-cover ${poppins.className}`}
     >
-      <div className=" -z-50 absolute inset-0 h-full w-full bg-zinc-100 bg-opacity-[0.85]"></div>
+      <div className=" -z-50 absolute inset-0 h-full w-full bg-zinc-100 bg-opacity-80"></div>
 
       {/* <img
         src={bgHero.src}

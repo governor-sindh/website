@@ -42,7 +42,7 @@ export default function Input({
 
         <input
           type={type}
-          inputMode="numeric"
+          // inputMode={ id === "cnic" || id === "phoneNumber" ? 'tel':''}
           onKeyDown={
             id === "cnic" || id === "phoneNumber" ? handleKeyDown : () => {}
           }

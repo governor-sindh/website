@@ -9,10 +9,8 @@ const poppins = Poppins({
 });
 
 export default function AdmitCard({ data }: { data: IAdmitCard }) {
-//  console.log("data ::::::::::" , data);
- 
   return (
-    <div className="w-[75%] border-2 border-gray-800 p-10 print:hidden">
+    <div className="w-[95%] border-2 border-gray-800 p-3 print:hidden xs:w-[75%] xs:p-10">
       <div className="flex items-center">
         <Image
           src={govtLogo}
@@ -43,46 +41,46 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
         </div>
         <div className="fields">
           <div className="my-1 flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Student Name :</h6>
-            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
+            <h6 className="w-48 font-bold md:w-52">Student Name :</h6>
+            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {data.fullName}
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Father&apos;s Name :</h6>
-            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
+            <h6 className="w-48 font-bold md:w-52">Father&apos;s Name :</h6>
+            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
               {data.fatherName}
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Student CNIC No. :</h6>
-            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
+            <h6 className="w-48 font-bold md:w-52">Student CNIC No. :</h6>
+            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {data.cnic}
             </p>
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Student Reg Number :</h6>
-            <p className=" border-b-2 border-gray-700 capitalize xs:w-48 md:w-60">
+            <h6 className="w-48 font-bold md:w-52">Student Reg Number :</h6>
+            <p className="w-32 border-b-2 border-gray-700 capitalize xs:w-48 md:w-60">
               {data.studentId}
             </p>
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Date of Registration :</h6>
-            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
+            <h6 className="w-48 font-bold md:w-52">Date of Registration :</h6>
+            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {`${new Date(data.dateOfRegistration).toLocaleDateString()}`}
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-24 font-bold md:w-52">Venue :</h6>
-            <p className=" border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
+            <h6 className="w-48 font-bold md:w-52">Venue :</h6>
+            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
               Governor House Sindh
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>

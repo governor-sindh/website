@@ -6,17 +6,19 @@ import {
   varchar,
   uniqueIndex,
   date,
+  numeric,
+  integer,
 } from "drizzle-orm/pg-core";
 import { InferModel } from "drizzle-orm";
 
 export const UsersTable = pgTable(
-  "applied_users",
+  "applied_user",
   {
     id: serial("id").primaryKey().notNull(),
     fullName: text("full_name").notNull(),
     fatherName: text("father_name").notNull(),
-    cnic: varchar("cnic").notNull(),
-    phoneNumber: varchar("phone_number").notNull(),
+    cnic: integer("cnic").notNull(),
+    phoneNumber: integer("phone_number").notNull(),
     city: text("city").notNull(),
     email: text("email").notNull(),
     gender: text("gender").notNull(),

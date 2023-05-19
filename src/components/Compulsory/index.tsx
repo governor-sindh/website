@@ -16,41 +16,41 @@ function Compulsory() {
                 <Link href={'/compulsory/1'} className='hover:scale-105 duration-200 transition-all'>
                     <div className=' overflow-hidden h-fit  box_shadow rounded-lg flex flex-col justify-center items-center text-center text-zinc-600 text-lg font-bold '>
                         <div>
-                            <img alt='programming fundamentals' src={programmingFundamentals.src} className='  object-cover'  width={'full'}  height={'300'}/>
+                            <Image alt='programming fundamentals' src={programmingFundamentals} className='object-cover w-full' height={'300'} />
                         </div>
                         <div className='px-4 flex justify-center items-center   h-[70px]'>
-                        <text  >
-                        Programming Fundamentals
-                        </text>
+                            <text  >
+                                Programming Fundamentals
+                            </text>
                         </div>
                     </div>
                 </Link>
                 <Link href={'/compulsory/2'} className='hover:scale-105 duration-200 transition-all'>
                     <div className=' overflow-hidden h-fit  box_shadow rounded-lg flex flex-col justify-center items-center text-center text-zinc-600 text-lg font-bold '>
                         <div>
-                            <img alt='nextjs' src={nextjsCourse.src} className='  object-cover'  width={'full'}  height={'300'}/>
+                            <Image alt='nextjs' src={nextjsCourse} className='object-cover w-full' height={'300'} />
                         </div>
                         <div className='px-4 flex justify-center items-center   h-[70px]'>
-                        <text  >
-                        Web2 Using NextJS
-                        </text>
+                            <text  >
+                                Web2 Using NextJS
+                            </text>
                         </div>
                     </div>
                 </Link>
                 <Link href={'/compulsory/3'} className='hover:scale-105 duration-200 transition-all'>
                     <div className=' overflow-hidden h-fit  box_shadow rounded-lg flex flex-col justify-center items-center text-center text-zinc-600 text-lg font-bold '>
                         <div>
-                            <img alt='nextjs' src={EarnAsYouLearn.src} className='  object-cover'  width={'full'}  height={'300'}/>
+                            <Image alt='nextjs' src={EarnAsYouLearn} className='object-cover w-full' height={'300'} />
                         </div>
                         <div className='px-4 flex justify-center items-center   h-[70px]'>
-                        <text  >
-                        Earn as You Learn
-                        </text>
+                            <text  >
+                                Earn as You Learn
+                            </text>
                         </div>
                     </div>
                 </Link>
 
-        
+
             </div>
         </div>
     );

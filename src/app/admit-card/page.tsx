@@ -51,8 +51,13 @@ export default function Page() {
         return;
       }
       setData(data);
-    } catch (err) {
-      console.log("err", err);
+    } catch (err: any) {
+      toast({
+        title: `${err.message}`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     } finally {
       setLoading(false);
     }

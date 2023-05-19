@@ -26,8 +26,6 @@ export async function GET() {
 
     return NextResponse.json({ message: "created" });
   } catch (error) {
-    console.log("eeror from table api ::::::::", error);
-
     return NextResponse.json({
       message: "Not Created",
     });

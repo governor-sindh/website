@@ -1,40 +1,66 @@
-import Image from 'next/image';
-import React from 'react';
-import { Poppins } from 'next/font/google';
-import Cover from '../../../public/cover.png'
-import Link from 'next/link';
-import bgHero from '../../../public/bg_hero.svg'
+import Image from "next/image";
+import React from "react";
+import { Poppins } from "next/font/google";
+import Link from "next/link";
+import Cover from "../../../public/cover.png";
+
 
 const poppins = Poppins({
-    weight: ['300', '400', '500', '800', '900'],
-    subsets: ['latin']
-})
+  weight: ["300", "400", "500", "800", "900"],
+  subsets: ["latin"],
+});
 
 function Hero() {
-    return (
-        <div className={` z-0 w-full relative overflow-hidden bg-zinc-100 ${poppins.className}`}>
-            <img src={bgHero.src} alt='bg hero'  className=' md:opacity-40 xl:opacity-100 hidden md:block h-100% z-10 transform  -scale-x-100 absolute top-[0px] right-[-120px]' />
+  return (
+    <div
+      className={` relative z-0 w-full overflow-hidden bg-opacity-75 bg-[url('/bg_house.jpg')] bg-cover ${poppins.className}`}
+    >
+      <div className=" -z-50 absolute inset-0 h-full w-full bg-zinc-100 bg-opacity-80"></div>
 
-            <div className=' z-50 xl:w-[1300px] lg:w-[90%] w-[95%] m-auto mt-10   block md:flex md:flex-row justify-between items-center '>
-                <div className=' h-fit md:w-1/2 w-full md:py-10 pt-5'>
-                    <h1 className='lg:text-6xl sm:text-5xl text-[2rem] sm:leading-none leading-10 md:text-left text-center tracking-wider text-main font-extrabold whitespace-nowrap'>Governor Sindh</h1>
-                    <h1 className='lg:text-[2.5rem] sm:text-4xl text-[1.5rem] md:text-left text-center sm:leading-[3rem] leading-[2rem]  text-sub font-semibold mt-5 tracking-wider whitespace-nowrap'>Initiative for<br />Artificial Intelligence,<br />Web 3.0 & Metaverse</h1>
-                    <p className=' whitespace-nowrap sm:text-2xl text-[1.25rem] md:text-left text-center font-extrabold text-main my-5'>
-                        Earn up to $5,000 / month
-                    </p>
-                    <p className='  my-5 sm:text-xl text-[1.125rem] md:text-left text-center text-main tracking-wider md:w-[80%] w-full'>
-                        Opening the Governor House and Removing Barriers to Educate the Youth of Sindh.
-                    </p>
-                    <Link href={'/apply'}><button className='mt-5 sm:py-4 py-3 rounded-md md:w-52 w-full sm:text-base text-sm text-center tracking-widest bg-sub text-white font-semibold transition-all hover:translate-y-1'>APPLY NOW</button></Link>
-                </div>
-                <div className=' relative  w-full flex  items-end md:justify-end justify-center md:m-auto mt-7 '>
-                    <Image src={Cover} alt='piaic' className=' transform  -scale-x-100 z-50 w-full  md: min-w-[500px]  lg:w-[600px]' />
+      {/* <img
+        src={bgHero.src}
+        alt="bg hero"
+        className=" h-100% absolute right-[-120px] top-[0px] z-10 hidden -scale-x-100  transform md:block md:opacity-40 xl:opacity-100"
+      /> */}
 
-                </div>
-               
-            </div>
+      <div className=" z-50 m-auto mt-6 block w-[95%] items-center   justify-between md:flex md:flex-row lg:w-[90%] xl:w-[1300px] ">
+        <div className=" h-fit w-full pt-5 md:w-1/2 md:py-10">
+          <h1 className="whitespace-nowrap text-center text-[2rem] font-extrabold leading-10 tracking-wider text-main sm:text-5xl sm:leading-none md:text-left lg:text-6xl">
+            Governor Sindh
+          </h1>
+          <h1 className=" whitespace-nowrap text-center text-[1.5rem] font-normal leading-[2rem] tracking-wider  text-main sm:text-4xl sm:leading-[3rem] md:text-left lg:text-[2.5rem]">
+            Kamran Khan Tessori
+          </h1>
+          <h1 className="mt-5 whitespace-nowrap text-center text-[1.5rem] font-semibold leading-[2rem] tracking-wider  text-sub sm:text-4xl sm:leading-[3rem] md:text-left lg:text-[2.5rem]">
+            Initiative for
+            <br />
+            Artificial Intelligence,
+            <br />
+            Web 3.0 & Metaverse
+          </h1>
+          <p className=" my-5 whitespace-nowrap text-center text-[1.25rem] font-extrabold text-main sm:text-2xl md:text-left">
+            Earn up to $5,000 / month
+          </p>
+          <p className="  my-5 w-full text-center text-[1.125rem] tracking-wider text-main sm:text-xl md:w-[80%] md:text-left">
+            Opening the Governor House and Removing Barriers to Educate the
+            Youth of Sindh.
+          </p>
+          <Link href={"/apply"}>
+            <button className="mt-5 w-full rounded-md bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:py-4 sm:text-base md:w-52">
+              APPLY NOW
+            </button>
+          </Link>
         </div>
-    )
+        <div className=" relative  mt-7 flex  w-full items-end justify-center md:m-auto md:justify-end ">
+          <Image
+            src={Cover}
+            alt="piaic"
+            className=" md: ml-40 h-auto min-w-[900px] lg:w-[600px]"
+          />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Hero;

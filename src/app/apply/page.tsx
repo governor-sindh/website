@@ -30,68 +30,76 @@ export default function Page() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
-    getValues
+    formState: { errors }
   } = useForm<IApplyForm>({
     mode: "onChange",
     resolver: yupResolver(mainFormSchema),
   });
 
   const onFormSubmit = async (data: IApplyForm) => {
+    setLoading(true);
+
+    const formData = {
+      fullName: data.fullName.toLowerCase(),
+      fatherName: data.fatherName.toLowerCase(),
+      cnic: data.cnic,
+      phoneNumber: data.phoneNumber,
+      city: data.city.toLowerCase(),
+      email: data.email.toLowerCase(),
+      dateOfBirth: `${data.dateOfBirth.getFullYear()}-${data.dateOfBirth.getMonth() + 1
+        }-${data.dateOfBirth.getDate()}`,
+      gender: data.gender,
+      highestQualification: data.highestQualification,
+      experiences: experienceData.length ? experienceData : null,
+    };
+
     try {
-      setLoading(true);
-      const formData = {
-        fullName: data.fullName.toLowerCase(),
-        fatherName: data.fatherName.toLowerCase(),
-        cnic: data.cnic,
-        phoneNumber: data.phoneNumber,
-        city: data.city.toLowerCase(),
-        email: data.email.toLowerCase(),
-        dateOfBirth: `${data.dateOfBirth.getFullYear()}-${data.dateOfBirth.getMonth() + 1
-          }-${data.dateOfBirth.getDate()}`,
-        gender: data.gender,
-        highestQualification: data.highestQualification,
-        experiences: experienceData.length ? experienceData : null,
-      };
+
       const res = await fetch("/api/applyform", {
         body: JSON.stringify(formData),
         method: "POST",
       });
 
+      // console.log("response api ::::::" ,res);
+
       const resData: any = await res.json();
 
       // console.log("res data:::::", resData);
-
-      if (!resData.users || resData.message == "User Already Exist" ||
-        resData.message == "Add All Credentials") {
-        // console.log("from error throw ::::::");
+      if (!resData.users) {
         throw new Error(resData.message);
       }
 
+      // if (!resData.users || resData.message == "User Already Exist" ||
+      //   resData.message == "Add All Credentials") {
+      //   // console.log("from error throw ::::::");
+      //   throw new Error(resData.message);
+      // }
+
       setFormValues({ ...formData, ...(resData.users[0] && { users: resData.users[0] }) });
+
       toast({
         title: `${resData.message}`,
-        status:
-          resData.message === "User Already Exist" ||
-            resData.message === "Add All Credentials"
-            ? "error"
-            : "success",
+        status: "success",
+        // resData.message === "User Already Exist" ||
+        //   resData.message === "Add All Credentials"
+        //   ? "error"
+        // : ,
         duration: 9000,
         isClosable: true,
       });
 
       setIsApplied(true);
-      console.log("form values :L:::", formValues)
+      // console.log("form values :L:::", formValues)
 
-      if (resData.message === "Applied Successfully") {
-        reset()
-      }
-      console.log("form values set :::::", formValues)
+      // if (resData.message === "Applied Successfully") {
+      //   reset()
+      // }
+      // console.log("form values set :::::", formValues)
     } catch (err: any) {
-      console.log("Erro from catch", JSON.stringify(err));
+      console.log("Erro from catch", err);
       toast({
         title: `Error`,
-        description: `${err?.message}`,
+        description: `${err.message}`,
         status: "error",
         isClosable: true,
       });
@@ -270,7 +278,7 @@ export default function Page() {
             </p>
           )}
         </div>
-        <div className="mt-6 min-h-[8rem]">
+        {/* <div className="mt-6 min-h-[8rem]">
           <label className="block text-slate-700 md:text-xl">
             Experience (optional)
           </label>
@@ -333,7 +341,7 @@ export default function Page() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         <div className="flex w-full justify-center">
           <button
             type="submit"

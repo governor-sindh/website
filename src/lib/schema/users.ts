@@ -4,9 +4,7 @@ import {
   text,
   timestamp,
   varchar,
-  index,
   uniqueIndex,
-  boolean,
   date,
 } from "drizzle-orm/pg-core";
 import { InferModel } from "drizzle-orm";
@@ -14,7 +12,7 @@ import { InferModel } from "drizzle-orm";
 export const UsersTable = pgTable(
   "applied_users",
   {
-    id: serial("id").primaryKey(),
+    id: serial("id").primaryKey().notNull(),
     fullName: text("full_name").notNull(),
     fatherName: text("father_name").notNull(),
     cnic: varchar("cnic").notNull(),

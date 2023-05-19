@@ -4,8 +4,9 @@ import { sql } from "@vercel/postgres";
 export async function GET() {
   try {
     await sql.query(`
+    
     CREATE TABLE IF NOT EXISTS applied_users (
-      id SERIAL PRIMARY KEY,      
+      id SERIAL PRIMARY KEY NOT NULL,     
       full_name TEXT NOT NULL,
             father_name TEXT NOT NULL,
             cnic VARCHAR(255) NOT NULL,

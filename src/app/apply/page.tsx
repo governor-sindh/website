@@ -87,7 +87,6 @@ export default function Page() {
 
       // if (resData.message === "Applied Successfully") reset()
     } catch (err: any) {
-      console.log("Erro from catch", err);
       toast({
         title: `Error`,
         description: `${err.message}`,

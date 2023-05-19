@@ -41,15 +41,15 @@ export default function Page() {
     mode: "onTouched",
     resolver: yupResolver(mainFormSchema),
   });
-
+  
   const onFormSubmit = async (data: IApplyForm) => {
+    try {
     setLoading(true);
-
     const formData = {
       fullName: data.fullName.toLowerCase(),
       fatherName: data.fatherName.toLowerCase(),
-      cnic: data.cnic,
-      phoneNumber: data.phoneNumber,
+      cnic: Number(data.cnic),
+      phoneNumber: Number(`92${data.phoneNumber}`),
       city: data.city.toLowerCase(),
       email: data.email.toLowerCase(),
       dateOfBirth: `${data.dateOfBirth.getFullYear()}-${
@@ -59,8 +59,7 @@ export default function Page() {
       highestQualification: data.highestQualification,
       experiences: experienceData.length ? experienceData : null,
     };
-
-    try {
+  
       const res = await fetch("/api/applyform", {
         body: JSON.stringify(formData),
         method: "POST",

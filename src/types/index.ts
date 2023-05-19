@@ -9,8 +9,8 @@ export interface IExperience {
 export interface IApplyForm {
   fullName: string;
   fatherName: string;
-  cnic: string;
-  phoneNumber: string;
+  cnic: number;
+  phoneNumber: number;
   city: string;
   email: string;
   gender: "male" | "female";

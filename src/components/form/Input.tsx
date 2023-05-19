@@ -63,7 +63,9 @@ export default function Input({
             id === "phoneNumber" ? "rounded-r" : "mb-2 mt-1 rounded"
           }`}
           placeholder={` ${placeholder}`}
-          {...register(id, { valueAsDate: false })}
+          {...register(id, {
+            valueAsNumber: id === "cnic" || id === "phoneNumber" ? true : false,
+          })}
         />
       </div>
       {errors?.[id] && (

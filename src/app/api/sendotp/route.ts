@@ -5,7 +5,6 @@ export async function POST(request: NextRequest) {
   const { email, code } = await request.json();
   try {
     const data = await db.insert(otpCodes).values({ email, code }).returning();
-    console.log(data);
     return NextResponse.json({
       message: "OTP sent to email",
     });

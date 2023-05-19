@@ -18,7 +18,13 @@ export default function Input({
 }) {
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const numericKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-    const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"];
+    const allowedKeys = [
+      "Backspace",
+      "Tab",
+      "Delete",
+      "ArrowLeft",
+      "ArrowRight",
+    ];
 
     if (!numericKeys.includes(event.key) && !allowedKeys.includes(event.key)) {
       event.preventDefault();

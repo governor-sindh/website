@@ -46,7 +46,7 @@ function Hero() {
             Youth of Sindh.
           </p>
           <Link href={"/apply"}>
-            <button className="mt-5 w-full rounded-md bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:py-4 sm:text-base md:w-52">
+            <button className="mt-5 w-full rounded-md bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:py-4 sm:text-base md:w-52">
               APPLY NOW
             </button>
           </Link>

@@ -124,7 +124,7 @@ export default function Page() {
             }}
           />
           <button
-            className="mx-8 mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
+            className="mx-8 mt-5 w-full bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
             onClick={() => window.print()}
           >
             DOWNLOAD
@@ -343,7 +343,7 @@ export default function Page() {
               type="submit"
               style={poppins.style}
               disabled={loading}
-              className="text mt-5 w-52  bg-sub py-4 text-center text-base font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-full sm:py-3 sm:text-sm"
+              className="text mt-5 w-52  bg-main py-4 text-center text-base font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-full sm:py-3 sm:text-sm"
             >
               {loading ? <Loader width="w-4" height="h-4" /> : "SUBMIT"}
             </button>

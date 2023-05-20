@@ -76,7 +76,7 @@ export default function Page() {
           <AdmitCard data={data} />
           <PrintableAdmitCard data={data} />
           <button
-            className="mx-8 mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
+            className="mx-8 mt-5 w-full bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
             onClick={() => window.print()}
           >
             DOWNLOAD
@@ -100,7 +100,7 @@ export default function Page() {
               type="submit"
               style={poppins.style}
               disabled={loading || verified}
-              className="mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-52 sm:py-4 sm:text-base"
+              className="mt-5 w-full bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-52 sm:py-4 sm:text-base"
             >
               {loading ? <Loader width="w-4" height="h-4" /> : "GET CARD"}
             </button>

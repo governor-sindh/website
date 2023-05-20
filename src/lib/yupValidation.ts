@@ -87,4 +87,9 @@ export const admitCardRequirementsSchema = yup.object({
     .required("Email is required")
     .min(3, "Please enter more then 3 characters")
     .max(55, "Please enter within 55 characters"),
+  // otp: yup
+  //   .string()
+  //   .required("Entry OTP you received")
+  //   .min(6, "Please enter more then 6 characters")
+  //   .max(6, "Please enter within 6 characters"),
 });

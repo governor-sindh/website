@@ -40,7 +40,7 @@ export default function Page() {
     try {
       setLoading(true);
 
-      console.log("formData", formData);
+      // console.log("formData", formData);
 
       const res = await fetch("/api/admitcard", {
         body: JSON.stringify({ email: formData.email.toLowerCase() }),
@@ -72,19 +72,19 @@ export default function Page() {
     }
   };
 
-  const sendOTP =async () => {
+  const sendOTP = async () => {
     const email = watch("email");
-    if (errors.email || !email)return
+    if (errors.email || !email) return;
     setResendAvailable(true);
 
-      const sleep = () => new Promise((resolve) => setTimeout(resolve, 2500));
-      await sleep();
-      toast({
-        title: `OTP Sent`,
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
+    const sleep = () => new Promise((resolve) => setTimeout(resolve, 2500));
+    await sleep();
+    toast({
+      title: `OTP Sent`,
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
     console.log(email);
   };
 

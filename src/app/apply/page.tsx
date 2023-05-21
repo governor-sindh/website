@@ -24,6 +24,7 @@ const poppins = Poppins({
 
 export default function Page() {
   const toast = useToast();
+  const [Counter, setCounter] = useState(0);
 
   const [showExperience, setShowExperience] = useState<boolean>(false);
   const [experienceData, setExperienceData] = useState<IExperience[]>([]);
@@ -41,6 +42,18 @@ export default function Page() {
     mode: "onTouched",
     resolver: yupResolver(mainFormSchema),
   });
+  
+  const incrementCounter = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/counter', {
+        method: 'POST',
+      });
+      const data = await response.json();
+      setCounter(data.counter);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const onFormSubmit = async (data: IApplyForm) => {
     try {
@@ -343,6 +356,7 @@ export default function Page() {
               type="submit"
               style={poppins.style}
               disabled={loading}
+              onSubmit={incrementCounter}
               className="text mt-5 w-52  bg-main py-4 text-center text-base font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-full sm:py-3 sm:text-sm"
             >
               {loading ? <Loader width="w-4" height="h-4" /> : "SUBMIT"}

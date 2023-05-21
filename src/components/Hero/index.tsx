@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
 import { Poppins } from 'next/font/google';
-import Cover from '../../../public/cover.jpg'
+import Cover from '../../../public/cover2.png'
 import Link from 'next/link';
+import Counter from '../counter';
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
@@ -21,8 +22,9 @@ function Hero() {
                     </p>
                     <p className='my-5 sm:text-xl text-[1.125rem] sm:text-left text-center text-main tracking-wider sm:w-[80%] w-full'>
                         Opening the Governor House and Removing Barriers to Educate the Youth of Sindh.
-                    </p>
+                    </p> 
                     <Link href={'/apply'}><button className='mt-5 sm:py-4 py-3 sm:w-52 w-full sm:text-base text-sm text-center tracking-widest bg-sub text-white font-semibold transition-all hover:translate-y-1'>APPLY NOW</button></Link>
+                    <Counter/>
                 </div>
                 <div className='md:w-1/2 w-full flex md:justify-end justify-center md:m-auto mt-7'>
                     <Image src={Cover} alt='piaic' className='lg:w-[80%] md:w-[95%] sm:w-[500px] w-full' />

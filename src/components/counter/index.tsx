@@ -18,22 +18,10 @@ const Counter = () => {
       setLoder(false)
     }
   };
-
-  const incrementCounter = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/api/counter', {
-        method: 'POST',
-      });
-      const data = await response.json();
-      setCounter(data.counter);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
   return (
-    <div>
-      <button disabled={loader} onClick={incrementCounter}>Increment</button>
+    <div className='w-40 text-center'>
+      <h1 className='sm:pt-4 pt-3 sm:w-52 w-full sm:text-3xl text-xl text-main text-center tracking-widest font-semibold'>{loader ? "Loading...": Counter}</h1>
+      <h1 className='sm:pt-1 sm:ml-4 sm:text-base text-[1.125rem] text-center text-main tracking-wider sm:w-40 w-full'>Applications accepted</h1>
     </div>
   );
 };

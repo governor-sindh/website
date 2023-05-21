@@ -3,7 +3,7 @@ import { db } from "@/lib/drizzle";
 import { and, eq, or } from "drizzle-orm";
 
 import { UsersTable, NewUser } from "@/lib/schema/users";
-// import { ExperiencesTable, NewExperience } from "@/lib/schema/experiences";
+import { ExperiencesTable, NewExperience } from "@/lib/schema/experiences";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
 

@@ -30,11 +30,8 @@
     "react-icons": "^4.8.0",
     "react-slick": "^0.29.0",
     "react-uuid": "^2.0.0",
-<<<<<<< HEAD
     "swr": "^2.1.5",
-=======
     "slick-carousel": "^1.8.1",
->>>>>>> cc7bff04a5d1b982cb49ca81c5233b9ac356d0ae
     "tailwindcss": "3.3.2",
     "yup": "^1.1.1"
   },

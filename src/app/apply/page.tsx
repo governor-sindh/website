@@ -32,7 +32,6 @@ export default function Page() {
     mode: "onTouched",
     resolver: yupResolver(mainFormSchema),
   });
-
   const onFormSubmit = async (data: IApplyForm) => {
     try {
       setLoading(true);

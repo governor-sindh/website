@@ -136,6 +136,5 @@ export async function POST(request: NextRequest) {
       .returning();
     return experiencesData;
   });
-
   return NextResponse.json({ message: "Applied Succesfully", users });
 }

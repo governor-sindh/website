@@ -9,8 +9,8 @@ export interface IExperience {
 export interface IApplyForm {
   fullName: string;
   fatherName: string;
-  cnic: string;
-  phoneNumber: string;
+  cnic: number;
+  phoneNumber: number;
   city: string;
   email: string;
   gender: "male" | "female";
@@ -39,3 +39,14 @@ export type TFields =
   | "yearsOfExperience"
   | "industry"
   | "companyName";
+
+export interface IAdmitCard {
+  fullName: string;
+  fatherName: string;
+  cnic: string;
+  dateOfRegistration: any;
+  studentId: string;
+}
+export interface IAdmitCardRequirements {
+  email: string;
+}

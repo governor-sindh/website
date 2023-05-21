@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { UsersTable } from "@/lib/schema/users";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
+import { IAdmitCard } from "@/types";
 
 export async function POST(request: NextRequest) {
-  const { cnic, phoneNumber, email } = await request.json();
+  const { email } = await request.json();
 
-  if (!cnic || !phoneNumber || !email) {
+  if (!email) {
     return NextResponse.json(
       {
         message: "Add your credentials",
@@ -17,20 +18,32 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const users = await db
-    .select()
-    .from(UsersTable)
-    .where(
-      and(
-        eq(UsersTable.cnic, cnic),
-        eq(UsersTable.phoneNumber, phoneNumber),
-        eq(UsersTable.email, email)
-      )
-    );
-  const user = users[0];
+  try {
+    const users = await db
+      .select()
+      .from(UsersTable)
+      .where(eq(UsersTable.email, email));
+    const user = users[0];
 
-  return NextResponse.json({
-    message: "Download your admit card",
-    user: user,
-  });
+    const { fullName, fatherName, cnic, createdAt, id } = user;
+    return NextResponse.json({
+      fullName,
+      fatherName,
+      cnic,
+      dateOfRegistration: createdAt,
+      studentId: id,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: "User not found",
+      },
+      {
+        status: 404,
+      }
+    );
+    // return new Response("User not found", {
+    //   status: 404,
+    // });
+  }
 }

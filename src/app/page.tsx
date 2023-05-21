@@ -5,7 +5,6 @@ import { Hero, Compulsory, Advance, Text } from '@/components'
 import Counter from '../components/counter/page'
 
 
-
 export default function Home() {
     return (
         <div>

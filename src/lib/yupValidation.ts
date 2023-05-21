@@ -19,8 +19,8 @@ export const mainFormSchema = yup.object({
   phoneNumber: yup
     .string()
     .required("Phone Number is required")
-    .min(11, "Please enter more then 11 characters")
-    .max(14, "Please enter within 14 characters"),
+    .min(10, "Please enter more then 10 characters")
+    .max(10, "Please enter within 10 characters"),
   city: yup
     .string()
     .required("City is required")
@@ -68,4 +68,23 @@ export const experienceSchema = yup.object({
     .required("Company Name is required")
     .min(3, "Please enter more then 3 characters")
     .max(40, "Please enter within 40 characters"),
+});
+
+export const admitCardRequirementsSchema = yup.object({
+  // cnic: yup
+  //   .string()
+  //   .required("CNIC Number is required  without -")
+  //   .min(13, "Please enter more then 13 characters")
+  //   .max(13, "Please enter within 13 characters without -"),
+  // phoneNumber: yup
+  //   .string()
+  //   .required("Phone Number is required")
+  //   .min(10, "Please enter more then 10 characters")
+  //   .max(10, "Please enter within 10 characters"),
+  email: yup
+    .string()
+    .email("Email is not valid")
+    .required("Email is required")
+    .min(3, "Please enter more then 3 characters")
+    .max(55, "Please enter within 55 characters"),
 });

@@ -1,6 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { IExperience } from "@/types/";
+import { IExperience } from "@/types";
 import type { Dispatch, SetStateAction } from "react";
 import { Input } from "@/components";
 import { yupResolver } from "@hookform/resolvers/yup";

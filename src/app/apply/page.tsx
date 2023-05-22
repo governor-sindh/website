@@ -41,25 +41,25 @@ export default function Page() {
     mode: "onTouched",
     resolver: yupResolver(mainFormSchema),
   });
-  
+
   const onFormSubmit = async (data: IApplyForm) => {
     try {
-    setLoading(true);
-    const formData = {
-      fullName: data.fullName.toLowerCase(),
-      fatherName: data.fatherName.toLowerCase(),
-      cnic: Number(data.cnic),
-      phoneNumber: Number(`92${data.phoneNumber}`),
-      city: data.city.toLowerCase(),
-      email: data.email.toLowerCase(),
-      dateOfBirth: `${data.dateOfBirth.getFullYear()}-${
-        data.dateOfBirth.getMonth() + 1
-      }-${data.dateOfBirth.getDate()}`,
-      gender: data.gender,
-      highestQualification: data.highestQualification,
-      experiences: experienceData.length ? experienceData : null,
-    };
-  
+      setLoading(true);
+      const formData = {
+        fullName: data.fullName.toLowerCase(),
+        fatherName: data.fatherName.toLowerCase(),
+        cnic: Number(data.cnic),
+        phoneNumber: Number(`92${data.phoneNumber}`),
+        city: data.city.toLowerCase(),
+        email: data.email.toLowerCase(),
+        dateOfBirth: `${data.dateOfBirth.getFullYear()}-${
+          data.dateOfBirth.getMonth() + 1
+        }-${data.dateOfBirth.getDate()}`,
+        gender: data.gender,
+        highestQualification: data.highestQualification,
+        experiences: experienceData.length ? experienceData : null,
+      };
+
       const res = await fetch("/api/applyform", {
         body: JSON.stringify(formData),
         method: "POST",

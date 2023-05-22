@@ -1,5 +1,5 @@
 import { TFields } from "@/types";
-import type { KeyboardEvent, ChangeEvent } from "react";
+import type { KeyboardEvent } from "react";
 
 export default function Input({
   id,
@@ -50,10 +50,21 @@ export default function Input({
           type={type}
           // inputMode={ id === "cnic" || id === "phoneNumber" ? 'tel':''}
           onKeyDown={
-            id === "cnic" || id === "phoneNumber" ? handleKeyDown : () => {}
+            id === "cnic" || id === "phoneNumber" || id === "otp"
+              ? handleKeyDown
+              : () => {}
           }
           id={id}
-          maxLength={id === "cnic" ? "13" : id === "phoneNumber" ? 10 : ""}
+          maxLength={
+            id === "cnic"
+              ? "13"
+              : id === "phoneNumber"
+              ? 10
+              : id === "otp"
+              ? 6
+              : ""
+          }
+          // maxLength={id === "cnic" ? "13" : id === "phoneNumber" ? 10 : id === "otp"?6:""}
           max={type === "date" ? `${new Date().getFullYear() - 13}-12-29` : ""}
           className={`block h-12 w-full border border-gray-400 bg-gray-100 p-3 ${
             errors?.[id]

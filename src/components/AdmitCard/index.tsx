@@ -66,7 +66,7 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
           <div className="my-1 flex text-lg">
             <h6 className="w-48 font-bold md:w-52">Student Reg Number :</h6>
             <p className="w-32 border-b-2 border-gray-700 capitalize xs:w-48 md:w-60">
-              {data.studentId}
+              {`${data.studentId}`.padStart(8, "0")}
             </p>
           </div>
 

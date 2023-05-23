@@ -14,7 +14,7 @@ import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { useToast } from "@chakra-ui/react";
 import { Poppins } from "next/font/google";
-import { IoRemoveCircleOutline } from "react-icons/io5";
+// import { IoRemoveCircleOutline } from "react-icons/io5";
 import Link from "next/link";
 
 const poppins = Poppins({
@@ -25,7 +25,7 @@ const poppins = Poppins({
 export default function Page() {
   const toast = useToast();
 
-  const [showExperience, setShowExperience] = useState<boolean>(false);
+  // const [showExperience, setShowExperience] = useState<boolean>(false);
   const [experienceData, setExperienceData] = useState<IExperience[]>([]);
   const [experienceModal, setExperienceModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ export default function Page() {
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm<IApplyForm>({
     mode: "onTouched",
@@ -66,9 +66,8 @@ export default function Page() {
       });
 
       const resData: any = await res.json();
-      if (!resData.users) {
-        throw new Error(resData.message);
-      }
+
+      if (!resData.users) throw new Error(resData.message);
 
       setFormValues({
         ...formData,
@@ -84,7 +83,9 @@ export default function Page() {
 
       setIsApplied(true);
 
-      // if (resData.message === "Applied Successfully") reset()
+      // this is to increment applications counter
+      fetch("/api/counter", { method: "POST" });
+      
     } catch (err: any) {
       toast({
         title: `Error`,

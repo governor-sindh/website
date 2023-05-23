@@ -85,7 +85,7 @@ export default function Page() {
       duration: 9000,
       isClosable: true,
     });
-    console.log(email);
+    // console.log(email);
   };
 
   return (

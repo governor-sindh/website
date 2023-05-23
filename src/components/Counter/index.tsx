@@ -5,6 +5,7 @@ import CountUp from "react-countup";
 export const Counter = () => {
   const [counter, setCounter] = useState(0);
   const [loader, setLoader] = useState(true);
+
   useEffect(() => {
     fetchCounterValue();
   }, []);
@@ -15,35 +16,27 @@ export const Counter = () => {
       const data = await response.json();
 
       setCounter(data.counter);
+    } catch (err) {
+    } finally {
       setLoader(false);
-    } catch (error) {
-      setLoader(false);
-      return error;
     }
   };
-  return (
-    <>
-      <div className="mt-2 flex h-24 w-full flex-col items-center sm:mt-7">
-        {counter ? (
-          <>
-            <h1 className="flex-col text-center  text-xl font-semibold tracking-widest text-main sm:pt-4 sm:text-3xl">
-              {loader ? (
-                " "
-              ) : (
-                <div className="w-36">
-                  <CountUp start={0} end={100} />
-                </div>
-              )}
-            </h1>
 
-            <h1 className="mb-5 text-xs tracking-wider text-main sm:mb-0 sm:text-sm">
-              {loader ? " " : "Accepted Applications "}
-            </h1>
-          </>
-        ) : (
-          " "
-        )}
-      </div>
-    </>
+  return (
+    <div className="mb-5 mt-4 flex h-24 w-full flex-col items-center sm:mt-7">
+      {counter && !loader ? (
+        <>
+          <div className="flex-col text-center text-xl font-semibold tracking-widest text-main sm:pt-4 sm:text-3xl">
+            <div className="w-36">
+              <CountUp start={0} end={counter} />
+            </div>
+          </div>
+
+          <div className="text-center text-xs tracking-wider text-main sm:mb-0 sm:text-sm">
+            Accepted Applications
+          </div>
+        </>
+      ) : null}
+    </div>
   );
 };

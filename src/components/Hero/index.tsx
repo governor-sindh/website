@@ -45,7 +45,7 @@ function Hero() {
             Opening the Governor House and Removing Barriers to Educate the
             Youth of Sindh.
           </p>
-          <div className="flex sm:flex-row flex-col items-center sm:gap-5 sm:mt-4">
+          <div className="flex sm:flex-row flex-col items-baseline sm:gap-5 sm:mt-4">
             <Link className="w-full" href={"/apply"}>
               <button className="mt-5 w-full rounded-md bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:py-4 sm:text-base md:w-52">
                 APPLY NOW
@@ -54,7 +54,7 @@ function Hero() {
             <Counter />
           </div>
         </div>
-        <div className=" relative  mt-7 flex  w-full items-end justify-center md:m-auto md:justify-end ">
+        <div className=" relative  mt-7 flex  w-full items-end justify-center md:m-auto md:justify-end">
           <Image
             src={Cover}
             alt="piaic"

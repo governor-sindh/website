@@ -81,7 +81,29 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
   if (phoneNumber.toString().length !== 12) {
     return NextResponse.json(
       {
-        message: "Invalid phone number length length!",
+        message: "Invalid phone number length!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if (cnic.toString().length !== 13) {
+    return NextResponse.json(
+      {
+        message: "Invalid cnic length!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if(gender !== "female" && gender !== "male"){
+    return NextResponse.json(
+      {
+        message: "Invalid Gender",
       },
       {
         status: 500,
@@ -131,11 +153,14 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
         )
       );
     const oldUser = oldUsers[0];
-    if (oldUser && oldUser.email === email) {
+    if (!!oldUser && oldUser.email == email) {
+      console.log('147')
       throw new Error("This Email Already Occupied!");
-    } else if (oldUser && oldUser.cnic === cnic) {
+    } else if (!!oldUser && oldUser.cnic == cnic) {
+      console.log('150')
       throw new Error("This CNIC Already Occupied");
-    } else if (oldUser && oldUser.phoneNumber === phoneNumber) {
+    } else if (!!oldUser && oldUser.phoneNumber == phoneNumber) {
+      console.log('153')
       throw new Error("This Phone Number Already Occupied!");
     }
 

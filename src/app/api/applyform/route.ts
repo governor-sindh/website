@@ -6,6 +6,8 @@ import { UsersTable, NewUser } from "@/lib/schema/users";
 // import { ExperiencesTable, NewExperience } from "@/lib/schema/experiences";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
+import { formCities } from "@/data";
+import { formQualifications } from "@/data";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {
@@ -19,6 +21,95 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     dateOfBirth,
     highestQualification,
   }: IApplyForm = await request.json();
+
+  if (fullName.length < 3 || fullName.length > 1000) {
+    return NextResponse.json(
+      {
+        message: "Invalid Full name length!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if (fatherName.length < 3 || fatherName.length > 1000) {
+    return NextResponse.json(
+      {
+        message: "Invalid Full name length!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if (email.length > 1000) {
+    return NextResponse.json(
+      {
+        message: "Invalid Email length!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  let newForCities = [...formCities, "karachi"];
+  if (!newForCities.includes(city)) {
+    return NextResponse.json(
+      {
+        message: "Invalid City!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if (!formQualifications.includes(highestQualification)) {
+    return NextResponse.json(
+      {
+        message: "Invalid Qualification!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if (phoneNumber.toString().length !== 12) {
+    return NextResponse.json(
+      {
+        message: "Invalid phone number length!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if (cnic.toString().length !== 13) {
+    return NextResponse.json(
+      {
+        message: "Invalid cnic length!",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if(gender !== "female" && gender !== "male"){
+    return NextResponse.json(
+      {
+        message: "Invalid Gender",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 
   if (
     !fullName ||
@@ -62,11 +153,14 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
         )
       );
     const oldUser = oldUsers[0];
-    if (oldUser && oldUser.email === email) {
+    if (!!oldUser && oldUser.email == email) {
+      console.log('147')
       throw new Error("This Email Already Occupied!");
-    } else if (oldUser && oldUser.cnic === cnic) {
+    } else if (!!oldUser && oldUser.cnic == cnic) {
+      console.log('150')
       throw new Error("This CNIC Already Occupied");
-    } else if (oldUser && oldUser.phoneNumber === phoneNumber) {
+    } else if (!!oldUser && oldUser.phoneNumber == phoneNumber) {
+      console.log('153')
       throw new Error("This Phone Number Already Occupied!");
     }
 
@@ -74,6 +168,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
 
     return NextResponse.json({ message: "Applied Successfully", users });
   } catch (error: any) {
+    console.log("error ", error);
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(
         {

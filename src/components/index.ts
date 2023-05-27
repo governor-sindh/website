@@ -11,6 +11,7 @@ import Text from "./Text";
 import Loader from "./Loader";
 import AdmitCard from "./AdmitCard";
 import PrintableAdmitCard from "./AdmitCard/PrintableAdmitCard";
+import OtpTimer from "./OtpTimer";
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   Loader,
   AdmitCard,
   PrintableAdmitCard,
+  OtpTimer,
 };

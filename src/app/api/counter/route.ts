@@ -1,6 +1,7 @@
 import { kv } from "@vercel/kv";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST() {
   try {
     // Fetch the current counter value from KV or initialize it as 0
     const currentValue: any = await kv.get("counter");
@@ -11,8 +12,12 @@ export async function POST(request: Request) {
     // Store the updated counter value in KV
     await kv.set("counter", newCounter);
 
-    return new Response(JSON.stringify({ counter: newCounter }), {
-      headers: { "Content-Type": "application/json" },
+    // return new Response(JSON.stringify({ counter: newCounter }), {
+    //   headers: { "Content-Type": "application/json" },
+    // });
+
+    return NextResponse.json({
+      counter: newCounter,
     });
   } catch (error) {
     // console.error("Error:", error);
@@ -21,11 +26,4 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
-
-export async function GET() {
-  const user = await kv.get("counter");
-  return new Response(JSON.stringify({ counter: user }), {
-    headers: { "Content-Type": "application/json" },
-  });
 }

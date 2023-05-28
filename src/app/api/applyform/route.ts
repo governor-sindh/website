@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
+import { kv } from "@vercel/kv";
+
 import { and, eq, or } from "drizzle-orm";
 
 import { UsersTable, NewUser } from "@/lib/schema/users";
@@ -100,7 +102,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     );
   }
 
-  if(gender !== "female" && gender !== "male"){
+  if (gender !== "female" && gender !== "male") {
     return NextResponse.json(
       {
         message: "Invalid Gender",
@@ -154,21 +156,52 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       );
     const oldUser = oldUsers[0];
     if (!!oldUser && oldUser.email == email) {
-      console.log('147')
       throw new Error("This Email Already Occupied!");
     } else if (!!oldUser && oldUser.cnic == cnic) {
-      console.log('150')
       throw new Error("This CNIC Already Occupied");
     } else if (!!oldUser && oldUser.phoneNumber == phoneNumber) {
-      console.log('153')
       throw new Error("This Phone Number Already Occupied!");
     }
 
     const users = await db.insert(UsersTable).values(appliedUser).returning();
 
-    return NextResponse.json({ message: "Applied Successfully", users });
+    try {
+      let currentValue: number | "OK" | null;
+      let newCounter: number;
+      currentValue = await kv.get("counter");
+      if (currentValue === null) {
+        currentValue = await kv.set("counter", 1);
+        return NextResponse.json({
+          message: "Applied Successfully",
+          users: users,
+          counter: 1,
+        });
+      }
+      newCounter = (currentValue as number) + 1;
+
+      const counter = await kv.set("counter", newCounter);
+
+      if (counter === null) {
+        throw new Error("Internal Server Error");
+      }
+      if (counter === "OK") {
+        return NextResponse.json({
+          message: "Applied Successfully",
+          users: users,
+          counter: newCounter,
+        });
+      }
+    } catch (error: any) {
+      return NextResponse.json(
+        {
+          message: error.message,
+        },
+        {
+          status: 500,
+        }
+      );
+    }
   } catch (error: any) {
-    console.log("error ", error);
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(
         {
@@ -176,7 +209,6 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
         },
         { status: 500 }
       );
-      // res.status(400).json({ message: 'This email is already occupied!' });
     } else if (error.message.includes("This CNIC Already Occupied")) {
       return NextResponse.json(
         {
@@ -195,13 +227,6 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
           status: 500,
         }
       );
-
-      // return new NextResponse("This Phone number is already occupied!", {
-      //   status: 500,
-      //   headers: {
-      //     "content-type": "application/json"
-      //   }
-      // });
     } else {
       return NextResponse.json(
         {
@@ -211,13 +236,6 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
           status: 500,
         }
       );
-
-      // return new Response("Internal server error!", {
-      //   status: 500,
-      //   headers: {
-      //     "content-type": "application/json"
-      //   }
-      // });
     }
   }
 }

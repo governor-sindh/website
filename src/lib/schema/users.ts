@@ -8,8 +8,9 @@ import {
   date,
   numeric,
   integer,
+  index,
 } from "drizzle-orm/pg-core";
-import { InferModel } from "drizzle-orm";
+import { InferModel, desc } from "drizzle-orm";
 
 export const UsersTable = pgTable(
   "applied_user",
@@ -33,7 +34,8 @@ export const UsersTable = pgTable(
         users.cnic,
         users.phoneNumber,
         users.email
-      ), // unique index
+      ),
+      index: index("idx_sort_id").on(users.id).desc(),
     };
   }
 );

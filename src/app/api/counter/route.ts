@@ -1,19 +1,31 @@
 import { kv } from "@vercel/kv";
 import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/lib/drizzle";
+import { UsersTable } from "@/lib/schema/users";
+import { desc } from "drizzle-orm";
 
 export async function GET() {
   try {
-    // Fetch the current counter value from KV or initialize it as 0
-    const currentValue: any = await kv.get("counter");
+    const users = await db
+      .select()
+      .from(UsersTable)
+      .orderBy(desc(UsersTable.id))
+      .limit(1);
+    const user = users[0];
 
-    if (!currentValue) {
-      throw new Error("Failed to update counter");
+    if (!users) {
+      throw new Error("Failed to fetch users!");
+    }
+
+    if (!users.length) {
+      return NextResponse.json({
+        counter: 0,
+      });
     }
     return NextResponse.json({
-      counter: currentValue,
+      counter: user.id,
     });
   } catch (error: any) {
-    // console.error("Error:", error);
     return NextResponse.json(
       {
         message: error.message,

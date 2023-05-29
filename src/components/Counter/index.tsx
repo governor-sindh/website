@@ -1,5 +1,8 @@
+import getURL from "@/lib/getUrl";
+
 export const Counter = async () => {
-  const response = await fetch("http://localhost:3000/api/counter", {
+  console.log("hhsdfhfhdfhdfhdfhfdh", getURL("api/counter"));
+  const response = await fetch(`${getURL("api/counter")}`, {
     cache: "no-cache",
   });
   const data = await response.json();

@@ -202,6 +202,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       );
     }
   } catch (error: any) {
+    console.log(error.message);
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(
         {

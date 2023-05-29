@@ -49,7 +49,7 @@ function Header() {
                                 )
                             })
                         }
-                        <h1 className='text-lg font-bold text-white px-2 mt-3 text-center'>Advance Courses</h1>
+                        <h1 className='text-lg font-bold text-white px-2 mt-3 text-center'>Advanced Courses</h1>
                         {
                             tracks.map((val, index) => {
                                 // let active = pathname.startsWith(`/compulsory/${val.id}`)

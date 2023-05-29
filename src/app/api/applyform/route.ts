@@ -53,9 +53,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     );
   }
 
-  let newForCities = formCities.map((item) => item.toLowerCase());
-  newForCities = [...newForCities, "karachi"];
-
+  const newForCities = [...formCities, "karachi"];
   if (!newForCities.includes(city)) {
     return NextResponse.json(
       {

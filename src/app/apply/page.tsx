@@ -53,12 +53,12 @@ export default function Page() {
         fatherName: data.fatherName.toLowerCase(),
         cnic: Number(data.cnic),
         phoneNumber: Number(`92${data.phoneNumber}`),
-        city: data.city.toLowerCase(),
+        city: data.city,
         email: data.email.toLowerCase(),
         dateOfBirth: `${data.dateOfBirth.getFullYear()}-${
           data.dateOfBirth.getMonth() + 1
         }-${data.dateOfBirth.getDate()}`,
-        gender: data.gender,
+        gender: data.gender.toLowerCase(),
         highestQualification: data.highestQualification,
         experiences: experienceData.length ? experienceData : null,
       };

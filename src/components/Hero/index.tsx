@@ -51,6 +51,7 @@ function Hero() {
                 APPLY NOW
               </button>
             </Link>
+            {/* @ts-expect-error Server Component */}
             <Counter />
           </div>
         </div>

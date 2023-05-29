@@ -46,7 +46,7 @@ function Hero() {
             Youth of Sindh.
           </p>
           <div className="mb-7 mt-5 flex flex-col items-center sm:mt-10 sm:flex-row sm:gap-5 md:mb-0">
-            <Link className="w-auto " href={"/apply"}>
+            <Link className="w-full md:w-auto" href={"/apply"}>
               <button className="w-full rounded-md bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:py-4 sm:text-base md:w-52">
                 APPLY NOW
               </button>

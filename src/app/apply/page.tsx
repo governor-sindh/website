@@ -14,7 +14,6 @@ import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
 import { useToast } from "@chakra-ui/react";
 import { Poppins } from "next/font/google";
-// import { IoRemoveCircleOutline } from "react-icons/io5";
 import Link from "next/link";
 
 const poppins = Poppins({
@@ -31,11 +30,15 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [isApplied, setIsApplied] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<any>();
+  const [occupiedErr, setOccupiedErr] = useState({
+    phoneNumber: "",
+    cnic: "",
+    email: "",
+  });
 
   const {
     register,
     handleSubmit,
-    // reset,
     formState: { errors },
   } = useForm<IApplyForm>({
     mode: "onTouched",
@@ -66,14 +69,6 @@ export default function Page() {
       });
 
       const resData: any = await res.json();
-     
-      if (resData.message === "This Email Already Occupied!") {
-        console.log("email error ");
-      } else if (resData.message === "This CNIC Already Occupied!") {
-        console.log("cnic error ");
-      } else if (resData.message === "This Phone Number Already Occupied!") {
-        console.log("phone error ");
-      }
 
       if (!resData.users) throw new Error(resData.message);
 
@@ -90,9 +85,6 @@ export default function Page() {
       });
 
       setIsApplied(true);
-
-      // this is to increment applications counter
-      fetch("/api/counter", { method: "POST" });
     } catch (err: any) {
       toast({
         title: `Error`,
@@ -100,6 +92,14 @@ export default function Page() {
         status: "error",
         isClosable: true,
       });
+
+      if (err.message == "This Email is already Occupied!") {
+        setOccupiedErr({ ...occupiedErr, email: err.message });
+      } else if (err.message == "This CNIC is already occupied!") {
+        setOccupiedErr({ ...occupiedErr, cnic: err.message });
+      } else if (err.message === "This Phone number is already occupied!") {
+        setOccupiedErr({ ...occupiedErr, phoneNumber: err.message });
+      }
     } finally {
       setLoading(false);
     }
@@ -181,6 +181,8 @@ export default function Page() {
             required={true}
             register={register}
             errors={errors}
+            occupiedErr={occupiedErr}
+            setOccupiedErr={setOccupiedErr}
           />
           <Input
             type="tel"
@@ -189,6 +191,8 @@ export default function Page() {
             required={true}
             register={register}
             errors={errors}
+            occupiedErr={occupiedErr}
+            setOccupiedErr={setOccupiedErr}
           />
           <label htmlFor="city" className="text-slate-700 md:text-xl">
             City *
@@ -220,6 +224,8 @@ export default function Page() {
             required={true}
             register={register}
             errors={errors}
+            occupiedErr={occupiedErr}
+            setOccupiedErr={setOccupiedErr}
           />
           <Input
             type="date"

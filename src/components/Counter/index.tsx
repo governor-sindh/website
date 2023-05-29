@@ -1,10 +1,12 @@
 import getURL from "@/lib/getUrl";
 
 export const Counter = async () => {
-  console.log("hhsdfhfhdfhdfhdfhfdh", getURL("api/counter"));
-  const response = await fetch(`${getURL("api/counter")}`, {
-    cache: "no-cache",
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/counter`,
+    {
+      cache: "no-cache",
+    }
+  );
   const data = await response.json();
 
   return (

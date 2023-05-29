@@ -53,9 +53,9 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     );
   }
 
-  let newForCities = formCities.map((item)=>item.toLowerCase())
+  let newForCities = formCities.map((item) => item.toLowerCase());
   newForCities = [...newForCities, "karachi"];
-  
+
   if (!newForCities.includes(city)) {
     return NextResponse.json(
       {
@@ -204,7 +204,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This Email Already Occupied!",
+          message: "This Email is already Occupied!",
         },
         { status: 500 }
       );

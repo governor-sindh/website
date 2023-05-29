@@ -66,6 +66,14 @@ export default function Page() {
       });
 
       const resData: any = await res.json();
+     
+      if (resData.message === "This Email Already Occupied!") {
+        console.log("email error ");
+      } else if (resData.message === "This CNIC Already Occupied!") {
+        console.log("cnic error ");
+      } else if (resData.message === "This Phone Number Already Occupied!") {
+        console.log("phone error ");
+      }
 
       if (!resData.users) throw new Error(resData.message);
 
@@ -85,7 +93,6 @@ export default function Page() {
 
       // this is to increment applications counter
       fetch("/api/counter", { method: "POST" });
-      
     } catch (err: any) {
       toast({
         title: `Error`,

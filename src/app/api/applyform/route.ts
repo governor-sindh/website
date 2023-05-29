@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { kv } from "@vercel/kv";
-
 import { and, eq, or } from "drizzle-orm";
-
 import { UsersTable, NewUser } from "@/lib/schema/users";
-// import { ExperiencesTable, NewExperience } from "@/lib/schema/experiences";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
-import { formCities } from "@/data";
-import { formQualifications } from "@/data";
+import { formCities, formQualifications } from "@/data";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {
@@ -57,7 +53,9 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     );
   }
 
-  let newForCities = [...formCities, "karachi"];
+  let newForCities = formCities.map((item)=>item.toLowerCase())
+  newForCities = [...newForCities, "karachi"];
+  
   if (!newForCities.includes(city)) {
     return NextResponse.json(
       {
@@ -158,7 +156,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     if (!!oldUser && oldUser.email == email) {
       throw new Error("This Email Already Occupied!");
     } else if (!!oldUser && oldUser.cnic == cnic) {
-      throw new Error("This CNIC Already Occupied");
+      throw new Error("This CNIC Already Occupied!");
     } else if (!!oldUser && oldUser.phoneNumber == phoneNumber) {
       throw new Error("This Phone Number Already Occupied!");
     }
@@ -202,7 +200,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       );
     }
   } catch (error: any) {
-    console.log(error.message);
+    // console.log(error.message);
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(
         {
@@ -210,7 +208,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
         },
         { status: 500 }
       );
-    } else if (error.message.includes("This CNIC Already Occupied")) {
+    } else if (error.message.includes("This CNIC Already Occupied!")) {
       return NextResponse.json(
         {
           message: "This CNIC is already occupied!",

@@ -30,7 +30,7 @@ function ChakraMenu({ screen, open, setOpen }: { screen: string, open: boolean, 
                     }
                 </div>
                 <div className='mt-5'>
-                    <h1 className='sm:text-xl text-lg font-bold text-zinc-800 mb-2'>Advance Courses</h1>
+                    <h1 className='sm:text-xl text-lg font-bold text-zinc-800 mb-2'>Advanced Courses</h1>
                     {
                         tracks.map((val, index) => {
                             let active = pathname.startsWith(`/tracks/${val.id}`)

@@ -23,20 +23,22 @@ export const Counter = () => {
   };
 
   return (
-    <div className="mb-5 mt-4 flex h-24 w-full flex-col items-center sm:mt-7">
+    <>
       {counter && !loader ? (
-        <>
-          <div className="flex-col text-center text-xl font-semibold tracking-widest text-main sm:pt-4 sm:text-3xl">
-            <div className="w-36">
-              <CountUp start={0} end={counter} />
+        <div className="flex w-full flex-col items-center mt-4 sm:mt-0">
+          <>
+            <div className="flex-col text-center text-xl font-semibold tracking-widest text-main sm:text-3xl">
+              <div className="w-36">
+                <CountUp start={0} end={counter} />
+              </div>
             </div>
-          </div>
 
-          <div className="text-center text-xs tracking-wider text-main sm:mb-0 sm:text-sm">
-            Accepted Applications
-          </div>
-        </>
+            <div className="text-center text-xs tracking-wider text-main sm:mb-0 sm:text-sm">
+              Accepted Applications
+            </div>
+          </>
+        </div>
       ) : null}
-    </div>
+    </>
   );
 };

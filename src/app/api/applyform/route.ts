@@ -163,42 +163,47 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
 
     const users = await db.insert(UsersTable).values(appliedUser).returning();
 
-    try {
-      let currentValue: number | "OK" | null;
-      let newCounter: number;
-      currentValue = await kv.get("counter");
-      if (currentValue === null) {
-        currentValue = await kv.set("counter", 1);
-        return NextResponse.json({
-          message: "Applied Successfully",
-          users: users,
-          counter: 1,
-        });
-      }
-      newCounter = (currentValue as number) + 1;
+    return NextResponse.json({
+      message: "Applied Successfully",
+      users: users,
+    });
 
-      const counter = await kv.set("counter", newCounter);
+    // try {
+    //   let currentValue: number | "OK" | null;
+    //   let newCounter: number;
+    //   currentValue = await kv.get("counter");
+    //   if (currentValue === null) {
+    //     currentValue = await kv.set("counter", 1);
+    //     return NextResponse.json({
+    //       message: "Applied Successfully",
+    //       users: users,
+    //       counter: 1,
+    //     });
+    //   }
+    //   newCounter = (currentValue as number) + 1;
 
-      if (counter === null) {
-        throw new Error("Internal Server Error");
-      }
-      if (counter === "OK") {
-        return NextResponse.json({
-          message: "Applied Successfully",
-          users: users,
-          counter: newCounter,
-        });
-      }
-    } catch (error: any) {
-      return NextResponse.json(
-        {
-          message: error.message,
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+    //   const counter = await kv.set("counter", newCounter);
+
+    //   if (counter === null) {
+    //     throw new Error("Internal Server Error");
+    //   }
+    //   if (counter === "OK") {
+    //     return NextResponse.json({
+    //       message: "Applied Successfully",
+    //       users: users,
+    //       counter: newCounter,
+    //     });
+    //   }
+    // } catch (error: any) {
+    //   return NextResponse.json(
+    //     {
+    //       message: error.message,
+    //     },
+    //     {
+    //       status: 500,
+    //     }
+    //   );
+    // }
   } catch (error: any) {
     // console.log(error.message);
     if (error.message.includes("This Email Already Occupied!")) {

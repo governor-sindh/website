@@ -4,7 +4,7 @@ export const Counter = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL!}/api/counter`,
     {
-      cache: "no-cache",
+      cache: "no-store",
     }
   );
   const data = await response.json();

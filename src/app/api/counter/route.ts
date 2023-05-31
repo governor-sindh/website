@@ -24,6 +24,7 @@ export async function GET() {
     }
     return NextResponse.json({
       counter: user.id,
+      users,
     });
   } catch (error: any) {
     return NextResponse.json(

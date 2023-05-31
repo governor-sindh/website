@@ -20,6 +20,7 @@ export async function GET() {
     if (!users.length) {
       return NextResponse.json({
         counter: 0,
+        users,
       });
     }
     return NextResponse.json({

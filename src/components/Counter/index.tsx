@@ -2,7 +2,7 @@ import getURL from "@/lib/getUrl";
 
 export const Counter = async () => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/counter`,
+    `${process.env.NEXT_PUBLIC_SITE_URL!}/api/counter`,
     {
       cache: "no-cache",
     }

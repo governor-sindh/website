@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { eq, or } from "drizzle-orm";
 import { UsersTable, NewUser } from "@/lib/schema/users";
@@ -164,55 +164,18 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       message: "Applied Successfully",
       users: users,
     });
-
-    // try {
-    //   let currentValue: number | "OK" | null;
-    //   let newCounter: number;
-    //   currentValue = await kv.get("counter");
-    //   if (currentValue === null) {
-    //     currentValue = await kv.set("counter", 1);
-    //     return NextResponse.json({
-    //       message: "Applied Successfully",
-    //       users: users,
-    //       counter: 1,
-    //     });
-    //   }
-    //   newCounter = (currentValue as number) + 1;
-
-    //   const counter = await kv.set("counter", newCounter);
-
-    //   if (counter === null) {
-    //     throw new Error("Internal Server Error");
-    //   }
-    //   if (counter === "OK") {
-    //     return NextResponse.json({
-    //       message: "Applied Successfully",
-    //       users: users,
-    //       counter: newCounter,
-    //     });
-    //   }
-    // } catch (error: any) {
-    //   return NextResponse.json(
-    //     {
-    //       message: error.message,
-    //     },
-    //     {
-    //       status: 500,
-    //     }
-    //   );
-    // }
   } catch (error: any) {
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This Email is already Occupied!",
+          message: "An application with this email already exists.",
         },
         { status: 500 }
       );
     } else if (error.message.includes("This CNIC Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This CNIC is already occupied!",
+          message: "An application with this CNIC already exists.",
         },
         {
           status: 500,
@@ -221,7 +184,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     } else if (error.message.includes("This Phone Number Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This Phone number is already occupied!",
+          message: "An application with this Phone number already exists.",
         },
         {
           status: 500,

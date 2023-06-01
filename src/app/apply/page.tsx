@@ -1,14 +1,8 @@
 "use client";
-import {
-  AdmitCard,
-  ExperienceModal,
-  Input,
-  Loader,
-  PrintableAdmitCard,
-} from "@/components";
+import { AdmitCard, Input, Loader, PrintableAdmitCard } from "@/components";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { IApplyForm, IExperience } from "@/types";
+import { IApplyForm } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { mainFormSchema } from "@/lib/yupValidation";
 import { formCities, formQualifications } from "@/data";
@@ -24,9 +18,6 @@ const poppins = Poppins({
 export default function Page() {
   const toast = useToast();
 
-  // const [showExperience, setShowExperience] = useState<boolean>(false);
-  const [experienceData, setExperienceData] = useState<IExperience[]>([]);
-  const [experienceModal, setExperienceModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [isApplied, setIsApplied] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<any>();
@@ -60,7 +51,6 @@ export default function Page() {
         }-${data.dateOfBirth.getDate()}`,
         gender: data.gender.toLowerCase(),
         highestQualification: data.highestQualification,
-        experiences: experienceData.length ? experienceData : null,
       };
 
       const res = await fetch("/api/applyform", {
@@ -93,11 +83,11 @@ export default function Page() {
         isClosable: true,
       });
 
-      if (err.message == "This Email is already Occupied!") {
+      if (err.message == "An application with this email already exists.") {
         setOccupiedErr({ ...occupiedErr, email: err.message });
-      } else if (err.message == "This CNIC is already occupied!") {
+      } else if (err.message == "An application with this CNIC already exists.") {
         setOccupiedErr({ ...occupiedErr, cnic: err.message });
-      } else if (err.message === "This Phone number is already occupied!") {
+      } else if (err.message == "An application with this Phone number already exists.") {
         setOccupiedErr({ ...occupiedErr, phoneNumber: err.message });
       }
     } finally {
@@ -106,10 +96,7 @@ export default function Page() {
   };
 
   return (
-    <main
-      // style={{ backgroundImage: `url('/formBg.png')` }}
-      className="mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat"
-    >
+    <main className="mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat">
       {isApplied && formValues && formValues.users && (
         <div className="mt-10 flex flex-col items-center justify-center gap-6">
           <AdmitCard
@@ -288,70 +275,7 @@ export default function Page() {
               </p>
             )}
           </div>
-          {/* <div className="mt-6 min-h-[8rem]">
-          <label className="block text-slate-700 md:text-xl">
-            Experience (optional)
-          </label>
 
-          <div className="mb-4 flex justify-center gap-20 text-xl">
-            <label className="ml-2 cursor-pointer text-slate-700 md:text-xl">
-              <input
-                onClick={(e) => {
-                  setShowExperience(true);
-                }}
-                type="radio"
-                name="experience"
-                className="h-4 w-4 cursor-pointer text-sub"
-              />
-              <span> Yes</span>
-            </label>
-            <label className="ml-2 cursor-pointer text-slate-700 md:text-xl">
-              <input
-                onClick={() => setShowExperience(false)}
-                type="radio"
-                name="experience"
-                defaultChecked
-                className="h-4 w-4 cursor-pointer text-sub"
-              />
-              <span> No</span>
-            </label>
-          </div>
-
-          {showExperience && (
-            <button
-              type="button"
-              onClick={() => setExperienceModal(!experienceModal)}
-              className="mb-2 mt-1 w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-main hover:bg-gray-100 hover:text-blue-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200"
-            >
-              Add Work Experience
-            </button>
-          )}
-
-          <div className="space-y-2">
-            {experienceData.map((item) => (
-              <div
-                className="flex items-center justify-between rounded-md border-2 border-gray-500 p-2 px-6"
-                key={item.id}
-              >
-                <h4 className="flex w-2/3 justify-around text-lg capitalize text-slate-700">
-                  <span>{item.title}</span> - <span>{item.companyName}</span>
-                </h4>
-                <button
-                  className="px-4 py-1"
-                  type="button"
-                  onClick={() => {
-                    const filteredData = experienceData.filter(
-                      (value) => value.id !== item.id
-                    );
-                    setExperienceData(filteredData);
-                  }}
-                >
-                  <IoRemoveCircleOutline className="text-2xl" />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div> */}
           <div className="flex w-full justify-center">
             <button
               type="submit"
@@ -363,15 +287,6 @@ export default function Page() {
             </button>
           </div>
         </form>
-      )}
-      {/* <button className="mt-5 w-full bg-sub py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:w-52 sm:py-4 sm:text-base">
-        </button> */}
-
-      {experienceModal && (
-        <ExperienceModal
-          setExperienceModal={setExperienceModal}
-          setExperienceData={setExperienceData}
-        />
       )}
     </main>
   );

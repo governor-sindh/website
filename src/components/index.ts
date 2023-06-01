@@ -1,5 +1,4 @@
 import ChakraWrapper from "./form/ChakraWrapper";
-import ExperienceModal from "./form/ExperienceModal";
 import Input from "./form/Input";
 import Header from "./Header";
 import Hero from "./Hero";
@@ -21,7 +20,6 @@ export {
   Advance,
   Footer,
   Input,
-  ExperienceModal,
   ChakraWrapper,
   Text,
   Loader,

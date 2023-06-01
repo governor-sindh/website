@@ -1,4 +1,3 @@
-// "use client";
 import { IAdmitCard } from "@/types";
 import { Poppins } from "next/font/google";
 import govtLogo from "../../../public/logo.png";

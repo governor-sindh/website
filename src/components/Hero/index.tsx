@@ -17,12 +17,6 @@ function Hero() {
     >
       <div className=" absolute inset-0 -z-50 h-full w-full bg-zinc-100 bg-opacity-80"></div>
 
-      {/* <img
-        src={bgHero.src}
-        alt="bg hero"
-        className=" h-100% absolute right-[-120px] top-[0px] z-10 hidden -scale-x-100  transform md:block md:opacity-40 xl:opacity-100"
-      /> */}
-
       <div className=" z-50 m-auto mt-6 block w-[95%] items-center   justify-between md:flex md:flex-row lg:w-[90%] xl:w-[1300px] ">
         <div className=" h-fit w-full pt-5 md:w-1/2 md:py-10">
           <h1 className="whitespace-nowrap text-center text-[2rem] font-extrabold leading-10 tracking-wider text-main sm:text-5xl sm:leading-none md:text-left lg:text-6xl">

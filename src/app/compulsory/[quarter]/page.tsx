@@ -2,7 +2,7 @@ import React from 'react';
 import { Coursecontent } from '@/components';
 import { IQuarterData } from '@/types/quarter';
 import Link from 'next/link';
-import { tracks } from '@/data/tracks';
+import { tracks } from '@/data';
 
 
 async function getData(quarter: string) {

@@ -5,33 +5,32 @@ export const mainFormSchema = yup.object({
     .string()
     .required("Name is required")
     .min(3, "Please enter more then 3 characters")
-    .max(100, "Please enter within 100 characters"),
+    .max(100, "Character limit reached, maximum allowed characters is 100."),
   fatherName: yup
     .string()
     .required("Father Name is required")
     .min(3, "Please enter more then 3 characters")
-    .max(100, "Please enter within 100 characters"),
+    .max(100, "Character limit reached, maximum allowed characters is 100."),
   cnic: yup
     .string()
-    .required("CNIC Number is required  without -")
+    .required("CNIC Number is required without -")
     .min(13, "Please enter more then 13 characters")
-    .max(13, "Please enter within 13 characters without -"),
+    .max(13, "Character limit reached, maximum allowed characters is 13."),
   phoneNumber: yup
     .string()
     .required("Phone Number is required")
     .min(10, "Please enter more then 10 characters")
-    .max(10, "Please enter within 10 characters"),
+    .max(10, "Character limit reached, maximum allowed characters is 10."),
   city: yup
     .string()
     .required("City is required")
     .min(2, "Please select your City")
-    .max(45, "Please enter within 45 characters"),
+    .max(45, "Character limit reached, maximum allowed characters is 45."),
   email: yup
     .string()
     .email("Email is not valid")
     .required("Email is required")
-    .min(3, "Please enter more then 3 characters")
-    .max(55, "Please enter within 55 characters"),
+    .max(55, "Character limit reached, maximum allowed characters is 55."),
   dateOfBirth: yup
     .date()
     .max(new Date(), "Invalid date of birth")
@@ -43,7 +42,7 @@ export const mainFormSchema = yup.object({
       return false;
     })
     .typeError("Date of Birth is Required")
-    .required("Date of Birth if Required"),
+    .required("Date of Birth is Required"),
 
   gender: yup.string().required("Gender is required"),
   highestQualification: yup
@@ -52,44 +51,11 @@ export const mainFormSchema = yup.object({
     .min(2, "Qualification is required"),
 });
 
-export const experienceSchema = yup.object({
-  title: yup
-    .string()
-    .required("Title is required")
-    .min(3, "Please enter more then 3 characters")
-    .max(40, "Please enter within 40 characters"),
-  industry: yup
-    .string()
-    .required("Industry is required")
-    .min(3, "Please enter more then 3 characters")
-    .max(40, "Please enter within 40 characters"),
-  companyName: yup
-    .string()
-    .required("Company Name is required")
-    .min(3, "Please enter more then 3 characters")
-    .max(40, "Please enter within 40 characters"),
-});
-
 export const admitCardRequirementsSchema = yup.object({
-  // cnic: yup
-  //   .string()
-  //   .required("CNIC Number is required  without -")
-  //   .min(13, "Please enter more then 13 characters")
-  //   .max(13, "Please enter within 13 characters without -"),
-  // phoneNumber: yup
-  //   .string()
-  //   .required("Phone Number is required")
-  //   .min(10, "Please enter more then 10 characters")
-  //   .max(10, "Please enter within 10 characters"),
   email: yup
     .string()
     .email("Email is not valid")
     .required("Email is required")
     .min(3, "Please enter more then 3 characters")
     .max(55, "Please enter within 55 characters"),
-  // otp: yup
-  //   .string()
-  //   .required("Entry OTP you received")
-  //   .min(6, "Please enter more then 6 characters")
-  //   .max(6, "Please enter within 6 characters"),
 });

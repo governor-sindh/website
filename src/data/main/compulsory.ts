@@ -1,4 +1,10 @@
 export const CompulsoryData = [
+  { id: "1", text: "Programming Fundamentals" },
+  { id: "2", text: "Web2 Using NextJS" },
+  { id: "3", text: "Earn as You Learn" },
+];
+
+export const CompulsoryData1 = [
   { id: "1", text: "CS-101: Object-Oriented Programming using TypeScript" },
   {
     id: "2",

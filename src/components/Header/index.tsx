@@ -8,8 +8,7 @@ import ChakraMenu from "../ChakraMenu";
 import { FiMenu } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
 import { IoIosArrowDown } from "react-icons/io";
-import { CompulsoryData } from '@/data/compulsory';
-import { tracks } from '@/data/tracks';
+import { CompulsoryData, tracks } from '@/data';
 
 
 function Header() {
@@ -32,7 +31,6 @@ function Header() {
                             Apply
                         </div>
                     </Link>
-                    {/* <ChakraMenu screen='small' open={open} setOpen={setOpen} /> */}
                     <div className={`py-5 ${!showMenu && 'border-b'} border-[#1468a5]`} onClick={() => setShowMenu(!showMenu)}>
                         <div className="flex justify-between items-center">
                             Courses
@@ -43,7 +41,6 @@ function Header() {
                         <h1 className='text-lg font-bold text-white px-2 mt-3 text-center'>Core Courses</h1>
                         {
                             CompulsoryData.map((val, index) => {
-                                // let active = pathname.startsWith(`/compulsory/${val.id}`)
                                 return (
                                     <Link onClick={() => setOpen(false)} key={index} href={`/compulsory/${val.id}`}><div className={`text-white sm:text-base border-b border-[#3695d8] py-3 text-sm pl-2`}>{val.text}</div></Link>
                                 )
@@ -52,7 +49,6 @@ function Header() {
                         <h1 className='text-lg font-bold text-white px-2 mt-3 text-center'>Advanced Courses</h1>
                         {
                             tracks.map((val, index) => {
-                                // let active = pathname.startsWith(`/compulsory/${val.id}`)
                                 return (
                                     <Link onClick={() => setOpen(false)} key={index} href={`/tracks/${val.id}/4`}><div className={`text-white sm:text-base border-b border-[#3695d8] py-3 text-sm pl-2`}>{val.name}</div></Link>
                                 )

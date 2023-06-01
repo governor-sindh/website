@@ -1,8 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { UsersTable } from "@/lib/schema/users";
 import { eq } from "drizzle-orm";
-import { IAdmitCard } from "@/types";
 
 export async function POST(request: NextRequest) {
   const { email } = await request.json();
@@ -42,8 +41,5 @@ export async function POST(request: NextRequest) {
         status: 404,
       }
     );
-    // return new Response("User not found", {
-    //   status: 404,
-    // });
   }
 }

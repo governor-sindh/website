@@ -168,14 +168,14 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This Email is already Occupied!",
+          message: "An application with this email already exists.",
         },
         { status: 500 }
       );
     } else if (error.message.includes("This CNIC Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This CNIC is already occupied!",
+          message: "An application with this CNIC already exists.",
         },
         {
           status: 500,
@@ -184,7 +184,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     } else if (error.message.includes("This Phone Number Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This Phone number is already occupied!",
+          message: "An application with this Phone number already exists.",
         },
         {
           status: 500,

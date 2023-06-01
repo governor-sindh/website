@@ -58,7 +58,6 @@ export default function Input({
 
         <input
           type={type}
-          // inputMode={ id === "cnic" || id === "phoneNumber" ? 'tel':''}
           onKeyDown={
             id === "cnic" || id === "phoneNumber" || id === "otp"
               ? handleKeyDown
@@ -74,7 +73,6 @@ export default function Input({
               ? 6
               : ""
           }
-          // maxLength={id === "cnic" ? "13" : id === "phoneNumber" ? 10 : id === "otp"?6:""}
           max={type === "date" ? `${new Date().getFullYear() - 13}-12-29` : ""}
           className={`block h-12 w-full border border-gray-400 bg-gray-100 p-3 ${
             errors?.[id] || occupiedErr?.[id]

@@ -79,7 +79,7 @@ function Coursecontent({ data }: { data: ITrackDataType | IQuarterData }) {
                                                                             <p>{sub_child.text}</p>
                                                                             :
                                                                             sub_child.type === 'link' ?
-                                                                                <a href={sub_child.url} className='text-blue-600 flex items-center gap-3 w-fit'>
+                                                                                <a href={sub_child.url} target='_blank' className='text-blue-600 flex items-center gap-3 w-fit'>
                                                                                     <span className='w-[4]'><HiOutlineExternalLink className='text-zinc-800' size={16} /></span>
                                                                                     <span className='lowercase'>{sub_child.text}</span>
                                                                                 </a>
@@ -109,7 +109,7 @@ function Coursecontent({ data }: { data: ITrackDataType | IQuarterData }) {
                                                                                                                                             <p>{list_item.text}</p>
                                                                                                                                             :
                                                                                                                                             list_item.type === 'link' ?
-                                                                                                                                                <a href={list_item.url} className='text-blue-600 flex items-center gap-3'>
+                                                                                                                                                <a href={list_item.url} target='_blank' className='text-blue-600 flex items-center gap-3'>
                                                                                                                                                     <span className='w-[10px]'><HiOutlineExternalLink className='text-zinc-800' size={16} /></span>
                                                                                                                                                     <span className='lowercase'>{list_item.text}</span>
                                                                                                                                                 </a>

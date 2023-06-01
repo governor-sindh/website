@@ -3,7 +3,7 @@ import React from "react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import Cover from "../../../public/cover.png";
-
+import { Counter } from "../Counter";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
@@ -15,13 +15,7 @@ function Hero() {
     <div
       className={` relative z-0 w-full overflow-hidden bg-opacity-75 bg-[url('/bg_house.jpg')] bg-cover ${poppins.className}`}
     >
-      <div className=" -z-50 absolute inset-0 h-full w-full bg-zinc-100 bg-opacity-80"></div>
-
-      {/* <img
-        src={bgHero.src}
-        alt="bg hero"
-        className=" h-100% absolute right-[-120px] top-[0px] z-10 hidden -scale-x-100  transform md:block md:opacity-40 xl:opacity-100"
-      /> */}
+      <div className=" absolute inset-0 -z-50 h-full w-full bg-zinc-100 bg-opacity-80"></div>
 
       <div className=" z-50 m-auto mt-6 block w-[95%] items-center   justify-between md:flex md:flex-row lg:w-[90%] xl:w-[1300px] ">
         <div className=" h-fit w-full pt-5 md:w-1/2 md:py-10">
@@ -45,13 +39,16 @@ function Hero() {
             Opening the Governor House and Removing Barriers to Educate the
             Youth of Sindh.
           </p>
-          <Link href={"/apply"}>
-            <button className="mt-5 w-full rounded-md bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:py-4 sm:text-base md:w-52">
-              APPLY NOW
-            </button>
-          </Link>
+          <div className="mb-7 mt-5 flex flex-col items-center sm:mt-10 sm:flex-row sm:gap-5 md:mb-0">
+            <Link className="w-full md:w-auto" href={"/apply"}>
+              <button className="w-full rounded-md bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 sm:py-4 sm:text-base md:w-52">
+                APPLY NOW
+              </button>
+            </Link>
+            <Counter />
+          </div>
         </div>
-        <div className=" relative  mt-7 flex  w-full items-end justify-center md:m-auto md:justify-end ">
+        <div className=" relative  mt-7 flex  w-full items-end justify-center md:m-auto md:justify-end">
           <Image
             src={Cover}
             alt="piaic"

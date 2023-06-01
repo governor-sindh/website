@@ -3,6 +3,7 @@ import { db } from "@/lib/drizzle";
 import { otpCodes } from "@/lib/schema/otpCodes";
 import { eq } from "drizzle-orm";
 import { UsersTable } from "@/lib/schema/users";
+
 export async function POST(request: NextRequest) {
   const { email, code } = await request.json();
   try {

@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { tracks } from '@/data/tracks';
 import { FaFacebookF, FaGithub, FaTwitter, FaYoutube } from 'react-icons/fa'
-import { CompulsoryData } from '@/data/compulsory';
+import { CompulsoryData,tracks } from '@/data';
 
 
 
@@ -24,7 +23,7 @@ function Footer() {
                         </div>
                     </div>
                     <div className='text-zinc-800'>
-                        <h1 className='font-bold text-xl'>Advance Courses</h1>
+                        <h1 className='font-bold text-xl'>Advanced Courses</h1>
                         <div className='mt-5 flex flex-col gap-3 md:text-base text-sm'>
                             {
                                 tracks.map((val, index) => {

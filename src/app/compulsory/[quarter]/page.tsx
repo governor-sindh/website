@@ -2,7 +2,7 @@ import React from 'react';
 import { Coursecontent } from '@/components';
 import { IQuarterData } from '@/types/quarter';
 import Link from 'next/link';
-import { tracks } from '@/data/tracks';
+import { tracks } from '@/data';
 
 
 async function getData(quarter: string) {
@@ -57,7 +57,7 @@ async function Page({ params }: { params: { quarter: string } }) {
                             </ul>
                         </div>
                         <div className='mt-8 md:p-0 p-2'>
-                            <h3 className='font-bold text-zinc-800 text-base leading-tight'>Advance Courses</h3>
+                            <h3 className='font-bold text-zinc-800 text-base leading-tight'>Advanced Courses</h3>
                             <div className='flex flex-col gap-2 mt-3'>
                                 {
                                     tracks.map((val, index) => {

@@ -1,13 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
-import { and, eq, or } from "drizzle-orm";
-
+import { eq, or } from "drizzle-orm";
 import { UsersTable, NewUser } from "@/lib/schema/users";
-// import { ExperiencesTable, NewExperience } from "@/lib/schema/experiences";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
-import { formCities } from "@/data";
-import { formQualifications } from "@/data";
+import { formCities, formQualifications } from "@/data";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {
@@ -55,7 +52,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     );
   }
 
-  let newForCities = [...formCities, "karachi"];
+  const newForCities = [...formCities, "karachi"];
   if (!newForCities.includes(city)) {
     return NextResponse.json(
       {
@@ -100,7 +97,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     );
   }
 
-  if(gender !== "female" && gender !== "male"){
+  if (gender !== "female" && gender !== "male") {
     return NextResponse.json(
       {
         message: "Invalid Gender",
@@ -154,33 +151,31 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       );
     const oldUser = oldUsers[0];
     if (!!oldUser && oldUser.email == email) {
-      console.log('147')
       throw new Error("This Email Already Occupied!");
     } else if (!!oldUser && oldUser.cnic == cnic) {
-      console.log('150')
-      throw new Error("This CNIC Already Occupied");
+      throw new Error("This CNIC Already Occupied!");
     } else if (!!oldUser && oldUser.phoneNumber == phoneNumber) {
-      console.log('153')
       throw new Error("This Phone Number Already Occupied!");
     }
 
     const users = await db.insert(UsersTable).values(appliedUser).returning();
 
-    return NextResponse.json({ message: "Applied Successfully", users });
+    return NextResponse.json({
+      message: "Applied Successfully",
+      users: users,
+    });
   } catch (error: any) {
-    console.log("error ", error);
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This Email Already Occupied!",
+          message: "An application with this email already exists.",
         },
         { status: 500 }
       );
-      // res.status(400).json({ message: 'This email is already occupied!' });
-    } else if (error.message.includes("This CNIC Already Occupied")) {
+    } else if (error.message.includes("This CNIC Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This CNIC is already occupied!",
+          message: "An application with this CNIC already exists.",
         },
         {
           status: 500,
@@ -189,19 +184,12 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     } else if (error.message.includes("This Phone Number Already Occupied!")) {
       return NextResponse.json(
         {
-          message: "This Phone number is already occupied!",
+          message: "An application with this Phone number already exists.",
         },
         {
           status: 500,
         }
       );
-
-      // return new NextResponse("This Phone number is already occupied!", {
-      //   status: 500,
-      //   headers: {
-      //     "content-type": "application/json"
-      //   }
-      // });
     } else {
       return NextResponse.json(
         {
@@ -211,13 +199,6 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
           status: 500,
         }
       );
-
-      // return new Response("Internal server error!", {
-      //   status: 500,
-      //   headers: {
-      //     "content-type": "application/json"
-      //   }
-      // });
     }
   }
 }

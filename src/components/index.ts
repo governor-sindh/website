@@ -1,5 +1,4 @@
 import ChakraWrapper from "./form/ChakraWrapper";
-import ExperienceModal from "./form/ExperienceModal";
 import Input from "./form/Input";
 import Header from "./Header";
 import Hero from "./Hero";
@@ -11,6 +10,7 @@ import Text from "./Text";
 import Loader from "./Loader";
 import AdmitCard from "./AdmitCard";
 import PrintableAdmitCard from "./AdmitCard/PrintableAdmitCard";
+import OtpTimer from "./OtpTimer";
 
 export {
   Header,
@@ -20,10 +20,10 @@ export {
   Advance,
   Footer,
   Input,
-  ExperienceModal,
   ChakraWrapper,
   Text,
   Loader,
   AdmitCard,
   PrintableAdmitCard,
+  OtpTimer,
 };

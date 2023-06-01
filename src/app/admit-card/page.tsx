@@ -17,22 +17,21 @@ export default function Page() {
   const toast = useToast();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [verified, setVerified] = useState<boolean>(false);
   const [data, setData] = useState<IAdmitCard>();
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<IAdmitCardRequirements>({
-    mode: "onTouched",
+    mode: "all",
     resolver: yupResolver(admitCardRequirementsSchema),
   });
 
   const onFormSubmit = async (formData: IAdmitCardRequirements) => {
     try {
       setLoading(true);
-
       const res = await fetch("/api/admitcard", {
         body: JSON.stringify({ email: formData.email.toLowerCase() }),
         method: "POST",
@@ -86,6 +85,7 @@ export default function Page() {
         <form
           className="-top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
           onSubmit={handleSubmit(onFormSubmit)}
+          noValidate
         >
           <Input
             type="email"
@@ -95,11 +95,12 @@ export default function Page() {
             register={register}
             errors={errors}
           />
+          
           <div className="flex justify-center">
             <button
               type="submit"
               style={poppins.style}
-              disabled={loading || verified}
+              disabled={loading}
               className="mt-5 w-full bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed sm:w-52 sm:py-4 sm:text-base"
             >
               {loading ? <Loader width="w-4" height="h-4" /> : "GET CARD"}

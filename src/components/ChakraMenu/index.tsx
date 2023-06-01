@@ -3,8 +3,7 @@
 import React from 'react';
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import { CompulsoryData } from '@/data/compulsory';
-import { tracks } from '@/data/tracks';
+import { CompulsoryData , tracks } from '@/data';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 
@@ -30,7 +29,7 @@ function ChakraMenu({ screen, open, setOpen }: { screen: string, open: boolean, 
                     }
                 </div>
                 <div className='mt-5'>
-                    <h1 className='sm:text-xl text-lg font-bold text-zinc-800 mb-2'>Advance Courses</h1>
+                    <h1 className='sm:text-xl text-lg font-bold text-zinc-800 mb-2'>Advanced Courses</h1>
                     {
                         tracks.map((val, index) => {
                             let active = pathname.startsWith(`/tracks/${val.id}`)

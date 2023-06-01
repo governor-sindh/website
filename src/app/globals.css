@@ -30,8 +30,7 @@
   background-color: #000000;
 }
 
-
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .line-indicator li {
     display: none !important;
   }

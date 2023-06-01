@@ -56,9 +56,9 @@ export const mainFormSchema = yup.object({
 
 export const admitCardRequirementsSchema = yup.object({
   email: yup
-  .string()
-  .email("Email is not valid")
-  .required("Email is required")
-  .max(55, "Character limit reached, maximum allowed characters is 55.")
-  .matches(emailRegex, "Email is not valid"),
+    .string()
+    .email("Email is not valid")
+    .required("Email is required")
+    .max(55, "Character limit reached, maximum allowed characters is 55.")
+    .matches(emailRegex, "Email is not valid"),
 });

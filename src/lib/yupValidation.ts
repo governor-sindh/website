@@ -1,5 +1,7 @@
 import * as yup from "yup";
 
+const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
 export const mainFormSchema = yup.object({
   fullName: yup
     .string()
@@ -30,7 +32,8 @@ export const mainFormSchema = yup.object({
     .string()
     .email("Email is not valid")
     .required("Email is required")
-    .max(55, "Character limit reached, maximum allowed characters is 55."),
+    .max(55, "Character limit reached, maximum allowed characters is 55.")
+    .matches(emailRegex, "Email is not valid"),
   dateOfBirth: yup
     .date()
     .max(new Date(), "Invalid date of birth")
@@ -53,9 +56,9 @@ export const mainFormSchema = yup.object({
 
 export const admitCardRequirementsSchema = yup.object({
   email: yup
-    .string()
-    .email("Email is not valid")
-    .required("Email is required")
-    .min(3, "Please enter more then 3 characters")
-    .max(55, "Please enter within 55 characters"),
+  .string()
+  .email("Email is not valid")
+  .required("Email is required")
+  .max(55, "Character limit reached, maximum allowed characters is 55.")
+  .matches(emailRegex, "Email is not valid"),
 });

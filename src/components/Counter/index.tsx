@@ -1,6 +1,6 @@
 // import getURL from "@/lib/getUrl";
 
-export const Counter = async () => {
+export const Counter = () => {
   // const response = await fetch(
   //   `${process.env.NEXT_PUBLIC_SITE_URL!}/api/counter`,
   //   {

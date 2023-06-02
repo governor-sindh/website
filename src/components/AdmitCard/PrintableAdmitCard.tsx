@@ -22,8 +22,9 @@ export default function PrintableAdmitCard({ data }: { data: IAdmitCard }) {
           style={poppins.style}
           className="text-center text-3xl font-bold text-main"
         >
-          Governor Sindh Initiative for Artificial Intelligence, Web 3.0 &
-          Metaverse
+          Governor Sindh Initiative for
+          <br />
+          Artificial Intelligence, Web 3.0 & Metaverse
         </h1>
       </div>
       <h2
@@ -84,10 +85,12 @@ export default function PrintableAdmitCard({ data }: { data: IAdmitCard }) {
         </div>
       </div>
 
-      <h2 className="my-2 text-lg font-bold">Instruction :</h2>
+      <h2 className="my-2 text-lg font-bold">Instructions :</h2>
       <ul className="my-2 pl-6">
-        <li>Please bring your cnic or b-form and admit card hard copy</li>
-        <li>Details and Date of Entry test will be emailed to you</li>
+        <li>
+          Please bring your original CNIC or B-Form and admit card hard copy.
+        </li>
+        <li>Details and date of the entrance exam will be emailed to you.</li>
       </ul>
     </div>
   );

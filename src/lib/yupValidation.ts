@@ -16,8 +16,8 @@ export const mainFormSchema = yup.object({
   cnic: yup
     .string()
     .required("CNIC Number is required without -")
-    .min(13, "Please enter more then 13 characters")
-    .max(13, "Character limit reached, maximum allowed characters is 13."),
+    .min(13, "CNIC must be 13 characters.")
+    .max(13, "CNIC must be 13 characters."),
   phoneNumber: yup
     .string()
     .required("Phone Number is required")

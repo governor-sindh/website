@@ -10,8 +10,8 @@ const poppins = Poppins({
 
 export default function AdmitCard({ data }: { data: IAdmitCard }) {
   return (
-    <div className="w-[95%] border-2 border-gray-800 p-3 print:hidden xs:w-[75%] xs:p-10">
-      <div className="flex items-center">
+    <div className="w-[95%] border-2 border-gray-800 p-3 print:hidden xs:p-10">
+      <div className="flex items-center justify-evenly">
         <Image
           src={govtLogo}
           alt="govt sindh logo"
@@ -22,9 +22,11 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
           style={poppins.style}
           className="text-center text-lg font-bold text-main md:text-3xl"
         >
-          Governor Sindh Initiative for Artificial Intelligence, Web 3.0 &
-          Metaverse
+          Governor Sindh Initiative for
+          <br className="hidden md:block" />
+          Artificial Intelligence, Web 3.0 & Metaverse
         </h1>
+        <div></div>
       </div>
       <h2
         style={poppins.style}
@@ -41,7 +43,9 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
         </div>
         <div className="fields">
           <div className="my-1 flex text-lg">
-            <h6 className="w-48 font-bold md:w-52">Student Name :</h6>
+            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
+              Student Name :
+            </h6>
             <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {data.fullName}
               <span className="h-[2px] w-full bg-gray-700"></span>
@@ -49,7 +53,9 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-48 font-bold md:w-52">Father&apos;s Name :</h6>
+            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
+              Father&apos;s Name :
+            </h6>
             <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
               {data.fatherName}
               <span className="h-[2px] w-full bg-gray-700"></span>
@@ -57,21 +63,27 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-48 font-bold md:w-52">Student CNIC No. :</h6>
+            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
+              Student CNIC No :
+            </h6>
             <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {data.cnic}
             </p>
           </div>
 
-          <div className="my-1 flex text-lg">
-            <h6 className="w-48 font-bold md:w-52">Student Reg Number :</h6>
+          <div className="my-1 flex  text-lg">
+            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
+              Student Reg No :
+            </h6>
             <p className="w-32 border-b-2 border-gray-700 capitalize xs:w-48 md:w-60">
               {`${data.studentId}`.padStart(8, "0")}
             </p>
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-48 font-bold md:w-52">Date of Registration :</h6>
+            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
+              Date of Registration :
+            </h6>
             <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
               {`${new Date(data.dateOfRegistration).toLocaleDateString()}`}
               <span className="h-[2px] w-full bg-gray-700"></span>
@@ -79,7 +91,7 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
           </div>
 
           <div className="my-1 flex text-lg">
-            <h6 className="w-48 font-bold md:w-52">Venue :</h6>
+            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">Venue :</h6>
             <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
               Governor House Sindh
               <span className="h-[2px] w-full bg-gray-700"></span>
@@ -88,10 +100,12 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
         </div>
       </div>
 
-      <h2 className="my-2 text-lg font-bold">Instruction :</h2>
+      <h2 className="my-2 text-lg font-bold">Instructions :</h2>
       <ul className="my-2 pl-6">
-        <li>Please bring your cnic or b-form and admit card hard copy</li>
-        <li>Details and Date of Entry test will be emailed to you</li>
+        <li>
+          Please bring your original CNIC or B-Form and admit card hard copy.
+        </li>
+        <li>Details and date of the entrance exam will be emailed to you.</li>
       </ul>
     </div>
   );

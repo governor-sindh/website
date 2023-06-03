@@ -1,10 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
-import { eq, or } from "drizzle-orm";
+import { eq, or, and } from "drizzle-orm";
 import { UsersTable, NewUser } from "@/lib/schema/users";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
 import { formCities, formQualifications } from "@/data";
+import { otpCodes } from "@/lib/schema/otpCodes";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {
@@ -17,6 +18,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     gender,
     dateOfBirth,
     highestQualification,
+    code,
   }: IApplyForm = await request.json();
 
   if (fullName.length < 3 || fullName.length > 1000) {
@@ -116,7 +118,8 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     !city ||
     !gender ||
     !highestQualification ||
-    !dateOfBirth
+    !dateOfBirth ||
+    !code
   ) {
     return NextResponse.json(
       { message: "Fields are empty!" },
@@ -149,6 +152,9 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
           eq(UsersTable.phoneNumber, phoneNumber)
         )
       );
+    if (!oldUsers) {
+      throw new Error("Internal Server Error");
+    }
     const oldUser = oldUsers[0];
     if (!!oldUser && oldUser.email == email) {
       throw new Error("This Email Already Occupied!");
@@ -158,84 +164,45 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       throw new Error("This Phone Number Already Occupied!");
     }
 
-    const users = await db.insert(UsersTable).values(appliedUser).returning();
+    const otpUsers = await db
+      .select()
+      .from(otpCodes)
+      .where(and(eq(otpCodes.email, email), eq(otpCodes.code, code)));
 
-    return NextResponse.json({
-      message: "Applied Successfully",
-      users: users,
-    });
-
-    // try {
-    //   let currentValue: number | "OK" | null;
-    //   let newCounter: number;
-    //   currentValue = await kv.get("counter");
-    //   if (currentValue === null) {
-    //     currentValue = await kv.set("counter", 1);
-    //     return NextResponse.json({
-    //       message: "Applied Successfully",
-    //       users: users,
-    //       counter: 1,
-    //     });
-    //   }
-    //   newCounter = (currentValue as number) + 1;
-
-    //   const counter = await kv.set("counter", newCounter);
-
-    //   if (counter === null) {
-    //     throw new Error("Internal Server Error");
-    //   }
-    //   if (counter === "OK") {
-    //     return NextResponse.json({
-    //       message: "Applied Successfully",
-    //       users: users,
-    //       counter: newCounter,
-    //     });
-    //   }
-    // } catch (error: any) {
-    //   return NextResponse.json(
-    //     {
-    //       message: error.message,
-    //     },
-    //     {
-    //       status: 500,
-    //     }
-    //   );
-    // }
-  } catch (error: any) {
-    if (error.message.includes("This Email Already Occupied!")) {
-      return NextResponse.json(
-        {
-          message: "This Email is already Occupied!",
-        },
-        { status: 500 }
-      );
-    } else if (error.message.includes("This CNIC Already Occupied!")) {
-      return NextResponse.json(
-        {
-          message: "This CNIC is already occupied!",
-        },
-        {
-          status: 500,
-        }
-      );
-    } else if (error.message.includes("This Phone Number Already Occupied!")) {
-      return NextResponse.json(
-        {
-          message: "This Phone number is already occupied!",
-        },
-        {
-          status: 500,
-        }
-      );
-    } else {
-      return NextResponse.json(
-        {
-          message: "Internal server error!",
-        },
-        {
-          status: 500,
-        }
-      );
+    if (!otpUsers) {
+      throw new Error("Internal Server Error");
     }
+    const otpUser = otpUsers[0];
+
+    if (!otpUser) {
+      throw new Error("Incorrect OTP Entered!");
+    }
+
+    const userTime = otpUser.expiryTime;
+    const expiryTime = userTime.getHours();
+
+    const currentDate = new Date();
+    const currentTime = currentDate.getHours();
+
+    if (expiryTime > currentTime) {
+      const users = await db.insert(UsersTable).values(appliedUser).returning();
+
+      return NextResponse.json({
+        message: "Applied Successfully",
+        users,
+      });
+    }
+    if (expiryTime < currentTime) {
+      throw new Error("OTP expired. Please click on SEND OTP button.");
+    }
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        message: error.message,
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }

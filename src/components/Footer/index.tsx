@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { tracks } from '@/data/tracks';
 import { FaFacebookF, FaGithub, FaTwitter, FaYoutube } from 'react-icons/fa'
-import { CompulsoryData } from '@/data/compulsory';
+import { CompulsoryData,tracks } from '@/data';
 
 
 

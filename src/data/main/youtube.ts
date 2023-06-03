@@ -1,7 +1,6 @@
-// import { IYtData } from "@/types/yt_data";
+import { IYtData } from "@/types/yt_data";
 
-// export const YoutubeData: IYtData[] = [
-export const YoutubeData = [
+export const YoutubeData: IYtData[] = [
   {
     videoId: "_3Mvt6T9UfE",
     title:

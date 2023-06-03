@@ -93,13 +93,6 @@ export default class ImagesCaurosel extends Component {
                                 <div className='px-3 xl-lg:px-1 group mb-2 md:mb-5  relative overflow-hidden cursor-pointer outline-none' key={index}>
                                     <div className='relative bg-slate-900 rounded-lg overflow-hidden'>
                                         <Image src={val.img} className='w-full h-[300px]  md:h-[600px] object-cover' alt={val.title} />
-                                        {/* <div className='absolute bottom-0 w-full flex flex-col h-11 xs:h-7 transition-all  mr-5 px-5 backdrop-blur-md bg-[#ffffff71]'> */}
-                                            {/* <h1 className='text-xl sm:text-lg xs:text-sm p-2 xs:p-1  text-center font-bold'>{val.title}</h1> */}
-                                            {/* <div className=' w-full h-[3px] bg-[#035855]'></div> */}
-                                            {/* <div className='flex-grow flex items-center'>
-                                                <p className='text-center text-zinc-800 text-sm xl-lg:text-lg md:text-base sm:text-xs xs:line-clamp-[7] font-semibold pt-2'>{val.text}</p>
-                                            </div> */}
-                                        {/* </div> */}
                                     </div>
                                 </div>
                             )

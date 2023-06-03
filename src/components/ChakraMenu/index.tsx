@@ -3,8 +3,7 @@
 import React from 'react';
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import { CompulsoryData } from '@/data/compulsory';
-import { tracks } from '@/data/tracks';
+import { CompulsoryData , tracks } from '@/data';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 

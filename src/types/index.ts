@@ -11,6 +11,7 @@ export interface IApplyForm {
   fatherName: string;
   cnic: number;
   phoneNumber: number;
+  code: number;
   city: string;
   email: string;
   gender: "male" | "female";

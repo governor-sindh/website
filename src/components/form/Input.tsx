@@ -18,13 +18,15 @@ export default function Input({
   register: any;
   errors: any;
   occupiedErr?: any;
-  setOccupiedErr?: Dispatch<
-    SetStateAction<{
-      phoneNumber: string;
-      cnic: string;
-      email: string;
-    }>
-  >;
+  setOccupiedErr?: any
+  // Dispatch<
+  //   SetStateAction<{
+  //     phoneNumber?: string;
+  //     cnic?: string;
+  //     email: string;
+  //     otp: string;
+  //   }>
+  // >;
 }) {
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const numericKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -89,7 +91,12 @@ export default function Input({
             !!occupiedErr?.[id]
               ? () => {
                   setOccupiedErr
-                    ? setOccupiedErr({ phoneNumber: "", cnic: "", email: "" })
+                    ? setOccupiedErr({
+                        phoneNumber: "",
+                        cnic: "",
+                        email: "",
+                        otp: "",
+                      })
                     : "";
                 }
               : () => {}

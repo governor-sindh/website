@@ -10,7 +10,8 @@ import Text from "./Text";
 import Loader from "./Loader";
 import AdmitCard from "./AdmitCard";
 import PrintableAdmitCard from "./AdmitCard/PrintableAdmitCard";
-import OtpTimer from "./OtpTimer";
+import OtpTimer from "./OTP/OtpTimer";
+import EmailAndOtpFields from "./OTP/EmailAndOtpFields";
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   AdmitCard,
   PrintableAdmitCard,
   OtpTimer,
+  EmailAndOtpFields,
 };

@@ -1,5 +1,12 @@
 "use client";
-import { AdmitCard, Input, Loader, PrintableAdmitCard } from "@/components";
+import {
+  AdmitCard,
+  Input,
+  Loader,
+  PrintableAdmitCard,
+  OtpTimer,
+  EmailAndOtpFields,
+} from "@/components";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IApplyForm } from "@/types";
@@ -21,15 +28,18 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [isApplied, setIsApplied] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<any>();
+  const [resendOtpAvailable, setResendOtpAvailable] = useState<boolean>(false);
   const [occupiedErr, setOccupiedErr] = useState({
     phoneNumber: "",
     cnic: "",
     email: "",
+    otp: "",
   });
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<IApplyForm>({
     mode: "onTouched",
@@ -46,12 +56,17 @@ export default function Page() {
         phoneNumber: Number(`92${data.phoneNumber}`),
         city: data.city,
         email: data.email.toLowerCase(),
+        otp: Number(data.otp),
         dateOfBirth: `${data.dateOfBirth.getFullYear()}-${
           data.dateOfBirth.getMonth() + 1
         }-${data.dateOfBirth.getDate()}`,
         gender: data.gender.toLowerCase(),
         highestQualification: data.highestQualification,
       };
+      console.log(
+        "🚀 ~ file: page.tsx:63 ~ onFormSubmit ~ formData:",
+        formData
+      );
 
       const res = await fetch("/api/applyform", {
         body: JSON.stringify(formData),
@@ -85,9 +100,13 @@ export default function Page() {
 
       if (err.message == "An application with this email already exists.") {
         setOccupiedErr({ ...occupiedErr, email: err.message });
-      } else if (err.message == "An application with this CNIC already exists.") {
+      } else if (
+        err.message == "An application with this CNIC already exists."
+      ) {
         setOccupiedErr({ ...occupiedErr, cnic: err.message });
-      } else if (err.message == "An application with this Phone number already exists.") {
+      } else if (
+        err.message == "An application with this Phone number already exists."
+      ) {
         setOccupiedErr({ ...occupiedErr, phoneNumber: err.message });
       }
     } finally {
@@ -161,6 +180,13 @@ export default function Page() {
             register={register}
             errors={errors}
           />
+          <EmailAndOtpFields
+            watch={watch}
+            register={register}
+            errors={errors}
+            occupiedErr={occupiedErr}
+            setOccupiedErr={setOccupiedErr}
+          />
           <Input
             type="tel"
             id="cnic"
@@ -204,16 +230,7 @@ export default function Page() {
           {errors.city && (
             <p className="mb-4 text-red-400">{errors.city?.message}</p>
           )}
-          <Input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required={true}
-            register={register}
-            errors={errors}
-            occupiedErr={occupiedErr}
-            setOccupiedErr={setOccupiedErr}
-          />
+
           <Input
             type="date"
             id="dateOfBirth"

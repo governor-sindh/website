@@ -13,6 +13,7 @@ export interface IApplyForm {
   phoneNumber: number;
   city: string;
   email: string;
+  otp: string;
   gender: "male" | "female";
   dateOfBirth: any;
   highestQualification:

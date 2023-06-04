@@ -19,14 +19,6 @@ export default function Input({
   errors: any;
   occupiedErr?: any;
   setOccupiedErr?: any
-  // Dispatch<
-  //   SetStateAction<{
-  //     phoneNumber?: string;
-  //     cnic?: string;
-  //     email: string;
-  //     otp: string;
-  //   }>
-  // >;
 }) {
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const numericKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];

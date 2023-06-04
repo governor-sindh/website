@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
-import { IAdmitCardRequirements } from "@/types";
 import type { UseFormWatch } from "react-hook-form";
-import type { Dispatch, SetStateAction } from "react";
 import { OtpTimer, Input } from "@/components";
 
 export default function EmailAndOtpFields({
@@ -17,7 +15,7 @@ export default function EmailAndOtpFields({
   errors: any;
   watch: UseFormWatch<any>;
   occupiedErr: { email: string; otp: string };
-  setOccupiedErr:any
+  setOccupiedErr: any;
 }) {
   const toast = useToast();
 
@@ -27,23 +25,27 @@ export default function EmailAndOtpFields({
     const email = watch("email");
     if (errors.email || !email) return;
     setResendOtpAvailable(true);
+
     try {
-      const res = await fetch("/api/sendotp", {
+      const response = await fetch("/api/sendotp", {
         body: JSON.stringify({ email }),
         method: "POST",
       });
-      const data=res.json()
-      console.log("🚀 ~ file: EmailAndOtpFields.tsx:43 ~ sendOTP ~ data:", data)
+
+      if (!response.ok) throw new Error(JSON.stringify(await response.json()));
+      const res = await response.json();
+
       toast({
-        title: `OTP sent successfully. Please check your email.`,
+        title: `${res.message}`,
         status: "success",
         duration: 9000,
         isClosable: true,
       });
-    } catch (err) {
-      console.log("err otp", err);
+    } catch (err: any) {
+      err = JSON.parse(err.message);
+
       toast({
-        title: `Unknown error occurred in sending OTP Sent`,
+        title: `${err.message}`,
         status: "error",
         duration: 9000,
         isClosable: false,

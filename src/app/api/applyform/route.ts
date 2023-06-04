@@ -17,6 +17,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     gender,
     dateOfBirth,
     highestQualification,
+    otp,
   }: IApplyForm = await request.json();
 
   if (fullName.length < 3 || fullName.length > 1000) {
@@ -116,7 +117,8 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     !city ||
     !gender ||
     !highestQualification ||
-    !dateOfBirth
+    !dateOfBirth ||
+    !otp
   ) {
     return NextResponse.json(
       { message: "Fields are empty!" },
@@ -158,7 +160,10 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       throw new Error("This Phone Number Already Occupied!");
     }
 
-    const users = await db.insert(UsersTable).values(appliedUser).returning();
+    const otpUsers = await db
+      .select()
+      .from(otpCodes)
+      .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
 
     return NextResponse.json({
       message: "Applied Successfully",

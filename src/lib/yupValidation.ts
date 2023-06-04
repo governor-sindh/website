@@ -34,6 +34,11 @@ export const mainFormSchema = yup.object({
     .required("Email is required")
     .max(55, "Character limit reached, maximum allowed characters is 55.")
     .matches(emailRegex, "Email is not valid"),
+  otp: yup
+    .string()
+    .required("Please confirm the one time password sent to your email.")
+    .min(6, "OTP must be 6 characters")
+    .max(6, "OTP must be 6 characters"),
   dateOfBirth: yup
     .date()
     .max(new Date(), "Invalid date of birth")
@@ -61,4 +66,9 @@ export const admitCardRequirementsSchema = yup.object({
     .required("Email is required")
     .max(55, "Character limit reached, maximum allowed characters is 55.")
     .matches(emailRegex, "Email is not valid"),
+  otp: yup
+    .string()
+    .required("Please confirm the one time password sent to your email.")
+    .min(6, "OTP must be 6 characters")
+    .max(6, "OTP must be 6 characters"),
 });

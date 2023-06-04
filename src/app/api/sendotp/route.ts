@@ -1,25 +1,56 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { otpCodes } from "@/lib/schema/otpCodes";
-// import sgMail from "@sendgrid/mail";
-// sgMail.setApiKey(process.env.NEXT_PUBLIC_API_KEY!);
+import { eq } from "drizzle-orm";
+import sgMail from "@sendgrid/mail";
+sgMail.setApiKey(process.env.NEXT_PUBLIC_API_KEY!);
 
 export async function POST(request: NextRequest) {
-  const { email, code } = await request.json();
+  const { email } = await request.json();
 
-  // const code = Math.floor(100000 + Math.random() * 900000).toString();
+  if (!email) {
+    throw new Error("Enter your email!");
+  }
+
+  const code = Math.floor(100000 + Math.random() * 900000);
 
   try {
-    // const msg = {
-    //   to: email, // Change to your recipient
-    //   from: "support@governorsindh.com", // Change to your verified sender
-    //   subject: "Verify Email with Governers Website!",
-    //   text: "and easy to do anywhere, even with Node.js",
-    //   html: sendEmailtemplate(code),
-    // };
+    const msg = {
+      to: email, // Change to your recipient
+      from: "support@governorsindh.com", // Change to your verified sender
+      subject: "Verify Email with Governers Website!",
+      text: "and easy to do anywhere, even with Node.js",
+      html: sendEmailtemplate(code),
+    };
 
-    // const response = await sgMail.send(msg);
-    // console.log("SEND", response);
+    //Response from sgMail
+
+    await sgMail.send(msg);
+
+    // Current Date
+
+    //Old User
+    const oldUsers = await db
+      .select()
+      .from(otpCodes)
+      .where(eq(otpCodes.email, email));
+    const oldUser = oldUsers[0];
+
+    const currentDate = new Date();
+    currentDate.setHours(currentDate.getHours() + 2);
+
+    //Updating OTP code
+    if (oldUser) {
+      const updatedCodes = await db
+        .update(otpCodes)
+        .set({ code, expiryTime: currentDate })
+        .where(eq(otpCodes.email, email))
+        .returning({ updatedCode: otpCodes.code });
+      const updatedCode = updatedCodes[0];
+      return NextResponse.json({
+        message: "OTP sent successfully. Please check you email.",
+      });
+    }
 
     const data = await db.insert(otpCodes).values({ email, code }).returning();
 

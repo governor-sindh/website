@@ -1,25 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { otpCodes } from "@/lib/schema/otpCodes";
-import sgMail from "@sendgrid/mail";
-sgMail.setApiKey(process.env.NEXT_PUBLIC_API_KEY!);
+// import sgMail from "@sendgrid/mail";
+// sgMail.setApiKey(process.env.NEXT_PUBLIC_API_KEY!);
 
 export async function POST(request: NextRequest) {
-  const { email } = await request.json();
+  const { email, code } = await request.json();
 
-  const code = Math.floor(100000 + Math.random() * 900000).toString();
+  // const code = Math.floor(100000 + Math.random() * 900000).toString();
 
   try {
-    const msg = {
-      to: email, // Change to your recipient
-      from: "support@governorsindh.com", // Change to your verified sender
-      subject: "Verify Email with Governers Website!",
-      text: "and easy to do anywhere, even with Node.js",
-      html: sendEmailtemplate(code),
-    };
+    // const msg = {
+    //   to: email, // Change to your recipient
+    //   from: "support@governorsindh.com", // Change to your verified sender
+    //   subject: "Verify Email with Governers Website!",
+    //   text: "and easy to do anywhere, even with Node.js",
+    //   html: sendEmailtemplate(code),
+    // };
 
-    const response = await sgMail.send(msg);
-    console.log("SEND", response);
+    // const response = await sgMail.send(msg);
+    // console.log("SEND", response);
 
     const data = await db.insert(otpCodes).values({ email, code }).returning();
 

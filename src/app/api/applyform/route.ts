@@ -18,7 +18,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     gender,
     dateOfBirth,
     highestQualification,
-    code,
+    otp,
   }: IApplyForm = await request.json();
 
   if (fullName.length < 3 || fullName.length > 1000) {
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     !gender ||
     !highestQualification ||
     !dateOfBirth ||
-    !code
+    !otp
   ) {
     return NextResponse.json(
       { message: "Fields are empty!" },
@@ -167,7 +167,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     const otpUsers = await db
       .select()
       .from(otpCodes)
-      .where(and(eq(otpCodes.email, email), eq(otpCodes.code, code)));
+      .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
 
     if (!otpUsers) {
       throw new Error("Internal Server Error");

@@ -1,18 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { otpCodes } from "@/lib/schema/otpCodes";
+
 import { eq } from "drizzle-orm";
 import sgMail from "@sendgrid/mail";
 sgMail.setApiKey(process.env.NEXT_PUBLIC_API_KEY!);
 
+
 export async function POST(request: NextRequest) {
-  const { email } = await request.json();
+  const { email, code } = await request.json();
+
 
   if (!email) {
     throw new Error("Enter your email!");
   }
 
   const code = Math.floor(100000 + Math.random() * 900000);
+
 
   try {
     const msg = {
@@ -23,7 +27,7 @@ export async function POST(request: NextRequest) {
       html: sendEmailtemplate(code),
     };
 
-    //Response from sgMail
+
 
     await sgMail.send(msg);
 
@@ -51,6 +55,7 @@ export async function POST(request: NextRequest) {
         message: "OTP sent successfully. Please check you email.",
       });
     }
+
 
     const data = await db.insert(otpCodes).values({ email, code }).returning();
 

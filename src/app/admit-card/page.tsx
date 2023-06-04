@@ -68,7 +68,7 @@ export default function Page() {
       }
       setData(data);
     } catch (err: any) {
-      console.log("🚀 ~ file: page.tsx:66 ~ onFormSubmit ~ err:", err);
+      console.log("🚀 ~ file: page.tsx:71 ~ onFormSubmit ~ err:", err);
       toast({
         title: `${err.message}`,
         status: "error",

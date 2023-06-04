@@ -11,6 +11,7 @@ export interface IApplyForm {
   fatherName: string;
   cnic: number;
   phoneNumber: number;
+  otp: number;
   city: string;
   email: string;
   otp: string;

@@ -18,12 +18,6 @@ export default function EmailAndOtpFields({
   watch: UseFormWatch<any>;
   occupiedErr: { email: string; otp: string };
   setOccupiedErr:any
-  //  Dispatch<
-  //   SetStateAction<{
-  //     email: string;
-  //     otp: string;
-  //   }>
-  // >;
 }) {
   const toast = useToast();
 
@@ -34,11 +28,12 @@ export default function EmailAndOtpFields({
     if (errors.email || !email) return;
     setResendOtpAvailable(true);
     try {
-      console.log({ email });
-      const res = await fetch("api/sendotp/", {
+      const res = await fetch("/api/sendotp", {
         body: JSON.stringify({ email }),
         method: "POST",
       });
+      const data=res.json()
+      console.log("🚀 ~ file: EmailAndOtpFields.tsx:43 ~ sendOTP ~ data:", data)
       toast({
         title: `OTP sent successfully. Please check your email.`,
         status: "success",

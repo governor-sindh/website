@@ -4,7 +4,6 @@ import {
   Input,
   Loader,
   PrintableAdmitCard,
-  OtpTimer,
   EmailAndOtpFields,
 } from "@/components";
 import { useState } from "react";
@@ -28,7 +27,6 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [isApplied, setIsApplied] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<any>();
-  const [resendOtpAvailable, setResendOtpAvailable] = useState<boolean>(false);
   const [occupiedErr, setOccupiedErr] = useState({
     phoneNumber: "",
     cnic: "",
@@ -63,10 +61,6 @@ export default function Page() {
         gender: data.gender.toLowerCase(),
         highestQualification: data.highestQualification,
       };
-      console.log(
-        "🚀 ~ file: page.tsx:63 ~ onFormSubmit ~ formData:",
-        formData
-      );
 
       const res = await fetch("/api/applyform", {
         body: JSON.stringify(formData),
@@ -99,6 +93,8 @@ export default function Page() {
       });
 
       if (err.message == "An application with this email already exists.") {
+        console.log('ddd');
+        
         setOccupiedErr({ ...occupiedErr, email: err.message });
       } else if (
         err.message == "An application with this CNIC already exists."

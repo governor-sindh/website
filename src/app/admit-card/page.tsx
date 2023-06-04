@@ -41,40 +41,36 @@ export default function Page() {
   const onFormSubmit = async (formData: IAdmitCardRequirements) => {
     try {
       setLoading(true);
-      const res = await fetch("/api/admitcard", {
+      const response = await fetch("/api/admitcard", {
         body: JSON.stringify({
           email: formData.email.toLowerCase(),
           otp: Number(formData.otp),
         }),
         method: "POST",
       });
-      const data = await res.json();
-      console.log("🚀 ~ file: page.tsx:52 ~ onFormSubmit ~ data:", data);
-      if (
-        data.message === "User not found" ||
-        data.message === "Add your credentials"
-      ) {
-        setOccupiedErr({
-          email: "OTP or Email is incorrect",
-          otp: "OTP or Email is incorrect",
-        });
-        toast({
-          title: `${data.message}`,
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
-        return;
-      }
-      setData(data);
+
+      if (!response.ok) throw new Error(JSON.stringify(await response.json()));
+      const res = await response.json();
+
+      setData(res);
     } catch (err: any) {
-      console.log("🚀 ~ file: page.tsx:71 ~ onFormSubmit ~ err:", err);
+      err = JSON.parse(err.message);
+
       toast({
         title: `${err.message}`,
         status: "error",
         duration: 9000,
         isClosable: true,
       });
+
+      if (err.message === "Incorrect OTP Entered!") {
+        setOccupiedErr({ email: "", otp: "Incorrect OTP Entered!" });
+      } else if (err.message === "User with this email does not exist!") {
+        setOccupiedErr({
+          email: "User with this email does not exist!",
+          otp: "",
+        });
+      }
     } finally {
       setLoading(false);
     }

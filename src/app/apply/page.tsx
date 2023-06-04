@@ -86,15 +86,13 @@ export default function Page() {
       setIsApplied(true);
     } catch (err: any) {
       toast({
-        title: `Error`,
-        description: `${err.message}`,
+        title: `${err.message}`,
         status: "error",
+        duration: 9000,
         isClosable: true,
       });
 
       if (err.message == "An application with this email already exists.") {
-        console.log('ddd');
-        
         setOccupiedErr({ ...occupiedErr, email: err.message });
       } else if (
         err.message == "An application with this CNIC already exists."
@@ -104,6 +102,8 @@ export default function Page() {
         err.message == "An application with this Phone number already exists."
       ) {
         setOccupiedErr({ ...occupiedErr, phoneNumber: err.message });
+      } else if (err.message === "Incorrect OTP Entered!") {
+        setOccupiedErr({ ...occupiedErr, otp: err.message });
       }
     } finally {
       setLoading(false);

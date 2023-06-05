@@ -33,9 +33,6 @@ export async function POST(request: NextRequest) {
         .where(eq(otpCodes.email, email))
         .returning({ updatedCode: otpCodes.code });
       const updatedCode = updatedCodes[0];
-      return NextResponse.json({
-        message: "OTP sent successfully. Please check you email.",
-      });
     } else {
       await db
         .insert(otpCodes)

@@ -192,7 +192,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
         users,
       });
     }
-    if (expiryTime < currentTime) {
+    else {
       throw new Error("OTP expired. Please click on SEND OTP button.");
     }
   } catch (error: any) {

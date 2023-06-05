@@ -15,18 +15,6 @@ export async function POST(request: NextRequest) {
   const code = Math.floor(100000 + Math.random() * 900000);
 
   try {
-    const msg = {
-      to: email, // Change to your recipient
-      from: "support@governorsindh.com", // Change to your verified sender
-      subject: "Verify Email with Governers Website!",
-      text: "and easy to do anywhere, even with Node.js",
-      html: sendEmailtemplate(code),
-    };
-
-    //Response from sgMail
-
-    await sgMail.send(msg);
-
     // Current Date
 
     //Old User
@@ -47,12 +35,22 @@ export async function POST(request: NextRequest) {
         .where(eq(otpCodes.email, email))
         .returning({ updatedCode: otpCodes.code });
       const updatedCode = updatedCodes[0];
-      return NextResponse.json({
-        message: "OTP sent successfully. Please check you email.",
-      });
+    } else {
+      await db
+        .insert(otpCodes)
+        .values({ email, code, expiryTime: currentDate })
+        .returning();
     }
 
-    const data = await db.insert(otpCodes).values({ email, code }).returning();
+    const msg = {
+      to: email, // Change to your recipient
+      from: "support@governorsindh.com", // Change to your verified sender
+      subject: "Verify Email with Governers Website!",
+      html: sendEmailtemplate(code.toString()),
+    };
+
+    //Response from sgMail
+    await sgMail.send(msg);
 
     return NextResponse.json({
       message: "OTP sent successfully. Please check you email.",

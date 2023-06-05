@@ -24,12 +24,12 @@ export async function POST(request: NextRequest) {
     if (!user) {
       throw new Error("Incorrect OTP Entered!");
     }
-
+    
     const userTime = user.expiryTime;
-    const expiryTime = userTime.getHours();
+    const expiryTime = userTime.getTime();
 
     const currentDate = new Date();
-    const currentTime = currentDate.getHours();
+    const currentTime = currentDate.getTime();
 
     if (user.code == otp && expiryTime > currentTime) {
       const users = await db
@@ -37,7 +37,6 @@ export async function POST(request: NextRequest) {
         .from(UsersTable)
         .where(eq(UsersTable.email, email));
       const user = users[0];
-
       if (!user) {
         throw new Error("User with this email does not exist!");
       }
@@ -49,8 +48,7 @@ export async function POST(request: NextRequest) {
         dateOfRegistration: createdAt,
         studentId: id,
       });
-    }
-    if (expiryTime < currentTime) {
+    } else {
       throw new Error("OTP expired! Please click on SEND OTP button.");
     }
   } catch (error: any) {

@@ -25,10 +25,10 @@ export async function POST(request: NextRequest) {
     }
 
     const userTime = user.expiryTime;
-    const expiryTime = userTime.getHours();
+    const expiryTime = userTime.getTime();
 
     const currentDate = new Date();
-    const currentTime = currentDate.getHours();
+    const currentTime = currentDate.getTime();
 
     if (user.code == otp && expiryTime > currentTime) {
       const users = await db
@@ -48,8 +48,7 @@ export async function POST(request: NextRequest) {
         dateOfRegistration: createdAt,
         studentId: id,
       });
-    }
-    if (expiryTime < currentTime) {
+    } else {
       throw new Error("OTP expired! Please click on SEND OTP button.");
     }
   } catch (error: any) {

@@ -165,10 +165,31 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       .from(otpCodes)
       .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
 
-    return NextResponse.json({
-      message: "Applied Successfully",
-      users: users,
-    });
+    if (!otpUsers) {
+      throw new Error("Internal Server Error");
+    }
+    const otpUser = otpUsers[0];
+
+    if (!otpUser) {
+      throw new Error("Incorrect OTP Entered!");
+    }
+
+    const userTime = otpUser.expiryTime;
+    const expiryTime = userTime.getTime();
+
+    const currentDate = new Date();
+    const currentTime = currentDate.getTime();
+
+    if (expiryTime > currentTime) {
+      const users = await db.insert(UsersTable).values(appliedUser).returning();
+
+      return NextResponse.json({
+        message: "Applied Successfully",
+        users,
+      });
+    } else {
+      throw new Error("OTP expired. Please click on SEND OTP button.");
+    }
   } catch (error: any) {
     if (error.message.includes("This Email Already Occupied!")) {
       return NextResponse.json(

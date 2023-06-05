@@ -50,18 +50,22 @@ export async function POST(request: NextRequest) {
     };
 
     //Response from sgMail
-
     await sgMail.send(msg);
 
     return NextResponse.json({
-      message: "OTP sent to email",
+      message: "OTP sent successfully. Please check you email.",
     });
-  } catch (error) {
-    return NextResponse.json(error);
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        message: error.message,
+      },
+      { status: 500 }
+    );
   }
 }
 
-const sendEmailtemplate = (EmailCode: string) => {
+const sendEmailtemplate = (EmailCode: number) => {
   let customerEmailTemplate = `
     <div style="background-color:#ffffff"><div class="adM">
     </div><center>

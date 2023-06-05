@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
-import { and, eq, or } from "drizzle-orm";
+import { eq, or, and } from "drizzle-orm";
 import { UsersTable, NewUser } from "@/lib/schema/users";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
@@ -152,6 +152,9 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
           eq(UsersTable.phoneNumber, phoneNumber)
         )
       );
+    if (!oldUsers) {
+      throw new Error("Internal Server Error");
+    }
     const oldUser = oldUsers[0];
     if (!!oldUser && oldUser.email == email) {
       throw new Error("This Email Already Occupied!");
@@ -192,40 +195,13 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       throw new Error("OTP expired. Please click on SEND OTP button.");
     }
   } catch (error: any) {
-    if (error.message.includes("This Email Already Occupied!")) {
-      return NextResponse.json(
-        {
-          message: "An application with this email already exists.",
-        },
-        { status: 500 }
-      );
-    } else if (error.message.includes("This CNIC Already Occupied!")) {
-      return NextResponse.json(
-        {
-          message: "An application with this CNIC already exists.",
-        },
-        {
-          status: 500,
-        }
-      );
-    } else if (error.message.includes("This Phone Number Already Occupied!")) {
-      return NextResponse.json(
-        {
-          message: "An application with this Phone number already exists.",
-        },
-        {
-          status: 500,
-        }
-      );
-    } else {
-      return NextResponse.json(
-        {
-          message: "Internal server error!",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+    return NextResponse.json(
+      {
+        message: error.message,
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }

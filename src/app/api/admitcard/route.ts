@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { UsersTable } from "@/lib/schema/users";
-import { and, eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { otpCodes } from "@/lib/schema/otpCodes";
 
 export async function POST(request: NextRequest) {
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     if (!user) {
       throw new Error("Incorrect OTP Entered!");
     }
-
+    
     const userTime = user.expiryTime;
     const expiryTime = userTime.getTime();
 
@@ -37,7 +37,6 @@ export async function POST(request: NextRequest) {
         .from(UsersTable)
         .where(eq(UsersTable.email, email));
       const user = users[0];
-
       if (!user) {
         throw new Error("User with this email does not exist!");
       }
@@ -54,11 +53,9 @@ export async function POST(request: NextRequest) {
     }
   } catch (error: any) {
     return NextResponse.json(
+      { message: error.message },
       {
-        message: "Add your credentials",
-      },
-      {
-        status: 401,
+        status: 500,
       }
     );
   }

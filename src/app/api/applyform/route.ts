@@ -179,10 +179,10 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     }
 
     const userTime = otpUser.expiryTime;
-    const expiryTime = userTime.getHours();
+    const expiryTime = userTime.getTime();
 
     const currentDate = new Date();
-    const currentTime = currentDate.getHours();
+    const currentTime = currentDate.getTime();
 
     if (expiryTime > currentTime) {
       const users = await db.insert(UsersTable).values(appliedUser).returning();
@@ -191,8 +191,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
         message: "Applied Successfully",
         users,
       });
-    }
-    if (expiryTime < currentTime) {
+    } else {
       throw new Error("OTP expired. Please click on SEND OTP button.");
     }
   } catch (error: any) {

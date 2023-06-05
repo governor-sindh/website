@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import type { UseFormWatch } from "react-hook-form";
-import { OtpTimer, Input } from "@/components";
+import { Loader, OtpTimer, Input } from "@/components";
 
 export default function EmailAndOtpFields({
   register,
@@ -19,12 +19,13 @@ export default function EmailAndOtpFields({
 }) {
   const toast = useToast();
 
-  const [resendOtpAvailable, setResendOtpAvailable] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [resendOtpAvailable, setResendOtpAvailable] = useState<boolean>(true);
 
   const sendOTP = async () => {
     const email = watch("email");
     if (errors.email || !email) return;
-    setResendOtpAvailable(true);
+    setLoading(true);
 
     try {
       const response = await fetch("/api/sendotp", {
@@ -34,6 +35,7 @@ export default function EmailAndOtpFields({
 
       if (!response.ok) throw new Error(JSON.stringify(await response.json()));
       const res = await response.json();
+      setResendOtpAvailable(false);
 
       toast({
         title: `${res.message}`,
@@ -50,6 +52,8 @@ export default function EmailAndOtpFields({
         duration: 9000,
         isClosable: false,
       });
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -84,17 +88,19 @@ export default function EmailAndOtpFields({
           <button
             type="button"
             onClick={sendOTP}
-            disabled={resendOtpAvailable}
-            className="w-[30%] rounded-r bg-main text-xs text-white disabled:opacity-60 disabled:hover:cursor-not-allowed xs:text-base"
+            disabled={!resendOtpAvailable || loading}
+            className="flex w-[30%] flex-col items-center justify-center rounded-r bg-main text-xs !leading-none text-white disabled:opacity-60 disabled:hover:cursor-not-allowed xs:text-base"
           >
-            {resendOtpAvailable ? (
+            {!resendOtpAvailable ? (
               <>
                 <span>Resend OTP</span>
                 <OtpTimer
                   duration={60}
-                  func={() => setResendOtpAvailable(false)}
+                  func={() => setResendOtpAvailable(true)}
                 />
               </>
+            ) : loading ? (
+              <Loader width="w-4" height="h-4" />
             ) : (
               <span>Send OTP</span>
             )}

@@ -36,9 +36,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         message: "OTP sent successfully. Please check you email.",
       });
-    }
-    else{
-      await db.insert(otpCodes).values({ email, code, expiryTime: currentDate }).returning();
+    } else {
+      await db
+        .insert(otpCodes)
+        .values({ email, code, expiryTime: currentDate })
+        .returning();
     }
 
     const msg = {

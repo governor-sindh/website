@@ -35,16 +35,18 @@ export async function POST(request: NextRequest) {
         .where(eq(otpCodes.email, email))
         .returning({ updatedCode: otpCodes.code });
       const updatedCode = updatedCodes[0];
-    }
-    else{
-      await db.insert(otpCodes).values({ email, code, expiryTime: currentDate }).returning();
+    } else {
+      await db
+        .insert(otpCodes)
+        .values({ email, code, expiryTime: currentDate })
+        .returning();
     }
 
     const msg = {
       to: email, // Change to your recipient
       from: "support@governorsindh.com", // Change to your verified sender
       subject: "Verify Email with Governers Website!",
-      html: sendEmailtemplate(code),
+      html: sendEmailtemplate(code.toString()),
     };
 
     //Response from sgMail

@@ -1,10 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
-import { eq, or } from "drizzle-orm";
+import { and, eq, or } from "drizzle-orm";
 import { UsersTable, NewUser } from "@/lib/schema/users";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
 import { formCities, formQualifications } from "@/data";
+import { otpCodes } from "@/lib/schema/otpCodes";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {

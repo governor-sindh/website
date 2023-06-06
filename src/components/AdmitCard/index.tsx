@@ -10,7 +10,7 @@ const poppins = Poppins({
 
 export default function AdmitCard({ data }: { data: IAdmitCard }) {
   return (
-    <div className="w-[95%] border-2 border-gray-800 p-3 print:hidden xs:p-10">
+    <div className="w-[95%] max-w-4xl border-2 border-gray-800 p-3 print:hidden xs:p-10">
       <div className="flex items-center justify-evenly">
         <Image
           src={govtLogo}

@@ -1,5 +1,10 @@
 "use client";
-import { Input, Loader, AdmitCard, PrintableAdmitCard } from "@/components";
+import {
+  Loader,
+  AdmitCard,
+  PrintableAdmitCard,
+  EmailAndOtpFields,
+} from "@/components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { admitCardRequirementsSchema } from "@/lib/yupValidation";
@@ -18,6 +23,10 @@ export default function Page() {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<IAdmitCard>();
+  const [occupiedErr, setOccupiedErr] = useState({
+    email: "",
+    otp: "",
+  });
 
   const {
     register,
@@ -32,31 +41,36 @@ export default function Page() {
   const onFormSubmit = async (formData: IAdmitCardRequirements) => {
     try {
       setLoading(true);
-      const res = await fetch("/api/admitcard", {
-        body: JSON.stringify({ email: formData.email.toLowerCase() }),
+      const response = await fetch("/api/admitcard", {
+        body: JSON.stringify({
+          email: formData.email.toLowerCase(),
+          otp: Number(formData.otp),
+        }),
         method: "POST",
       });
-      const data = await res.json();
-      if (
-        data.message === "User not found" ||
-        data.message === "Add your credentials"
-      ) {
-        toast({
-          title: `${data.message}`,
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
-        return;
-      }
-      setData(data);
+
+      if (!response.ok) throw new Error(JSON.stringify(await response.json()));
+      const res = await response.json();
+
+      setData(res);
     } catch (err: any) {
+      err = JSON.parse(err.message);
+
       toast({
         title: `${err.message}`,
         status: "error",
         duration: 9000,
         isClosable: true,
       });
+
+      if (err.message === "Incorrect OTP Entered!") {
+        setOccupiedErr({ email: "", otp: "Incorrect OTP Entered!" });
+      } else if (err.message === "User with this email does not exist!") {
+        setOccupiedErr({
+          email: "User with this email does not exist!",
+          otp: "",
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -87,15 +101,13 @@ export default function Page() {
           onSubmit={handleSubmit(onFormSubmit)}
           noValidate
         >
-          <Input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required={true}
+          <EmailAndOtpFields
+            watch={watch}
             register={register}
             errors={errors}
+            occupiedErr={occupiedErr}
+            setOccupiedErr={setOccupiedErr}
           />
-          
           <div className="flex justify-center">
             <button
               type="submit"

@@ -18,15 +18,10 @@ export default function Input({
   register: any;
   errors: any;
   occupiedErr?: any;
-  setOccupiedErr?: Dispatch<
-    SetStateAction<{
-      phoneNumber: string;
-      cnic: string;
-      email: string;
-    }>
-  >;
+  setOccupiedErr?: any;
 }) {
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.ctrlKey) return;
     const numericKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     const allowedKeys = [
       "Backspace",
@@ -34,6 +29,7 @@ export default function Input({
       "Delete",
       "ArrowLeft",
       "ArrowRight",
+      "Control",
     ];
 
     if (!numericKeys.includes(event.key) && !allowedKeys.includes(event.key)) {
@@ -89,7 +85,12 @@ export default function Input({
             !!occupiedErr?.[id]
               ? () => {
                   setOccupiedErr
-                    ? setOccupiedErr({ phoneNumber: "", cnic: "", email: "" })
+                    ? setOccupiedErr({
+                        phoneNumber: "",
+                        cnic: "",
+                        email: "",
+                        otp: "",
+                      })
                     : "";
                 }
               : () => {}

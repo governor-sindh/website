@@ -2,6 +2,8 @@ import {
   pgTable,
   text,
   numeric,
+  integer,
+  boolean,
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
@@ -14,8 +16,8 @@ export const otpCodes = pgTable(
   "otp_codes",
   {
     email: text("email").notNull(),
-    code: numeric("code", { precision: 6 }).notNull(),
-    expiryTime: timestamp("expiry_date").default(currentDate),
+    code: integer("code").notNull(),
+    expiryTime: timestamp("expiry_date").default(currentDate).notNull(),
   },
   (otpCodes) => {
     return {

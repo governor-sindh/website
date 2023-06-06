@@ -1,5 +1,11 @@
 "use client";
-import { AdmitCard, Input, Loader, PrintableAdmitCard } from "@/components";
+import {
+  AdmitCard,
+  Input,
+  Loader,
+  PrintableAdmitCard,
+  EmailAndOtpFields,
+} from "@/components";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IApplyForm } from "@/types";
@@ -25,11 +31,13 @@ export default function Page() {
     phoneNumber: "",
     cnic: "",
     email: "",
+    otp: "",
   });
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<IApplyForm>({
     mode: "onTouched",
@@ -46,6 +54,7 @@ export default function Page() {
         phoneNumber: Number(`92${data.phoneNumber}`),
         city: data.city,
         email: data.email.toLowerCase(),
+        otp: Number(data.otp),
         dateOfBirth: `${data.dateOfBirth.getFullYear()}-${
           data.dateOfBirth.getMonth() + 1
         }-${data.dateOfBirth.getDate()}`,
@@ -77,18 +86,24 @@ export default function Page() {
       setIsApplied(true);
     } catch (err: any) {
       toast({
-        title: `Error`,
-        description: `${err.message}`,
+        title: `${err.message}`,
         status: "error",
+        duration: 9000,
         isClosable: true,
       });
 
       if (err.message == "An application with this email already exists.") {
         setOccupiedErr({ ...occupiedErr, email: err.message });
-      } else if (err.message == "An application with this CNIC already exists.") {
+      } else if (
+        err.message == "An application with this CNIC already exists."
+      ) {
         setOccupiedErr({ ...occupiedErr, cnic: err.message });
-      } else if (err.message == "An application with this Phone number already exists.") {
+      } else if (
+        err.message == "An application with this Phone number already exists."
+      ) {
         setOccupiedErr({ ...occupiedErr, phoneNumber: err.message });
+      } else if (err.message === "Incorrect OTP Entered!") {
+        setOccupiedErr({ ...occupiedErr, otp: err.message });
       }
     } finally {
       setLoading(false);
@@ -161,6 +176,13 @@ export default function Page() {
             register={register}
             errors={errors}
           />
+          <EmailAndOtpFields
+            watch={watch}
+            register={register}
+            errors={errors}
+            occupiedErr={occupiedErr}
+            setOccupiedErr={setOccupiedErr}
+          />
           <Input
             type="tel"
             id="cnic"
@@ -204,16 +226,7 @@ export default function Page() {
           {errors.city && (
             <p className="mb-4 text-red-400">{errors.city?.message}</p>
           )}
-          <Input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required={true}
-            register={register}
-            errors={errors}
-            occupiedErr={occupiedErr}
-            setOccupiedErr={setOccupiedErr}
-          />
+
           <Input
             type="date"
             id="dateOfBirth"

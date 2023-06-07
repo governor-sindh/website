@@ -33,8 +33,9 @@ export default function EmailAndOtpFields({
         method: "POST",
       });
 
-      if (!response.ok) throw new Error(JSON.stringify(await response.json()));
       const res = await response.json();
+      if (!response.ok) throw new Error(res.message);
+
       setResendOtpAvailable(false);
 
       toast({
@@ -44,10 +45,8 @@ export default function EmailAndOtpFields({
         isClosable: true,
       });
     } catch (err: any) {
-      err = JSON.parse(err.message);
-
       toast({
-        title: `${err.message}`,
+        title: `${err.message || "Unknown Error"}`,
         status: "error",
         duration: 9000,
         isClosable: false,

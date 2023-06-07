@@ -157,11 +157,11 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     }
     const oldUser = oldUsers[0];
     if (!!oldUser && oldUser.email == email) {
-      throw new Error("This Email Already Occupied!");
+      throw new Error("An application with this email already exists.");
     } else if (!!oldUser && oldUser.cnic == cnic) {
-      throw new Error("This CNIC Already Occupied!");
+      throw new Error("An application with this CNIC already exists.");
     } else if (!!oldUser && oldUser.phoneNumber == phoneNumber) {
-      throw new Error("This Phone Number Already Occupied!");
+      throw new Error("An application with this Phone number already exists.");
     }
 
     ///Commenting out otp code until email is working fine

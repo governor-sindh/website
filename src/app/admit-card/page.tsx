@@ -3,7 +3,8 @@ import {
   Loader,
   AdmitCard,
   PrintableAdmitCard,
-  EmailAndOtpFields,
+  Input,
+  // EmailAndOtpFields,
 } from "@/components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -44,32 +45,30 @@ export default function Page() {
       const response = await fetch("/api/admitcard", {
         body: JSON.stringify({
           email: formData.email.toLowerCase(),
-          otp: Number(formData.otp),
+          // otp: Number(formData.otp),
         }),
         method: "POST",
       });
 
-      if (!response.ok) throw new Error(JSON.stringify(await response.json()));
       const res = await response.json();
+      if (!response.ok) throw new Error(res.message);
 
       setData(res);
     } catch (err: any) {
-      err = JSON.parse(err.message);
-
       toast({
-        title: `${err.message}`,
+        title: `${err.message || "Unknown Error"}`,
         status: "error",
         duration: 9000,
         isClosable: true,
       });
 
-      if (err.message === "Incorrect OTP Entered!") {
-        setOccupiedErr({ email: "", otp: "Incorrect OTP Entered!" });
-      } else if (err.message === "User with this email does not exist!") {
+      if (err.message === "User with this email does not exist!") {
         setOccupiedErr({
           email: "User with this email does not exist!",
           otp: "",
         });
+      } else if (err.message === "Incorrect OTP Entered!") {
+        setOccupiedErr({ email: "", otp: "Incorrect OTP Entered!" });
       }
     } finally {
       setLoading(false);
@@ -101,13 +100,21 @@ export default function Page() {
           onSubmit={handleSubmit(onFormSubmit)}
           noValidate
         >
-          <EmailAndOtpFields
+          <Input
+            type="email"
+            id="email"
+            placeholder="Email"
+            required={true}
+            register={register}
+            errors={errors}
+          />
+          {/* <EmailAndOtpFields
             watch={watch}
             register={register}
             errors={errors}
             occupiedErr={occupiedErr}
             setOccupiedErr={setOccupiedErr}
-          />
+          /> */}
           <div className="flex justify-center">
             <button
               type="submit"

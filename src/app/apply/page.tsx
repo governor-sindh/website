@@ -4,7 +4,7 @@ import {
   Input,
   Loader,
   PrintableAdmitCard,
-  EmailAndOtpFields,
+  // EmailAndOtpFields,
 } from "@/components";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -68,7 +68,6 @@ export default function Page() {
       });
 
       const resData: any = await res.json();
-
       if (!resData.users) throw new Error(resData.message);
 
       setFormValues({
@@ -86,7 +85,7 @@ export default function Page() {
       setIsApplied(true);
     } catch (err: any) {
       toast({
-        title: `${err.message}`,
+        title: `${err.message || "Unknown Error"}`,
         status: "error",
         duration: 9000,
         isClosable: true,
@@ -176,13 +175,23 @@ export default function Page() {
             register={register}
             errors={errors}
           />
-          <EmailAndOtpFields
-            watch={watch}
+          <Input
+            type="email"
+            id="email"
+            placeholder="Email"
+            required={true}
             register={register}
             errors={errors}
             occupiedErr={occupiedErr}
             setOccupiedErr={setOccupiedErr}
           />
+          {/* <EmailAndOtpFields
+            watch={watch}
+            register={register}
+            errors={errors}
+            occupiedErr={occupiedErr}
+            setOccupiedErr={setOccupiedErr}
+          /> */}
           <Input
             type="tel"
             id="cnic"

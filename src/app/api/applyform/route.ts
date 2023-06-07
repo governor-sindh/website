@@ -5,7 +5,7 @@ import { UsersTable, NewUser } from "@/lib/schema/users";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
 import { formCities, formQualifications } from "@/data";
-import { otpCodes } from "@/lib/schema/otpCodes";
+// import { otpCodes } from "@/lib/schema/otpCodes";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     gender,
     dateOfBirth,
     highestQualification,
-    otp,
+    // otp,
   }: IApplyForm = await request.json();
 
   if (fullName.length < 3 || fullName.length > 1000) {
@@ -118,8 +118,8 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     !city ||
     !gender ||
     !highestQualification ||
-    !dateOfBirth ||
-    !otp
+    !dateOfBirth 
+    // || !otp
   ) {
     return NextResponse.json(
       { message: "Fields are empty!" },
@@ -164,36 +164,36 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
       throw new Error("This Phone Number Already Occupied!");
     }
 
-    const otpUsers = await db
-      .select()
-      .from(otpCodes)
-      .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
+    ///Commenting out otp code until email is working fine
+    // const otpUsers = await db
+    //   .select()
+    //   .from(otpCodes)
+    //   .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
 
-    if (!otpUsers) {
-      throw new Error("Internal Server Error");
-    }
-    const otpUser = otpUsers[0];
+    // if (!otpUsers) {
+    //   throw new Error("Internal Server Error");
+    // }
+    // const otpUser = otpUsers[0];
 
-    if (!otpUser) {
-      throw new Error("Incorrect OTP Entered!");
-    }
+    // if (!otpUser) {
+    //   throw new Error("Incorrect OTP Entered!");
+    // }
 
-    const userTime = otpUser.expiryTime;
-    const expiryTime = userTime.getTime();
+    // const userTime = otpUser.expiryTime;
+    // const expiryTime = userTime.getTime();
 
-    const currentDate = new Date();
-    const currentTime = currentDate.getTime();
+    // const currentDate = new Date();
+    // const currentTime = currentDate.getTime();
 
-    if (expiryTime > currentTime) {
+    // if (expiryTime > currentTime) {
       const users = await db.insert(UsersTable).values(appliedUser).returning();
-
       return NextResponse.json({
         message: "Applied Successfully",
         users,
       });
-    } else {
-      throw new Error("OTP expired. Please click on SEND OTP button.");
-    }
+    // } else {
+    //   throw new Error("OTP expired. Please click on SEND OTP button.");
+    // }
   } catch (error: any) {
     return NextResponse.json(
       {

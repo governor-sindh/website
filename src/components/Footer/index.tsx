@@ -42,9 +42,6 @@ function Footer() {
                             <Link href={'https://www.facebook.com/governorsindhinitiative'} target='_blank' className='w-10 h-10 bg-main rounded-full flex justify-center items-center text-white'>
                                 <FaFacebookF size={16} />
                             </Link>
-                            <Link href={'https://twitter.com/Panaverse_edu'} target='_blank' className='w-10 h-10 bg-main rounded-full flex justify-center items-center text-white'>
-                                <FaTwitter size={16} />
-                            </Link>
                             <Link href={'https://www.youtube.com/@KamranTessorikk'} target='_blank' className='w-10 h-10 bg-main rounded-full flex justify-center items-center text-white'>
                                 <FaYoutube size={16} />
                             </Link>

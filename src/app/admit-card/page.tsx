@@ -1,9 +1,8 @@
 "use client";
 import {
   Loader,
-  AdmitCard,
-  PrintableAdmitCard,
   Input,
+  DownloadAdmitCard,
   // EmailAndOtpFields,
 } from "@/components";
 import { useForm } from "react-hook-form";
@@ -84,16 +83,7 @@ export default function Page() {
         Download Admit Card
       </h1>
       {data ? (
-        <>
-          <AdmitCard data={data} />
-          <PrintableAdmitCard data={data} />
-          <button
-            className="mt-5 w-[95%] bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
-            onClick={() => window.print()}
-          >
-            DOWNLOAD
-          </button>
-        </>
+        <DownloadAdmitCard data={data} />
       ) : (
         <form
           className="-top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"

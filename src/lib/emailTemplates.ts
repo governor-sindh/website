@@ -87,7 +87,7 @@ export const emailTemplate = `<!DOCTYPE html>
 <a id="youtube" href="https://www.youtube.com/XXXXXX" target="_blank">YouTube</a>
             </div>
             <p>Regards,</p>
-            <p>Team Governor Initiative</p>
+            <p>Team Governor Sindh Initiative</p>
             <p>Email: support@governorsindh.com</p>
             <p>Website: <a href="http://www.governorsindh.com" target="_blank">www.governorsindh.com</a></p>
         </div>

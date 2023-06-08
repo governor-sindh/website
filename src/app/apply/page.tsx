@@ -1,9 +1,8 @@
 "use client";
 import {
-  AdmitCard,
+  DownloadAdmitCard,
   Input,
   Loader,
-  PrintableAdmitCard,
   // EmailAndOtpFields,
 } from "@/components";
 import { useState } from "react";
@@ -110,35 +109,25 @@ export default function Page() {
   };
 
   return (
-    <main className="mb-20 flex justify-center bg-contain bg-fixed bg-center bg-no-repeat">
+    <main className="mb-20 flex items-center flex-col justify-center">
       {isApplied && formValues && formValues.users && (
-        <div className="mt-10 flex flex-col items-center justify-center gap-6">
-          <AdmitCard
-            data={{
-              cnic: formValues.cnic,
-              dateOfRegistration: formValues.users.createdAt,
-              fatherName: formValues.fatherName,
-              fullName: formValues.fullName,
-              studentId: formValues.users.id,
-            }}
-          />
-
-          <PrintableAdmitCard
-            data={{
-              cnic: formValues.cnic,
-              dateOfRegistration: formValues.users.createdAt,
-              fatherName: formValues.fatherName,
-              fullName: formValues.fullName,
-              studentId: formValues.users.id,
-            }}
-          />
-          <button
-            className="mx-8 mt-5 w-full bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
-            onClick={() => window.print()}
+        <>
+          <h1
+            style={poppins.style}
+            className="my-8 text-center text-lg font-bold text-main print:hidden md:text-3xl"
           >
-            DOWNLOAD
-          </button>
-        </div>
+            Download Admit Card
+          </h1>
+          <DownloadAdmitCard
+            data={{
+              cnic: formValues.cnic,
+              dateOfRegistration: formValues.users.createdAt,
+              fatherName: formValues.fatherName,
+              fullName: formValues.fullName,
+              studentId: formValues.users.id,
+            }}
+          />
+        </>
       )}
 
       {!isApplied && (

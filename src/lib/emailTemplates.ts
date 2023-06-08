@@ -68,10 +68,10 @@ export const emailTemplate = `<!DOCTYPE html>
             </div>
             <div id="content">
                 <p>Dear Student,</p>
-                <p>Thank you for expressing your interest in the Governor Sindh Initiative for Artificial Intelligence and Web 3 & Metaverse Programs.
-                We have received your application, and the next step will be the Entry Test. The venue and date of the Entry Test will be communicated to you through your registered email ID.
+                <p>Thank you for expressing your interest in the Governor Sindh Initiative for Artificial Intelligence and Web 3 & Metaverse Program.
+                We have received your application, and the next step will be the entry test. The venue and date of the entry test will be communicated to you through your registered email address.
                 
-                <p>In the meantime, we encourage you to begin preparing for the Entry Test, which will cover the following subjects:</p>
+                <p>In the meantime, we encourage you to begin preparing for the entry test, which will cover the following subjects:</p>
                 <ul>
                     <li>General English</li>
                     <li>General Math</li>

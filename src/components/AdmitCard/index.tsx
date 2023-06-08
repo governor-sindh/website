@@ -28,7 +28,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
         </p>
         <p>
           We have received your application. Please note your Registration
-          Number: {data.studentId}
+          Number: {`${data.studentId}`.padStart(8, "0")}
         </p>
         <p className="my-4">
           Now that you&apos;ve applied, the next step will be the entrance exam.

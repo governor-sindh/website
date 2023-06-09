@@ -8,7 +8,8 @@ import Advance from "./Advance";
 import Footer from "./Footer";
 import Text from "./Text";
 import Loader from "./Loader";
-import AdmitCard from "./AdmitCard";
+import DownloadAdmitCard from './AdmitCard/index'
+import AdmitCard from "./AdmitCard/AdmitCard";
 import PrintableAdmitCard from "./AdmitCard/PrintableAdmitCard";
 import OtpTimer from "./OTP/OtpTimer";
 import EmailAndOtpFields from "./OTP/EmailAndOtpFields";
@@ -24,6 +25,7 @@ export {
   ChakraWrapper,
   Text,
   Loader,
+  DownloadAdmitCard,
   AdmitCard,
   PrintableAdmitCard,
   OtpTimer,

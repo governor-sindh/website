@@ -1,112 +1,135 @@
+"use client";
+import { AdmitCard, PrintableAdmitCard } from "@/components";
 import { IAdmitCard } from "@/types";
 import { Poppins } from "next/font/google";
-import govtLogo from "../../../public/logo.png";
-import Image from "next/image";
+import Link from "next/link";
+import {
+  FaFacebookF,
+  FaGithub,
+  // FaTwitter,
+  FaYoutube,
+  // FaLinkedinIn,
+  // FaWhatsapp,
+} from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
   subsets: ["latin"],
 });
 
-export default function AdmitCard({ data }: { data: IAdmitCard }) {
+export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
   return (
-    <div className="w-[95%] max-w-4xl border-2 border-gray-800 p-3 print:hidden xs:p-10">
-      <div className="flex items-center justify-evenly">
-        <Image
-          src={govtLogo}
-          alt="govt sindh logo"
-          width={90}
-          className="w-[70px] sm:w-[80px] md:w-[90px]"
-        />
-        <h1
-          style={poppins.style}
-          className="text-center text-lg font-bold text-main md:text-3xl"
-        >
-          Governor Sindh Initiative for
-          <br className="hidden md:block" />
-          Artificial Intelligence, Web 3.0 & Metaverse
-        </h1>
-        <div></div>
+    <div className="mx-auto my-6 flex max-w-4xl flex-col items-center justify-center gap-6">
+      <div style={poppins.style} className="w-[95%] text-justify print:hidden">
+        <h3 className="capitalize">Dear {data.fullName},</h3>
+        <p className="my-4">
+          Thank you for expressing your interest in the Governor&apos;s
+          Initiative for Artificial Intelligence, Web 3.0 & Metaverse Program!
+        </p>
+        <p>
+          We have received your application. Please note your Registration
+          Number: {`${data.studentId}`.padStart(8, "0")}
+        </p>
+        <p className="my-4">
+          Now that you&apos;ve applied, the next step will be the entrance exam.
+          The details of the entrance exam, including the venue and date will be
+          emailed to you. If you haven&apos;t already downloaded your admit card
+          please download it and save it. You&apos;ll need it when you come for
+          the entrance exam. Please click the download button below to save your
+          admit card.
+        </p>
+        <p>
+          While applications are being accepted, we encourage you to begin
+          preparing for the entrance exam. The entrance exam will be split into
+          3 parts:
+        </p>
+        <ul className="my-4 list-[upper-roman]">
+          <li className="ml-14 pl-6">English (Reading & Vocabulary)</li>
+          <li className="ml-14 pl-6">Mathematics (10th Grade Math)</li>
+          <li className="ml-14 pl-6">Intelligence Quotient (IQ)</li>
+        </ul>
+        <p>
+          For those students who are new to the computer field, you can get a
+          jump start on your learning immediately by starting HTML and CSS:{" "}
+        </p>
+        <ul>
+          <li className="my-4">
+            <span className="block">
+              Learn HTML by Hira Khan (Watch Recorded Videos)
+            </span>
+            <Link
+              className="text-main underline"
+              href="https://www.youtube.com/playlist?list=PLKvqnz8z1zWQ3BALy86tIXICkG874wAc6"
+              target="_blank"
+            >
+              youtube.com/playlist?list=PLKvqnz8z1zWQ3BALy86tIXICkG874wAc6
+            </Link>
+          </li>
+          <li>
+            <span className="block">
+              Learn CSS Intro by Hira Khan (Watch Recorded Videos)
+            </span>
+            <Link
+              className="text-main underline"
+              href="https://www.youtube.com/playlist?list=PLKvqnz8z1zWQSWIen_zUSEBmtqzPLuRob"
+              target="_blank"
+            >
+              youtube.com/playlist?list=PLKvqnz8z1zWQSWIen_zUSEBmtqzPLuRob
+            </Link>
+          </li>
+        </ul>
+        <p className="mt-4 ">
+          Regards,
+          <b className="block font-bold">
+            Governor&apos;s Initiative for AI, Web 3.0 & Metaverse
+          </b>
+          <Link
+            className="mt-4 flex items-center text-main underline"
+            href="mailto:education@governorsindh.com"
+            target="_blank"
+          >
+            <MdEmail className="mr-3 h-10 w-10 rounded-full bg-main p-2 text-white" />
+            education@governorsindh.com
+          </Link>
+        </p>
+        <p className="my-4">
+          To stay up to date on the latest updates from the Governor&apos;s
+          Initiative, please follow us on your favorite social media channels:
+        </p>
+        <div className="my-4 flex gap-3  md:text-sm">
+          <Link
+            href={"https://www.facebook.com/governorsindhinitiative"}
+            target="_blank"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
+          >
+            <FaFacebookF size={16} />
+          </Link>
+          <Link
+            href={"https://www.youtube.com/@KamranTessorikk"}
+            target="_blank"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
+          >
+            <FaYoutube size={16} />
+          </Link>
+          <Link
+            href={"https://github.com/panaverse"}
+            target="_blank"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
+          >
+            <FaGithub size={18} />
+          </Link>
+        </div>
       </div>
-      <h2
-        style={poppins.style}
-        className="my-7 text-center text-sm font-bold text-black xs:text-lg md:text-3xl"
+
+      <AdmitCard data={data} />
+      <PrintableAdmitCard data={data} />
+      <button
+        className="mt-5 w-[95%] bg-main py-3 text-center text-sm font-semibold tracking-widest text-white transition-all hover:translate-y-1 print:hidden sm:w-52 sm:py-4 sm:text-base"
+        onClick={() => window.print()}
       >
-        Entry Test Admit Card
-      </h2>
-      <div className="mb-6 flex flex-col items-center justify-evenly border-b border-zinc-500 pb-6 md:flex-row">
-        <div className="image flex h-40 w-32 items-center justify-center border-2 border-dotted border-gray-900 text-center md:order-last md:w-40">
-          Paste
-          <br />
-          Photograph
-          <br />1 X 1
-        </div>
-        <div className="fields">
-          <div className="my-1 flex text-lg">
-            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
-              Student Name :
-            </h6>
-            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
-              {data.fullName}
-              <span className="h-[2px] w-full bg-gray-700"></span>
-            </p>
-          </div>
-
-          <div className="my-1 flex text-lg">
-            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
-              Father&apos;s Name :
-            </h6>
-            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
-              {data.fatherName}
-              <span className="h-[2px] w-full bg-gray-700"></span>
-            </p>
-          </div>
-
-          <div className="my-1 flex text-lg">
-            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
-              Student CNIC No :
-            </h6>
-            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
-              {data.cnic}
-            </p>
-          </div>
-
-          <div className="my-1 flex  text-lg">
-            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
-              Student Reg No :
-            </h6>
-            <p className="w-32 border-b-2 border-gray-700 capitalize xs:w-48 md:w-60">
-              {`${data.studentId}`.padStart(8, "0")}
-            </p>
-          </div>
-
-          <div className="my-1 flex text-lg">
-            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">
-              Date of Registration :
-            </h6>
-            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60">
-              {`${new Date(data.dateOfRegistration).toLocaleDateString()}`}
-              <span className="h-[2px] w-full bg-gray-700"></span>
-            </p>
-          </div>
-
-          <div className="my-1 flex text-lg">
-            <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">Venue :</h6>
-            <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
-              Governor House Sindh
-              <span className="h-[2px] w-full bg-gray-700"></span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <h2 className="my-2 text-lg font-bold">Instructions :</h2>
-      <ul className="my-2 pl-6">
-        <li>
-          Please bring your original CNIC or B-Form and admit card hard copy.
-        </li>
-        <li>Details and date of the entrance exam will be emailed to you.</li>
-      </ul>
+        DOWNLOAD
+      </button>
     </div>
   );
 }

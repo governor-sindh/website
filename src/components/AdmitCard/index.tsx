@@ -20,7 +20,7 @@ const poppins = Poppins({
 
 export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
   return (
-    <div className="mx-auto my-6 flex max-w-4xl flex-col items-center justify-center gap-6">
+    <div className="mx-auto my-6 flex w-full max-w-4xl flex-col items-center justify-center gap-6">
       <div style={poppins.style} className="w-[95%] text-justify print:hidden">
         <h3 className="capitalize">Dear {data.fullName},</h3>
         <p className="my-4">

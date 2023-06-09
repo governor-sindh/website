@@ -36,10 +36,8 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
           The details of the entrance exam, including the venue and date will be
           emailed to you. If you haven&apos;t already downloaded your admit card
           please download it and save it. You&apos;ll need it when you come for
-          the entrance exam. You can find it at:{" "}
-          <Link className="text-main underline" href="/admit-card">
-            www.governorsindh.com/admit-card
-          </Link>
+          the entrance exam. Please click the download button below to save your
+          admit card.
         </p>
         <p>
           While applications are being accepted, we encourage you to begin
@@ -53,7 +51,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
         </ul>
         <p>
           For those students who are new to the computer field, you can get a
-          jump start on your learning immediately by starting HTML and CSS :{" "}
+          jump start on your learning immediately by starting HTML and CSS:{" "}
         </p>
         <ul>
           <li className="my-4">
@@ -84,21 +82,20 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
         <p className="mt-4 ">
           Regards,
           <b className="block font-bold">
-            {" "}
-            Governor&apos;s Initiative for AI, Web 3.0 & Metaverse{" "}
+            Governor&apos;s Initiative for AI, Web 3.0 & Metaverse
           </b>
           <Link
-            className="text-main underline flex items-center mt-4"
+            className="mt-4 flex items-center text-main underline"
             href="mailto:education@governorsindh.com"
             target="_blank"
           >
-            <MdEmail className="mr-3 p-2 w-10 h-10 rounded-full bg-main text-white"/>
+            <MdEmail className="mr-3 h-10 w-10 rounded-full bg-main p-2 text-white" />
             education@governorsindh.com
           </Link>
         </p>
         <p className="my-4">
           To stay up to date on the latest updates from the Governor&apos;s
-          Initiative, please follow us on your favorite social media channels :
+          Initiative, please follow us on your favorite social media channels:
         </p>
         <div className="my-4 flex gap-3  md:text-sm">
           <Link
@@ -119,30 +116,9 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             href={"https://github.com/panaverse"}
             target="_blank"
             className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-            >
+          >
             <FaGithub size={18} />
           </Link>
-            {/* <Link
-              href={"https://twitter.com/Panaverse_edu"}
-              target="_blank"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-            >
-              <FaTwitter size={16} />
-            </Link> */}
-          {/* <Link
-            href={"https://www.linkedin.com/company/panaverse/"}
-            target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-          >
-            <FaLinkedinIn size={18} />
-          </Link> */}
-          {/* <Link
-            href={"whatsapp"}
-            target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-          >
-            <FaWhatsapp size={20} />
-          </Link> */}
         </div>
       </div>
 

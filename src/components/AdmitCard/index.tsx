@@ -6,11 +6,12 @@ import Link from "next/link";
 import {
   FaFacebookF,
   FaGithub,
-  FaTwitter,
+  // FaTwitter,
   FaYoutube,
-  FaLinkedinIn,
-  FaWhatsapp,
+  // FaLinkedinIn,
+  // FaWhatsapp,
 } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
@@ -21,7 +22,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
   return (
     <div className="mx-auto my-6 flex max-w-4xl flex-col items-center justify-center gap-6">
       <div style={poppins.style} className="w-[95%] text-justify print:hidden">
-        <h3>Dear {data.fullName},</h3>
+        <h3 className="capitalize">Dear {data.fullName},</h3>
         <p className="my-4">
           Thank you for expressing your interest in the Governor&apos;s
           Initiative for Artificial Intelligence, Web 3.0 & Metaverse Program!
@@ -80,6 +81,21 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             </Link>
           </li>
         </ul>
+        <p className="mt-4 ">
+          Regards,
+          <b className="block font-bold">
+            {" "}
+            Governor&apos;s Initiative for AI, Web 3.0 & Metaverse{" "}
+          </b>
+          <Link
+            className="text-main underline flex items-center mt-4"
+            href="mailto:education@governorsindh.com"
+            target="_blank"
+          >
+            <MdEmail className="mr-3 p-2 w-10 h-10 rounded-full bg-main text-white"/>
+            education@governorsindh.com
+          </Link>
+        </p>
         <p className="my-4">
           To stay up to date on the latest updates from the Governor&apos;s
           Initiative, please follow us on your favorite social media channels :
@@ -100,27 +116,26 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             <FaYoutube size={16} />
           </Link>
           <Link
-            href={"https://twitter.com/Panaverse_edu"}
-            target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-          >
-            <FaTwitter size={16} />
-          </Link>
-          <Link
             href={"https://github.com/panaverse"}
             target="_blank"
             className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-          >
+            >
             <FaGithub size={18} />
           </Link>
-
-          <Link
+            {/* <Link
+              href={"https://twitter.com/Panaverse_edu"}
+              target="_blank"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
+            >
+              <FaTwitter size={16} />
+            </Link> */}
+          {/* <Link
             href={"https://www.linkedin.com/company/panaverse/"}
             target="_blank"
             className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
           >
             <FaLinkedinIn size={18} />
-          </Link>
+          </Link> */}
           {/* <Link
             href={"whatsapp"}
             target="_blank"
@@ -129,27 +144,6 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             <FaWhatsapp size={20} />
           </Link> */}
         </div>
-
-        <p>
-          Regards,
-          <b className="mt-4 block font-bold">
-            {" "}
-            Governor&apos;s Initiative for AI, Web 3.0 & Metaverse{" "}
-          </b>
-          <span className="pr-3">Email : </span>
-          <Link
-            className="text-main underline"
-            href="mailto:education@governorsindh.com"
-            target="_blank"
-          >
-            education@governorsindh.com
-          </Link>{" "}
-          <br />
-          <span className="pr-1">Website : </span>
-          <span className="cursor-pointer text-main underline">
-            www.governorsindh.com
-          </span>
-        </p>
       </div>
 
       <AdmitCard data={data} />

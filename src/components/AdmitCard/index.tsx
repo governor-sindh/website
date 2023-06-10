@@ -79,7 +79,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             </Link>
           </li>
         </ul>
-        <p className="mt-4 ">
+        <p className="mt-4">
           Regards,
           <b className="block font-bold">
             Governor&apos;s Initiative for AI, Web 3.0 & Metaverse
@@ -89,7 +89,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             href="mailto:education@governorsindh.com"
             target="_blank"
           >
-            <MdEmail className="mr-3 h-10 w-10 rounded-full bg-main p-2 text-white" />
+            <MdEmail className="mr-3 h-8 w-8 text-main" />
             education@governorsindh.com
           </Link>
         </p>

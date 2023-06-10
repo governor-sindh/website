@@ -15,7 +15,10 @@ export default function SocialInvitation({
 }) {
   return (
     <div className="z-10 mx-4 my-10 flex w-full max-w-2xl flex-col items-center justify-center rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6">
-      <h2 className="text-xl xs:text-3xl text-main" style={poppins.style}>
+      <h2
+        className="text-center text-xl text-main xs:text-3xl"
+        style={poppins.style}
+      >
         Please take a moment to subscribe to our social media for latest updates
       </h2>
       <div className="mt-4 flex gap-6">
@@ -36,10 +39,10 @@ export default function SocialInvitation({
       </div>
       <button
         onClick={() => setShowSocialInvitation(false)}
-        className="mt-5 w-full bg-main py-4 text-center font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed md:w-52"
+        className="mt-5 w-full bg-main py-4 text-center font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed xs:w-52"
         style={poppins.style}
       >
-        Continue
+        CONTINUE
       </button>
     </div>
   );

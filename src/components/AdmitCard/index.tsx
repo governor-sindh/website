@@ -89,7 +89,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             href="mailto:education@governorsindh.com"
             target="_blank"
           >
-            <MdEmail className="mr-3 h-8 w-8 text-main" />
+            <MdEmail className="mr-3 h-10 w-10 rounded-full bg-main p-2 text-white" />
             education@governorsindh.com
           </Link>
         </p>

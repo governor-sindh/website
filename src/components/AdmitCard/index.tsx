@@ -3,15 +3,8 @@ import { AdmitCard, PrintableAdmitCard } from "@/components";
 import { IAdmitCard } from "@/types";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import {
-  FaFacebookF,
-  FaGithub,
-  // FaTwitter,
-  FaYoutube,
-  // FaLinkedinIn,
-  // FaWhatsapp,
-} from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { FaFacebookF, FaGithub, FaYoutube } from "react-icons/fa";
+import { AiOutlineMail } from "react-icons/ai";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
@@ -79,7 +72,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             </Link>
           </li>
         </ul>
-        <p className="mt-4 ">
+        <p className="mt-4">
           Regards,
           <b className="block font-bold">
             Governor&apos;s Initiative for AI, Web 3.0 & Metaverse
@@ -89,7 +82,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             href="mailto:education@governorsindh.com"
             target="_blank"
           >
-            <MdEmail className="mr-3 h-10 w-10 rounded-full bg-main p-2 text-white" />
+            <AiOutlineMail className="mr-3 h-6 w-6 text-main" />
             education@governorsindh.com
           </Link>
         </p>
@@ -101,23 +94,23 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
           <Link
             href={"https://www.facebook.com/governorsindhinitiative"}
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4267B2] text-white"
           >
-            <FaFacebookF size={16} />
+            <FaFacebookF className="h-6 w-6" />
           </Link>
           <Link
             href={"https://www.youtube.com/@KamranTessorikk"}
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FF0000] text-white"
           >
-            <FaYoutube size={16} />
+            <FaYoutube className="h-6 w-6" />
           </Link>
           <Link
             href={"https://github.com/panaverse"}
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#171515] text-white"
           >
-            <FaGithub size={18} />
+            <FaGithub className="h-6 w-6" />
           </Link>
         </div>
       </div>

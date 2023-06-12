@@ -5,7 +5,8 @@ import { UsersTable, NewUser } from "@/lib/schema/users";
 import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
 import { formCities, formQualifications } from "@/data";
-// import { otpCodes } from "@/lib/schema/otpCodes";
+import { createConnection } from "../nodeMailer";
+import { sendConfirmationEmail } from "@/lib/confirmationTemplates";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {
@@ -18,8 +19,8 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     gender,
     dateOfBirth,
     highestQualification,
-    // otp,
-  }: IApplyForm = await request.json();
+  }: // otp,
+  IApplyForm = await request.json();
 
   if (fullName.length < 3 || fullName.length > 1000) {
     return NextResponse.json(
@@ -118,7 +119,7 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     !city ||
     !gender ||
     !highestQualification ||
-    !dateOfBirth 
+    !dateOfBirth
     // || !otp
   ) {
     return NextResponse.json(
@@ -186,11 +187,26 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     // const currentTime = currentDate.getTime();
 
     // if (expiryTime > currentTime) {
-      const users = await db.insert(UsersTable).values(appliedUser).returning();
-      return NextResponse.json({
-        message: "Applied Successfully",
-        users,
+    const users = await db.insert(UsersTable).values(appliedUser).returning();
+    const user = users[0]
+    const transporter = await createConnection();
+
+    try {
+      await transporter.sendMail({
+        to: email, // Change to your recipient
+        from: "education@governorsindh.com", // Change to your verified sender
+        subject:
+          "Thank you for expressing your interest in the Governor’s Initiative for AI, Web 3.0 & Metaverse Program!",
+        html: sendConfirmationEmail(fullName, `${user.id}`.padStart(8, "0")), // html body
       });
+    } catch (error) {
+      console.log("error ", error);
+    }
+
+    return NextResponse.json({
+      message: "Applied Successfully",
+      users,
+    });
     // } else {
     //   throw new Error("OTP expired. Please click on SEND OTP button.");
     // }

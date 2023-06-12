@@ -94,23 +94,23 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
           <Link
             href={"https://www.facebook.com/governorsindhinitiative"}
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4267B2] text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4267B2] text-white"
           >
-            <FaFacebookF className="h-6 w-6" />
+            <FaFacebookF className="h-5 w-5" />
           </Link>
           <Link
             href={"https://www.youtube.com/@KamranTessorikk"}
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FF0000] text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF0000] text-white"
           >
-            <FaYoutube className="h-6 w-6" />
+            <FaYoutube className="h-5 w-5" />
           </Link>
           <Link
             href={"https://github.com/panaverse"}
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#171515] text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#171515] text-white"
           >
-            <FaGithub className="h-6 w-6" />
+            <FaGithub className="h-5 w-5" />
           </Link>
         </div>
       </div>

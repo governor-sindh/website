@@ -1,6 +1,5 @@
-import Link from "next/link";
 import { Poppins } from "next/font/google";
-import { FaFacebookF, FaYoutube } from "react-icons/fa";
+import { Icons } from "@/components";
 import type { Dispatch, SetStateAction } from "react";
 
 const poppins = Poppins({
@@ -21,22 +20,7 @@ export default function SocialInvitation({
       >
         Please take a moment to subscribe to our social media for latest updates
       </h2>
-      <div className="flex gap-6">
-        <Link
-          href={"https://www.facebook.com/governorsindhinitiative"}
-          target="_blank"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4267B2] text-white"
-        >
-          <FaFacebookF className="h-5 w-5" />
-        </Link>
-        <Link
-          href={"https://www.youtube.com/@KamranTessorikk"}
-          target="_blank"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF0000] text-white"
-        >
-          <FaYoutube className="h-5 w-5" />
-        </Link>
-      </div>
+      <Icons />
       <button
         onClick={() => setShowSocialInvitation(false)}
         className="w-full bg-main py-4 text-center font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed xs:w-52"

@@ -14,6 +14,7 @@ import PrintableAdmitCard from "./AdmitCard/PrintableAdmitCard";
 import OtpTimer from "./OTP/OtpTimer";
 import EmailAndOtpFields from "./OTP/EmailAndOtpFields";
 import SocialInvitation from "./form/SocialInvitation";
+import Icons from "./ui/Icons";
 
 export {
   Header,
@@ -32,4 +33,5 @@ export {
   OtpTimer,
   EmailAndOtpFields,
   SocialInvitation,
+  Icons,
 };

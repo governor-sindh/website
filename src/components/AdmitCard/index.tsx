@@ -1,9 +1,8 @@
 "use client";
-import { AdmitCard, PrintableAdmitCard } from "@/components";
+import { AdmitCard, Icons, PrintableAdmitCard } from "@/components";
 import { IAdmitCard } from "@/types";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { FaFacebookF, FaGithub, FaYoutube } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 
 const poppins = Poppins({
@@ -90,29 +89,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
           To stay up to date on the latest updates from the Governor&apos;s
           Initiative, please follow us on your favorite social media channels:
         </p>
-        <div className="my-4 flex gap-3  md:text-sm">
-          <Link
-            href={"https://www.facebook.com/governorsindhinitiative"}
-            target="_blank"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4267B2] text-white"
-          >
-            <FaFacebookF className="h-5 w-5" />
-          </Link>
-          <Link
-            href={"https://www.youtube.com/@KamranTessorikk"}
-            target="_blank"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF0000] text-white"
-          >
-            <FaYoutube className="h-5 w-5" />
-          </Link>
-          <Link
-            href={"https://github.com/panaverse"}
-            target="_blank"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#171515] text-white"
-          >
-            <FaGithub className="h-5 w-5" />
-          </Link>
-        </div>
+        <Icons />
       </div>
 
       <AdmitCard data={data} />

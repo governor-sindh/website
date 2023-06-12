@@ -1,8 +1,7 @@
-import React from "react";
 import Link from "next/link";
-import { FaFacebookF, FaGithub, FaYoutube } from "react-icons/fa";
 import { CompulsoryData, tracks } from "@/data";
 import { AiOutlineMail } from "react-icons/ai";
+import { Icons } from "@/components";
 
 function Footer() {
   return (
@@ -44,38 +43,14 @@ function Footer() {
 
           <div className="text-zinc-800">
             <h1 className="text-xl font-bold">Social Links</h1>
-
-            <div className="mt-5 flex gap-3 md:text-sm">
-              <Link
-                href={"https://www.facebook.com/governorsindhinitiative"}
-                target="_blank"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4267B2] text-white"
-              >
-                <FaFacebookF className="h-5 w-5" />
-              </Link>
-              <Link
-                href={"https://www.youtube.com/@KamranTessorikk"}
-                target="_blank"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF0000] text-white"
-              >
-                <FaYoutube className="h-5 w-5" />
-              </Link>
-              <Link
-                href={"https://github.com/panaverse"}
-                target="_blank"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#171515] text-white"
-              >
-                <FaGithub className="h-5 w-5" />
-              </Link>
-            </div>
-
+            <Icons />
             <Link
-              className="mt-4 flex items-center text-main underline py-1"
+              className="mt-4 flex items-center py-1 text-main underline"
               href="mailto:education@governorsindh.com"
               target="_blank"
             >
-              <div className="h-6 w-6 mr-3">
-              <AiOutlineMail className="h-6 w-6 text-main" />
+              <div className="mr-3 h-6 w-6">
+                <AiOutlineMail className="h-6 w-6 text-main" />
               </div>
               education@governorsindh.com
             </Link>

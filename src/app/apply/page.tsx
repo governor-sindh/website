@@ -171,16 +171,6 @@ export default function Page() {
             register={register}
             errors={errors}
           />
-          <Input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required={true}
-            register={register}
-            errors={errors}
-            occupiedErr={occupiedErr}
-            setOccupiedErr={setOccupiedErr}
-          />
           <EmailAndOtpFields
             watch={watch}
             register={register}

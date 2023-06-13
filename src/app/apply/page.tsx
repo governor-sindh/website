@@ -1,9 +1,9 @@
 "use client";
 import {
   DownloadAdmitCard,
+  EmailAndOtpFields,
   Input,
   Loader,
-  // EmailAndOtpFields,
   SocialInvitation,
 } from "@/components";
 import { useState } from "react";
@@ -39,7 +39,7 @@ export default function Page() {
   const {
     register,
     handleSubmit,
-    // watch,
+    watch,
     formState: { errors },
   } = useForm<IApplyForm>({
     mode: "onTouched",
@@ -181,13 +181,13 @@ export default function Page() {
             occupiedErr={occupiedErr}
             setOccupiedErr={setOccupiedErr}
           />
-          {/* <EmailAndOtpFields
+          <EmailAndOtpFields
             watch={watch}
             register={register}
             errors={errors}
             occupiedErr={occupiedErr}
             setOccupiedErr={setOccupiedErr}
-          /> */}
+          />
           <Input
             type="tel"
             id="cnic"

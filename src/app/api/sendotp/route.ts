@@ -3,6 +3,7 @@ import { db } from "@/lib/drizzle";
 import { otpCodes } from "@/lib/schema/otpCodes";
 import { eq } from "drizzle-orm";
 import sgMail from "@sendgrid/mail";
+import { createConnection } from "../nodeMailer";
 sgMail.setApiKey(process.env.NEXT_PUBLIC_API_KEY!);
 
 export async function POST(request: NextRequest) {
@@ -39,16 +40,14 @@ export async function POST(request: NextRequest) {
         .returning();
     }
 
-    const msg = {
+    const transporter = await createConnection();
+
+    await transporter.sendMail({
       to: email, // Change to your recipient
-      from: "support@governorsindh.com", // Change to your verified sender
+      from: "education@governorsindh.com", // Change to your verified sender
       subject: "Verify Email with Governers Website!",
-      html: sendEmailtemplate(code),
-    };
-
-    //Response from sgMail
-
-    await sgMail.send(msg);
+      html: sendEmailtemplate(code), // html body
+    });
 
     return NextResponse.json({
       message: "OTP sent successfully. Please check you email.",

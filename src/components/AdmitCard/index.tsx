@@ -1,17 +1,9 @@
 "use client";
-import { AdmitCard, PrintableAdmitCard } from "@/components";
+import { AdmitCard, Icons, PrintableAdmitCard } from "@/components";
 import { IAdmitCard } from "@/types";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import {
-  FaFacebookF,
-  FaGithub,
-  // FaTwitter,
-  FaYoutube,
-  // FaLinkedinIn,
-  // FaWhatsapp,
-} from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { AiOutlineMail } from "react-icons/ai";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
@@ -20,7 +12,7 @@ const poppins = Poppins({
 
 export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
   return (
-    <div className="mx-auto my-6 flex max-w-4xl flex-col items-center justify-center gap-6">
+    <div className="mx-auto my-6 flex w-full max-w-4xl flex-col items-center justify-center gap-6">
       <div style={poppins.style} className="w-[95%] text-justify print:hidden">
         <h3 className="capitalize">Dear {data.fullName},</h3>
         <p className="my-4">
@@ -79,7 +71,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             </Link>
           </li>
         </ul>
-        <p className="mt-4 ">
+        <p className="mt-4">
           Regards,
           <b className="block font-bold">
             Governor&apos;s Initiative for AI, Web 3.0 & Metaverse
@@ -89,7 +81,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
             href="mailto:education@governorsindh.com"
             target="_blank"
           >
-            <MdEmail className="mr-3 h-10 w-10 rounded-full bg-main p-2 text-white" />
+            <AiOutlineMail className="mr-3 h-6 w-6 text-main" />
             education@governorsindh.com
           </Link>
         </p>
@@ -97,29 +89,7 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
           To stay up to date on the latest updates from the Governor&apos;s
           Initiative, please follow us on your favorite social media channels:
         </p>
-        <div className="my-4 flex gap-3  md:text-sm">
-          <Link
-            href={"https://www.facebook.com/governorsindhinitiative"}
-            target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-          >
-            <FaFacebookF size={16} />
-          </Link>
-          <Link
-            href={"https://www.youtube.com/@KamranTessorikk"}
-            target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-          >
-            <FaYoutube size={16} />
-          </Link>
-          <Link
-            href={"https://github.com/panaverse"}
-            target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-main text-white"
-          >
-            <FaGithub size={18} />
-          </Link>
-        </div>
+        <Icons />
       </div>
 
       <AdmitCard data={data} />

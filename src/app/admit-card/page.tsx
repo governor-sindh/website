@@ -3,6 +3,7 @@ import {
   Loader,
   Input,
   DownloadAdmitCard,
+  EmailAndOtpFields,
   // EmailAndOtpFields,
 } from "@/components";
 import { useForm } from "react-hook-form";
@@ -44,7 +45,7 @@ export default function Page() {
       const response = await fetch("/api/admitcard", {
         body: JSON.stringify({
           email: formData.email.toLowerCase(),
-          // otp: Number(formData.otp),
+          otp: Number(formData.otp),
         }),
         method: "POST",
       });
@@ -90,21 +91,21 @@ export default function Page() {
           onSubmit={handleSubmit(onFormSubmit)}
           noValidate
         >
-          <Input
+          {/* <Input
             type="email"
             id="email"
             placeholder="Email"
             required={true}
             register={register}
             errors={errors}
-          />
-          {/* <EmailAndOtpFields
+          /> */}
+          <EmailAndOtpFields
             watch={watch}
             register={register}
             errors={errors}
             occupiedErr={occupiedErr}
             setOccupiedErr={setOccupiedErr}
-          /> */}
+          />
           <div className="flex justify-center">
             <button
               type="submit"

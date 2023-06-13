@@ -1,9 +1,10 @@
 "use client";
 import {
   DownloadAdmitCard,
+  EmailAndOtpFields,
   Input,
   Loader,
-  // EmailAndOtpFields,
+  SocialInvitation,
 } from "@/components";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -32,6 +33,8 @@ export default function Page() {
     email: "",
     otp: "",
   });
+  const [showSocialInvitation, setShowSocialInvitation] =
+    useState<boolean>(true);
 
   const {
     register,
@@ -109,7 +112,7 @@ export default function Page() {
   };
 
   return (
-    <main className="mb-20 flex items-center flex-col justify-center">
+    <main className="mb-20 flex flex-col items-center justify-center">
       {isApplied && formValues && formValues.users && (
         <>
           <h1
@@ -130,9 +133,13 @@ export default function Page() {
         </>
       )}
 
-      {!isApplied && (
+      {showSocialInvitation && (
+        <SocialInvitation setShowSocialInvitation={setShowSocialInvitation} />
+      )}
+
+      {!isApplied && !showSocialInvitation && (
         <form
-          className="-top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
+          className="z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
           onSubmit={handleSubmit(onFormSubmit)}
           noValidate
         >
@@ -164,23 +171,13 @@ export default function Page() {
             register={register}
             errors={errors}
           />
-          <Input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required={true}
-            register={register}
-            errors={errors}
-            occupiedErr={occupiedErr}
-            setOccupiedErr={setOccupiedErr}
-          />
-          {/* <EmailAndOtpFields
+          <EmailAndOtpFields
             watch={watch}
             register={register}
             errors={errors}
             occupiedErr={occupiedErr}
             setOccupiedErr={setOccupiedErr}
-          /> */}
+          />
           <Input
             type="tel"
             id="cnic"

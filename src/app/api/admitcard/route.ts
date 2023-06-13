@@ -5,33 +5,33 @@ import { eq, and } from "drizzle-orm";
 import { otpCodes } from "@/lib/schema/otpCodes";
 
 export async function POST(request: NextRequest) {
-  const { email } = await request.json();
+  const { email, otp } = await request.json();
 
   if (!email) {
     return NextResponse.json({ message: "Add all values!" }, { status: 500 });
   }
 
   try {
-    // const users = await db
-    //   .select()
-    //   .from(otpCodes)
-    //   .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
+    const users = await db
+      .select()
+      .from(otpCodes)
+      .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
 
-    // if (!users) {
-    //   throw new Error("Internal Server Error");
-    // }
-    // const user = users[0];
-    // if (!user) {
-    //   throw new Error("Incorrect OTP Entered!");
-    // }
+    if (!users) {
+      throw new Error("Internal Server Error");
+    }
+    const user = users[0];
+    if (!user) {
+      throw new Error("Incorrect OTP Entered!");
+    }
 
-    // const userTime = user.expiryTime;
-    // const expiryTime = userTime.getTime();
+    const userTime = user.expiryTime;
+    const expiryTime = userTime.getTime();
 
-    // const currentDate = new Date();
-    // const currentTime = currentDate.getTime();
+    const currentDate = new Date();
+    const currentTime = currentDate.getTime();
 
-    // if (user.code == otp && expiryTime > currentTime) {
+    if (user.code == otp && expiryTime > currentTime) {
       const users = await db
         .select()
         .from(UsersTable)
@@ -49,9 +49,9 @@ export async function POST(request: NextRequest) {
         dateOfRegistration: createdAt,
         studentId: id,
       });
-    // } else {
-    //   throw new Error("OTP expired! Please click on SEND OTP button.");
-    // }
+    } else {
+      throw new Error("OTP expired! Please click on SEND OTP button.");
+    }
   } catch (error: any) {
     return NextResponse.json(
       { message: error.message },

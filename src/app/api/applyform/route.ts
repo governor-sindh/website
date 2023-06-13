@@ -7,6 +7,7 @@ import type { IApplyForm } from "@/types";
 import { formCities, formQualifications } from "@/data";
 import { createConnection } from "../nodeMailer";
 import { sendConfirmationEmail } from "@/lib/confirmationTemplates";
+import { otpCodes } from "@/lib/schema/otpCodes";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {
@@ -19,8 +20,8 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     gender,
     dateOfBirth,
     highestQualification,
-  }: // otp,
-  IApplyForm = await request.json();
+    otp,
+  }: IApplyForm = await request.json();
 
   if (fullName.length < 3 || fullName.length > 1000) {
     return NextResponse.json(
@@ -119,8 +120,8 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     !city ||
     !gender ||
     !highestQualification ||
-    !dateOfBirth
-    // || !otp
+    !dateOfBirth ||
+    !otp
   ) {
     return NextResponse.json(
       { message: "Fields are empty!" },
@@ -166,50 +167,50 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
     }
 
     ///Commenting out otp code until email is working fine
-    // const otpUsers = await db
-    //   .select()
-    //   .from(otpCodes)
-    //   .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
+    const otpUsers = await db
+      .select()
+      .from(otpCodes)
+      .where(and(eq(otpCodes.email, email), eq(otpCodes.code, otp)));
 
-    // if (!otpUsers) {
-    //   throw new Error("Internal Server Error");
-    // }
-    // const otpUser = otpUsers[0];
+    if (!otpUsers) {
+      throw new Error("Internal Server Error");
+    }
+    const otpUser = otpUsers[0];
 
-    // if (!otpUser) {
-    //   throw new Error("Incorrect OTP Entered!");
-    // }
-
-    // const userTime = otpUser.expiryTime;
-    // const expiryTime = userTime.getTime();
-
-    // const currentDate = new Date();
-    // const currentTime = currentDate.getTime();
-
-    // if (expiryTime > currentTime) {
-    const users = await db.insert(UsersTable).values(appliedUser).returning();
-    const user = users[0]
-    const transporter = await createConnection();
-
-    try {
-      await transporter.sendMail({
-        to: email, // Change to your recipient
-        from: "education@governorsindh.com", // Change to your verified sender
-        subject:
-          "Thank you for expressing your interest in the Governor’s Initiative for AI, Web 3.0 & Metaverse Program!",
-        html: sendConfirmationEmail(fullName, `${user.id}`.padStart(8, "0")), // html body
-      });
-    } catch (error) {
-      console.log("error ", error);
+    if (!otpUser) {
+      throw new Error("Incorrect OTP Entered!");
     }
 
-    return NextResponse.json({
-      message: "Applied Successfully",
-      users,
-    });
-    // } else {
-    //   throw new Error("OTP expired. Please click on SEND OTP button.");
-    // }
+    const userTime = otpUser.expiryTime;
+    const expiryTime = userTime.getTime();
+
+    const currentDate = new Date();
+    const currentTime = currentDate.getTime();
+
+    if (expiryTime > currentTime) {
+      const users = await db.insert(UsersTable).values(appliedUser).returning();
+      const user = users[0];
+      const transporter = await createConnection();
+
+      try {
+        await transporter.sendMail({
+          to: email, // Change to your recipient
+          from: "education@governorsindh.com", // Change to your verified sender
+          subject:
+            "Thank you for expressing your interest in the Governor’s Initiative for AI, Web 3.0 & Metaverse Program!",
+          html: sendConfirmationEmail(fullName, `${user.id}`.padStart(8, "0")), // html body
+        });
+      } catch (error) {
+        console.log("error ", error);
+      }
+
+      return NextResponse.json({
+        message: "Applied Successfully",
+        users,
+      });
+    } else {
+      throw new Error("OTP expired. Please click on SEND OTP button.");
+    }
   } catch (error: any) {
     return NextResponse.json(
       {

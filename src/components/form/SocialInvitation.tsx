@@ -1,6 +1,7 @@
 "use client"
 
 import { Poppins } from "next/font/google";
+import Link from "next/link";
 import { useState, type Dispatch, type SetStateAction, useEffect } from "react";
 import {
   FaFacebookF,
@@ -94,6 +95,7 @@ export default function SocialInvitation({
     )
   }
 
+
   return (
     <div className="z-10 mx-4 my-10 flex w-full max-w-2xl flex-col items-center justify-center gap-5 rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-14 md:p-16">
       <h2
@@ -157,6 +159,12 @@ export default function SocialInvitation({
           </button>
 
       }
+      <p className="text-center">
+        Already applied?{" "}
+        <Link className="text-blue-400 underline" href={"/admit-card"}>
+          Get Admit Card
+        </Link>
+      </p>
       {
         error &&
         <p className="text-red-600 font-semibold text-center">Please follow all social links</p>

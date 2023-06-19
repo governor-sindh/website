@@ -57,11 +57,14 @@ export default function SocialInvitation({
   }, [])
 
   function OpenSocial(link: string, platform: string) {
-    window.open(link, platform, "width=800, height=600");
+    let left = (screen.width / 2) - (800 / 2);
+    let top = (screen.height / 2) - (600 / 2);
+
+    window.open(link, platform, `width=800, height=600, top=${top}, left=${left}`);
     setTimeout(() => {
       localStorage.setItem(platform, 'y')
       setSocialSuccess((oldSocials) => ({ ...oldSocials, [platform]: 'y' }))
-    },2000)
+    }, 2000)
   }
 
   function checkSubscription() {

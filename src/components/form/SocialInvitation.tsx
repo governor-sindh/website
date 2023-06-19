@@ -10,7 +10,7 @@ import {
   // FaTiktok,
   // FaCheck,
 } from "react-icons/fa";
-// import { GiCheckMark } from 'react-icons/gi'
+import { GiCheckMark } from 'react-icons/gi'
 
 
 const poppins = Poppins({
@@ -86,13 +86,13 @@ export default function SocialInvitation({
 
   }
 
-  // function SocialSuccess() {
-  //   return (
-  //     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white">
-  //       <GiCheckMark size={14} />
-  //     </div>
-  //   )
-  // }
+  function SocialSuccess() {
+    return (
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white">
+        <GiCheckMark size={14} />
+      </div>
+    )
+  }
 
   return (
     <div className="z-10 mx-4 my-10 flex w-full max-w-2xl flex-col items-center justify-center gap-5 rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-14 md:p-16">
@@ -103,21 +103,35 @@ export default function SocialInvitation({
         Before continuing to the application please subscribe on these social media platforms.
       </h2>
       <div className="my-5 flex gap-3  md:text-sm">
-        <div onClick={() => OpenSocial('https://www.facebook.com/governorsindhinitiative', 'facebook')} className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4267B2] text-white cursor-pointer">
-          <FaFacebookF className="h-5 w-5" />
-        </div>
-
-        <div onClick={() => OpenSocial('https://www.youtube.com/channel/UCFo-Z1Tp-Tus4D-YQNlue6A?sub_confirmation=1', 'youtube')} className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF0000] text-white cursor-pointer">
-          <FaYoutube className="h-5 w-5" />
-        </div>
+        {
+          socialSuccess.facebook ?
+            <SocialSuccess />
+            :
+            <div onClick={() => OpenSocial('https://www.facebook.com/governorsindhinitiative', 'facebook')} className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4267B2] text-white cursor-pointer">
+              <FaFacebookF className="h-5 w-5" />
+            </div>
+        }
+        {
+          socialSuccess.youtube ?
+            <SocialSuccess />
+            :
+            <div onClick={() => OpenSocial('https://www.youtube.com/channel/UCFo-Z1Tp-Tus4D-YQNlue6A?sub_confirmation=1', 'youtube')} className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF0000] text-white cursor-pointer">
+              <FaYoutube className="h-5 w-5" />
+            </div>
+        }
 
         {/* <div onClick={() => OpenSocial('https://twitter.com/KamranTessoriPk', 'twitter')} className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1DA1F2] text-white cursor-pointer">
               <FaTwitter className="h-5 w-5" />
             </div> */}
 
-        <div onClick={() => OpenSocial('https://www.instagram.com/KamranTessoriPk/', 'instagram')} className="instagram flex h-8 w-8 items-center justify-center rounded-full text-white cursor-pointer">
-          <FaInstagram className="h-5 w-5" />
-        </div>
+        {
+          socialSuccess.instagram ?
+            <SocialSuccess />
+            :
+            <div onClick={() => OpenSocial('https://www.instagram.com/KamranTessoriPk/', 'instagram')} className="instagram flex h-8 w-8 items-center justify-center rounded-full text-white cursor-pointer">
+              <FaInstagram className="h-5 w-5" />
+            </div>
+        }
 
         {/* <div onClick={() => OpenSocial('https://www.tiktok.com/@KamranTessoriPk', 'tiktok')} className="flex h-8 w-8 items-center justify-center rounded-full bg-[#171515] text-white cursor-pointer">
               <FaTiktok className="h-5 w-5" />

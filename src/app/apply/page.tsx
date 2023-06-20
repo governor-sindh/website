@@ -85,7 +85,7 @@ export default function Page() {
       });
       localStorage.removeItem('facebook')
       localStorage.removeItem('youtube')
-      // localStorage.removeItem('twitter')
+      localStorage.removeItem('twitter')
       localStorage.removeItem('instagram')
       // localStorage.removeItem('tiktok')
 

@@ -83,6 +83,11 @@ export default function Page() {
         duration: 9000,
         isClosable: true,
       });
+      localStorage.removeItem('facebook')
+      localStorage.removeItem('youtube')
+      localStorage.removeItem('twitter')
+      localStorage.removeItem('instagram')
+      // localStorage.removeItem('tiktok')
 
       setIsApplied(true);
     } catch (err: any) {

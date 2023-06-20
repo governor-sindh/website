@@ -6,7 +6,7 @@ import { useState, type Dispatch, type SetStateAction, useEffect } from "react";
 import {
   FaFacebookF,
   FaYoutube,
-  // FaTwitter,
+  FaTwitter,
   FaInstagram,
   // FaTiktok,
   // FaCheck,
@@ -29,7 +29,7 @@ export default function SocialInvitation({
   const [socialSuccess, setSocialSuccess] = useState({
     facebook: "",
     youtube: "",
-    // twitter: "",
+    twitter: "",
     instagram: "",
     // tiktok: ""
   })
@@ -37,7 +37,7 @@ export default function SocialInvitation({
   useEffect(() => {
     let facebook = localStorage.getItem('facebook')
     let youtube = localStorage.getItem('youtube')
-    // let twitter = localStorage.getItem('twitter')
+    let twitter = localStorage.getItem('twitter')
     let instagram = localStorage.getItem('instagram')
     // let tiktok = localStorage.getItem('tiktok')
     if (facebook && facebook === 'y') {
@@ -46,9 +46,9 @@ export default function SocialInvitation({
     if (youtube && youtube === 'y') {
       setSocialSuccess((oldSocials) => ({ ...oldSocials, youtube: 'y' }))
     }
-    // if (twitter && twitter === 'y') {
-    //   setSocialSuccess((oldSocials) => ({ ...oldSocials, twitter: 'y' }))
-    // }
+    if (twitter && twitter === 'y') {
+      setSocialSuccess((oldSocials) => ({ ...oldSocials, twitter: 'y' }))
+    }
     if (instagram && instagram === 'y') {
       setSocialSuccess((oldSocials) => ({ ...oldSocials, instagram: 'y' }))
     }
@@ -69,16 +69,9 @@ export default function SocialInvitation({
   }
 
   function checkSubscription() {
-    // let facebook = localStorage.getItem('facebook')
-    // let youtube = localStorage.getItem('youtube')
-    // let twitter = localStorage.getItem('twitter')
-    // let instagram = localStorage.getItem('instagram')
-    // let tiktok = localStorage.getItem('tiktok')
-    // if ((facebook && facebook === 'y') && (youtube && youtube === 'y') && (twitter && twitter === 'y') && (instagram && instagram === 'y') && (tiktok && tiktok === 'y')) {
-    //   setShowSocialInvitation(false)
-    // }
 
-    if (socialSuccess.facebook && socialSuccess.youtube && socialSuccess.instagram) {
+
+    if (socialSuccess.facebook && socialSuccess.youtube && socialSuccess.twitter && socialSuccess.instagram) {
       setShowSocialInvitation(false)
     }
     else {
@@ -122,9 +115,14 @@ export default function SocialInvitation({
             </div>
         }
 
-        {/* <div onClick={() => OpenSocial('https://twitter.com/KamranTessoriPk', 'twitter')} className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1DA1F2] text-white cursor-pointer">
+        {
+          socialSuccess.twitter ?
+          <SocialSuccess />
+          :
+            <div onClick={() => OpenSocial('https://twitter.com/KamranTessoriPk', 'twitter')} className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1DA1F2] text-white cursor-pointer">
               <FaTwitter className="h-5 w-5" />
-            </div> */}
+            </div>
+        }
 
         {
           socialSuccess.instagram ?

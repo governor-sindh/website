@@ -76,7 +76,8 @@ export default function SocialInvitation({
         className="text-center text-xl text-main xs:text-3xl"
         style={poppins.style}
       >
-        Click the links below first{" "}
+        Before continuing to the application please subscribe on these social
+        media platforms.{" "}
       </h2>
 
       <div className="my-5 flex gap-3  md:text-sm">
@@ -113,13 +114,18 @@ export default function SocialInvitation({
           CONTINUE
         </button>
       ) : (
-        <button
-          disabled
-          className="w-full bg-main py-4 text-center font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed xs:w-52"
-          style={poppins.style}
-        >
-          CONTINUE
-        </button>
+        <div className="group relative mt-4">
+          <div className="popover absolute bottom-16 right-2 z-10 rounded-lg border border-gray-400 bg-white px-4 py-2 text-sm text-gray-500 opacity-0 shadow-sm transition-opacity duration-300 group-hover:opacity-100">
+            <p>Click the links above first.</p>
+          </div>
+          <button
+            disabled
+            className="w-full bg-main py-4 text-center font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed xs:w-52"
+            style={poppins.style}
+          >
+            CONTINUE
+          </button>
+        </div>
       )}
       <p className="text-center">
         Already applied?{" "}
@@ -127,6 +133,7 @@ export default function SocialInvitation({
           Get Admit Card
         </Link>
       </p>
+
       {error && (
         <p className="text-center font-semibold text-red-600">
           Please follow all social links

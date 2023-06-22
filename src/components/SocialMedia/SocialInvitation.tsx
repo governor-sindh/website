@@ -4,8 +4,8 @@ import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { useState, type Dispatch, type SetStateAction, useEffect } from "react";
 import { GiCheckMark } from "react-icons/gi";
-import { socialLinks } from "@/data/socialLinks";
-
+import { socialLinks } from "@/data";
+import { SocialIconStepper } from "@/components";
 const poppins = Poppins({
   weight: ["300", "400", "500", "800", "900"],
   subsets: ["latin"],
@@ -16,7 +16,6 @@ export default function SocialInvitation({
 }: {
   setShowSocialInvitation: Dispatch<SetStateAction<boolean>>;
 }) {
-  const [error, setError] = useState(false);
   const [socialSuccess, setSocialSuccess] = useState({
     facebook: "",
     youtube: "",
@@ -24,6 +23,32 @@ export default function SocialInvitation({
     instagram: "",
     // tiktok: ""
   });
+  console.log(
+    "🚀 ~ file: SocialInvitation.tsx:26 ~ socialSuccess:",
+    socialSuccess
+  );
+  const [currentStep, setCurrentStep] = useState(0);
+  // console.log("🚀 ~ file: SocialInvitation.tsx:27 ~ currentStep:", currentStep)
+
+  const checkSubscription = () => {
+    if (
+      socialSuccess.facebook &&
+      socialSuccess.youtube &&
+      socialSuccess.twitter &&
+      socialSuccess.instagram
+    ) {
+      console.log(
+        "asddf",
+        socialSuccess.facebook &&
+          socialSuccess.youtube &&
+          socialSuccess.twitter &&
+          socialSuccess.instagram
+      );
+
+      setCurrentStep(3);
+      setShowSocialInvitation(false);
+    }
+  };
 
   useEffect(() => {
     let facebook = localStorage.getItem("facebook");
@@ -46,29 +71,21 @@ export default function SocialInvitation({
     // if (tiktok && tiktok === 'y') {
     //   setSocialSuccess((oldSocials) => ({ ...oldSocials, tiktok: 'y' }))
     // }
+    checkSubscription();
   }, []);
 
   const OpenSocial = (link: string, platform: string) => {
     window.open(link, "_blank");
 
     setTimeout(() => {
+      setCurrentStep((prev) => {
+        if (2 < prev) return prev;
+        return (prev += 1);
+      });
       localStorage.setItem(platform, "y");
       setSocialSuccess((oldSocials) => ({ ...oldSocials, [platform]: "y" }));
     }, 2000);
   };
-
-  function checkSubscription() {
-    if (
-      socialSuccess.facebook &&
-      socialSuccess.youtube &&
-      socialSuccess.twitter &&
-      socialSuccess.instagram
-    ) {
-      setShowSocialInvitation(false);
-    } else {
-      setError(true);
-    }
-  }
 
   return (
     <>
@@ -80,27 +97,31 @@ export default function SocialInvitation({
           Before continuing to the application please subscribe on these social
           media platforms.{" "}
         </h2>
-
         <div className="mt-5 flex gap-3  md:text-sm">
-          {socialLinks.map((item) =>
+          {
+            // socialLinks.map((item) =>)
             // @ts-ignore
-            socialSuccess?.[item.platform] ? (
-              <div
-                key={item.id}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white"
-              >
-                <GiCheckMark size={14} />
-              </div>
-            ) : (
-              <div
-                key={item.id}
-                onClick={() => OpenSocial(item.link, item.platform)}
-                className={`flex h-8 w-8 cursor-pointer items-center justify-center ${item.class} rounded-full text-white`}
-              >
-                {item.icon}
-              </div>
-            )
-          )}
+            // socialSuccess?.[socialLinks[currentStep].platform] ? (
+            //   <div
+            //     key={socialLinks[currentStep].id}
+            //     className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white"
+            //   >
+            //     <GiCheckMark size={14} />
+            //   </div>
+            // ) :
+            <div
+              key={socialLinks[currentStep].id}
+              onClick={() =>
+                OpenSocial(
+                  socialLinks[currentStep].link,
+                  socialLinks[currentStep].platform
+                )
+              }
+              className={`flex h-8 w-8 cursor-pointer items-center justify-center ${socialLinks[currentStep].class} rounded-full text-white`}
+            >
+              {socialLinks[currentStep].icon}
+            </div>
+          }
         </div>
 
         {socialSuccess.facebook &&
@@ -117,7 +138,7 @@ export default function SocialInvitation({
         ) : (
           <div className="group relative w-full xs:w-52">
             <div className="popover bottom-16 right-[6.8rem] z-10 rounded-lg bg-white px-4 py-2 text-sm text-red-500 opacity-0 shadow-sm transition-opacity duration-300 group-hover:opacity-100 xs:right-2">
-              <p>Click the links above first.</p>
+              <p>Click the icon above first.</p>
             </div>
             <button
               disabled
@@ -134,13 +155,11 @@ export default function SocialInvitation({
             Get Admit Card
           </Link>
         </p>
-
-        {error && (
-          <p className="text-center font-semibold text-red-600">
-            Please follow all social links
-          </p>
-        )}
       </div>
+      <SocialIconStepper
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+      />
     </>
   );
 }

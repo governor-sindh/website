@@ -1,11 +1,5 @@
 "use client";
-import {
-  Loader,
-  Input,
-  DownloadAdmitCard,
-  EmailAndOtpFields,
-  // EmailAndOtpFields,
-} from "@/components";
+import { Loader, DownloadAdmitCard, EmailAndOtpFields } from "@/components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { admitCardRequirementsSchema } from "@/lib/yupValidation";
@@ -91,14 +85,6 @@ export default function Page() {
           onSubmit={handleSubmit(onFormSubmit)}
           noValidate
         >
-          {/* <Input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required={true}
-            register={register}
-            errors={errors}
-          /> */}
           <EmailAndOtpFields
             watch={watch}
             register={register}

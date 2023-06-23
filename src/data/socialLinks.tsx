@@ -6,6 +6,7 @@ import {
   // FaTiktok,
   // FaCheck,
 } from "react-icons/fa";
+import { GiCheckMark } from "react-icons/gi";
 
 interface ISocialLinks {
   id: number;
@@ -44,11 +45,11 @@ export const socialLinks: ISocialLinks[] = [
     class: "instagram",
     icon: <FaInstagram className="h-5 w-5" />,
   },
-  // {
-  //   id: 5,
-  //   platform: "tiktok",
-  //   link: "https://tiktok.com/@KamranTessoriPk",
-  //   class: "bg-[#171515]",
-  //   icon: <FaTiktok className="h-5 w-5" />,
-  // },
+  {
+    id: 5,
+    platform: "Apply",
+    link: "",
+    class: "bg-green-500 !cursor-not-allowed",
+    icon: <GiCheckMark size={14} />,
+  },
 ];

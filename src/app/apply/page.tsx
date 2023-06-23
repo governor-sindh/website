@@ -6,7 +6,7 @@ import {
   Loader,
   SocialInvitation,
 } from "@/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IApplyForm } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -35,6 +35,17 @@ export default function Page() {
   });
   const [showSocialInvitation, setShowSocialInvitation] =
     useState<boolean>(true);
+
+  useEffect(() => {
+    const facebook = localStorage.getItem("facebook");
+    const youtube = localStorage.getItem("youtube");
+    const twitter = localStorage.getItem("twitter");
+    const instagram = localStorage.getItem("instagram");
+    // const tiktok = localStorage.getItem('tiktok')
+    if (facebook && youtube && twitter && instagram) {
+      setShowSocialInvitation(false);
+    }
+  }, []);
 
   const {
     register,
@@ -83,10 +94,10 @@ export default function Page() {
         duration: 9000,
         isClosable: true,
       });
-      localStorage.removeItem('facebook')
-      localStorage.removeItem('youtube')
-      localStorage.removeItem('twitter')
-      localStorage.removeItem('instagram')
+      localStorage.removeItem("facebook");
+      localStorage.removeItem("youtube");
+      localStorage.removeItem("twitter");
+      localStorage.removeItem("instagram");
       // localStorage.removeItem('tiktok')
 
       setIsApplied(true);

@@ -1,7 +1,6 @@
 "use client";
 import {
   Step,
-  // StepDescription,
   StepIcon,
   StepIndicator,
   StepNumber,
@@ -21,12 +20,12 @@ export default function SocialIconStepper({
   const mainColor = "#044e83";
 
   return (
-    <Stepper index={activeStep} colorScheme={mainColor}>
+    <Stepper index={activeStep} color={mainColor} colorScheme={mainColor}>
       {socialLinks.map((step) => (
         <Step key={step.id}>
           <StepIndicator>
             <StepStatus
-              complete={<StepIcon backgroundColor={mainColor} />}
+              complete={<StepIcon />}
               incomplete={<StepNumber />}
               active={<StepNumber />}
             />

@@ -15,14 +15,13 @@ const poppins = Poppins({
 export default function SocialInvitation({
   setShowSocialInvitation,
 }: {
-  setShowSocialInvitation: Dispatch<SetStateAction<boolean>>;
+  setShowSocialInvitation: Dispatch<SetStateAction<boolean | null>>;
 }) {
   const [socialSuccess, setSocialSuccess] = useState({
     facebook: "",
     youtube: "",
     twitter: "",
     instagram: "",
-    // tiktok: ""
   });
 
   const { activeStep, setActiveStep } = useSteps({
@@ -30,23 +29,12 @@ export default function SocialInvitation({
     count: socialLinks.length,
   });
 
-  const checkSubscription = () => {
-    if (
-      socialSuccess.facebook &&
-      socialSuccess.youtube &&
-      socialSuccess.twitter &&
-      socialSuccess.instagram
-    ) {
-      setShowSocialInvitation(false);
-    }
-  };
-
   useEffect(() => {
     let facebook = localStorage.getItem("facebook");
     let youtube = localStorage.getItem("youtube");
     let twitter = localStorage.getItem("twitter");
     let instagram = localStorage.getItem("instagram");
-    // let tiktok = localStorage.getItem('tiktok')
+
     if (facebook && facebook === "y") {
       setSocialSuccess((oldSocials) => ({ ...oldSocials, facebook: "y" }));
     }
@@ -59,10 +47,6 @@ export default function SocialInvitation({
     if (instagram && instagram === "y") {
       setSocialSuccess((oldSocials) => ({ ...oldSocials, instagram: "y" }));
     }
-    // if (tiktok && tiktok === 'y') {
-    //   setSocialSuccess((oldSocials) => ({ ...oldSocials, tiktok: 'y' }))
-    // }
-    checkSubscription();
   }, []);
 
   const OpenSocial = (link: string, platform: string) => {
@@ -111,7 +95,6 @@ export default function SocialInvitation({
         socialSuccess.instagram &&
         socialSuccess.twitter ? (
           <button
-            onClick={checkSubscription}
             className="w-full bg-main py-4 text-center font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed xs:w-52"
             style={poppins.style}
           >

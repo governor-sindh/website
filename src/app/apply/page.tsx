@@ -33,17 +33,28 @@ export default function Page() {
     email: "",
     otp: "",
   });
-  const [showSocialInvitation, setShowSocialInvitation] =
-    useState<boolean>(true);
+  const [showSocialInvitation, setShowSocialInvitation] = useState<
+    boolean | null
+  >(null);
 
   useEffect(() => {
     const facebook = localStorage.getItem("facebook");
     const youtube = localStorage.getItem("youtube");
     const twitter = localStorage.getItem("twitter");
     const instagram = localStorage.getItem("instagram");
-    // const tiktok = localStorage.getItem('tiktok')
-    if (facebook && youtube && twitter && instagram) {
+
+    if (!(facebook && youtube && twitter && instagram)) {
+      setShowSocialInvitation(true);
+      console.log(
+        "🚀 ~ file: page.tsx:37 ~ Page ~ showSocialInvitation:",
+        showSocialInvitation
+      );
+    } else {
       setShowSocialInvitation(false);
+      console.log(
+        "🚀 ~ file: page.tsx:37 ~ Page ~ showSocialInvitation:",
+        showSocialInvitation
+      );
     }
   }, []);
 
@@ -98,7 +109,6 @@ export default function Page() {
       localStorage.removeItem("youtube");
       localStorage.removeItem("twitter");
       localStorage.removeItem("instagram");
-      // localStorage.removeItem('tiktok')
 
       setIsApplied(true);
     } catch (err: any) {
@@ -149,13 +159,19 @@ export default function Page() {
         </>
       )}
 
+      {showSocialInvitation === null && (
+        <div className="h-[85vh] flex items-center justify-centers">
+          <Loader width="w-32" height="h-32" />
+        </div>
+      )}
+
       {showSocialInvitation && (
         <SocialInvitation setShowSocialInvitation={setShowSocialInvitation} />
       )}
 
-      {!isApplied && !showSocialInvitation && (
+      {!isApplied && showSocialInvitation === false && (
         <form
-          className="z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
+          className="w z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
           onSubmit={handleSubmit(onFormSubmit)}
           noValidate
         >
@@ -315,3 +331,5 @@ export default function Page() {
     </main>
   );
 }
+
+// this is for tailwind to  ==> bg-green-500 !cursor-not-allowed

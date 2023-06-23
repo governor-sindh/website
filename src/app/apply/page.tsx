@@ -6,7 +6,7 @@ import {
   Loader,
   SocialInvitation,
 } from "@/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IApplyForm } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -33,8 +33,20 @@ export default function Page() {
     email: "",
     otp: "",
   });
-  const [showSocialInvitation, setShowSocialInvitation] =
-    useState<boolean>(true);
+  const [showSocialInvitation, setShowSocialInvitation] = useState<
+    boolean | null
+  >(null);
+
+  useEffect(() => {
+    const facebook = localStorage.getItem("facebook");
+    const youtube = localStorage.getItem("youtube");
+    const twitter = localStorage.getItem("twitter");
+    const instagram = localStorage.getItem("instagram");
+
+    if (!(facebook && youtube && twitter && instagram)) {
+      setShowSocialInvitation(true);
+    } else setShowSocialInvitation(false);
+  }, []);
 
   const {
     register,
@@ -83,11 +95,10 @@ export default function Page() {
         duration: 9000,
         isClosable: true,
       });
-      localStorage.removeItem('facebook')
-      localStorage.removeItem('youtube')
-      localStorage.removeItem('twitter')
-      localStorage.removeItem('instagram')
-      // localStorage.removeItem('tiktok')
+      localStorage.removeItem("facebook");
+      localStorage.removeItem("youtube");
+      localStorage.removeItem("twitter");
+      localStorage.removeItem("instagram");
 
       setIsApplied(true);
     } catch (err: any) {
@@ -138,13 +149,19 @@ export default function Page() {
         </>
       )}
 
+      {showSocialInvitation === null && (
+        <div className="justify-centers flex h-[85vh] items-center">
+          <Loader width="w-32" height="h-32" />
+        </div>
+      )}
+
       {showSocialInvitation && (
         <SocialInvitation setShowSocialInvitation={setShowSocialInvitation} />
       )}
 
-      {!isApplied && !showSocialInvitation && (
+      {!isApplied && showSocialInvitation === false && (
         <form
-          className="z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
+          className="w z-10 mx-4 my-10 w-full max-w-2xl rounded bg-opacity-30 px-4 py-8 text-black shadow-lg backdrop-blur-3xl md:mx-10 md:px-6"
           onSubmit={handleSubmit(onFormSubmit)}
           noValidate
         >
@@ -304,3 +321,5 @@ export default function Page() {
     </main>
   );
 }
+
+// this is for tailwind to  ==> bg-green-500 !cursor-not-allowed

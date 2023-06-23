@@ -11,6 +11,8 @@ import {
   years,
 } from "./form/formData";
 
+import { socialLinks } from "./socialLinks";
+
 export {
   YoutubeData,
   tracks,
@@ -20,4 +22,5 @@ export {
   employmentType,
   industries,
   years,
+  socialLinks,
 };

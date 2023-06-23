@@ -45,3 +45,7 @@
     #285aeb 90%
   );
 }
+
+.css-kq5oaw[data-status="complete"] {
+  background-color: #044e83 !important;
+}

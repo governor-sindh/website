@@ -95,6 +95,7 @@ export default function SocialInvitation({
         socialSuccess.instagram &&
         socialSuccess.twitter ? (
           <button
+            onClick={() => setShowSocialInvitation(false)}
             className="w-full bg-main py-4 text-center font-semibold tracking-widest text-white transition-all hover:translate-y-1 disabled:opacity-60 disabled:hover:cursor-not-allowed xs:w-52"
             style={poppins.style}
           >

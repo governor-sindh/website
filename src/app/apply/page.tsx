@@ -45,17 +45,7 @@ export default function Page() {
 
     if (!(facebook && youtube && twitter && instagram)) {
       setShowSocialInvitation(true);
-      console.log(
-        "🚀 ~ file: page.tsx:37 ~ Page ~ showSocialInvitation:",
-        showSocialInvitation
-      );
-    } else {
-      setShowSocialInvitation(false);
-      console.log(
-        "🚀 ~ file: page.tsx:37 ~ Page ~ showSocialInvitation:",
-        showSocialInvitation
-      );
-    }
+    } else setShowSocialInvitation(false);
   }, []);
 
   const {
@@ -160,7 +150,7 @@ export default function Page() {
       )}
 
       {showSocialInvitation === null && (
-        <div className="h-[85vh] flex items-center justify-centers">
+        <div className="justify-centers flex h-[85vh] items-center">
           <Loader width="w-32" height="h-32" />
         </div>
       )}

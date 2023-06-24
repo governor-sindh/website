@@ -6,8 +6,9 @@ import { NextApiResponse } from "next";
 import type { IApplyForm } from "@/types";
 import { formCities, formQualifications } from "@/data";
 import { createConnection } from "../nodeMailer";
-import { sendConfirmationEmail } from "@/lib/confirmationTemplates";
+// import { sendConfirmationEmail } from "@/lib/confirmationTemplates";
 import { otpCodes } from "@/lib/schema/otpCodes";
+import { sendConfirmationEmail } from "@/lib/confirmationTemplates";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {

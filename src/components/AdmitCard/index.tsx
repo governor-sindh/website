@@ -16,8 +16,12 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
       <div style={poppins.style} className="w-[95%] text-justify print:hidden">
         <h3 className="capitalize">Dear {data.fullName},</h3>
         <p className="my-4">
-          Thank you for expressing your interest in the Governor&apos;s
-          Initiative for Artificial Intelligence, Web 3.0 & Metaverse Program!
+          Thank you for expressing your interest in the{" "}
+          <b>
+            Governor Sindh&apos;s Initiative for “Artificial Intelligence, Web
+            3.0, and Metaverse”, <i>A Nation Building Program By Honorable</i>{" "}
+            Governor Sindh Kamran Khan Tessori.
+          </b>
         </p>
         <p>
           We have received your application. Please note your Registration

@@ -8,6 +8,7 @@ import { formCities, formQualifications } from "@/data";
 import { createConnection } from "../nodeMailer";
 // import { sendConfirmationEmail } from "@/lib/confirmationTemplates";
 import { otpCodes } from "@/lib/schema/otpCodes";
+import { sendConfirmationEmail } from "@/lib/confirmationTemplates";
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const {
@@ -189,20 +190,20 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
 
     if (expiryTime > currentTime) {
       const users = await db.insert(UsersTable).values(appliedUser).returning();
-      // const user = users[0];
-      // const transporter = await createConnection();
+      const user = users[0];
+      const transporter = await createConnection();
 
-      // try {
-      //   await transporter.sendMail({
-      //     to: email, // Change to your recipient
-      //     from: "education@governorsindh.com", // Change to your verified sender
-      //     subject:
-      //       "Thank you for expressing your interest in the Governor’s Initiative for AI, Web 3.0 & Metaverse Program!",
-      //     html: sendConfirmationEmail(fullName, `${user.id}`.padStart(8, "0")), // html body
-      //   });
-      // } catch (error) {
-      //   console.log("error ", error);
-      // }
+      try {
+        await transporter.sendMail({
+          to: email, // Change to your recipient
+          from: "education@governorsindh.com", // Change to your verified sender
+          subject:
+            "Thank you for expressing your interest in the Governor’s Initiative for AI, Web 3.0 & Metaverse Program!",
+          html: sendConfirmationEmail(fullName, `${user.id}`.padStart(8, "0")), // html body
+        });
+      } catch (error) {
+        console.log("error ", error);
+      }
 
       return NextResponse.json({
         message: "Applied Successfully",

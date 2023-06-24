@@ -20,7 +20,7 @@ export default function SocialIconStepper({
   const mainColor = "#044e83";
 
   return (
-    <Stepper index={activeStep} color={mainColor} colorScheme={mainColor}>
+    <Stepper index={activeStep} className="w-[90%] lg:w-[800px] !justify-center mx-auto !flex-wrap" color={mainColor} colorScheme={mainColor}>
       {socialLinks.map((step) => (
         <Step key={step.id}>
           <StepIndicator>

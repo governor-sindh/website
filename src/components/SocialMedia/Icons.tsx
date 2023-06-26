@@ -11,7 +11,7 @@ export default function Icons() {
   return (
     <div className="my-5 flex gap-3  md:text-sm">
       <Link
-        href={"https://www.facebook.com/governorsindhinitiative"}
+        href={"https://www.facebook.com/TeamKTessori"}
         target="_blank"
         className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4267B2] text-white"
       >

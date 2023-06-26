@@ -20,7 +20,6 @@ export const socialLinks: ISocialLinks[] = [
   {
     id: 1,
     platform: "facebook",
-
     link: "https://www.facebook.com/TeamKTessori",
     class: "bg-[#4267B2]",
     icon: <FaFacebookF className="h-5 w-5" />,

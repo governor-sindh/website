@@ -7,7 +7,7 @@ export default function Home() {
       <Text />
       <Compulsory />
       <Advance />
-      sdf2
+      testing
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function Home() {
       <Text />
       <Compulsory />
       <Advance />
-      sdf
+      sdf2
     </div>
   );
 }

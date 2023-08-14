@@ -56,6 +56,7 @@ export interface IAdmitCardRequirements {
 }
 
 export interface IResult {
+  message?:string;
   fullName?: string;
   status: string;
   regNo: string;

@@ -17,12 +17,7 @@ export default function Page() {
   const toast = useToast();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<IResult>({
-    fullName: "Shehzad Iqbal",
-    regNo: "0023432",
-    status: "Eligible for Online",
-    // status: "Eligible for ONSITE",
-  });
+  const [data, setData] = useState<IResult>();
   const [occupiedErr, setOccupiedErr] = useState({
     regNo: "",
   });
@@ -41,20 +36,23 @@ export default function Page() {
     try {
       setLoading(true);
 
-      const sleep = async (millis: number) =>
-        new Promise((resolve) => setTimeout(resolve, millis));
-      await sleep(2500);
-      //   const response = await fetch("/api/admitcard", {
-      //     body: JSON.stringify({
-      //       regNo: Number(formData.regNo),
-      //     }),
-      //     method: "POST",
-      //   });
+      const response = await fetch("/api/getresult", {
+        body: JSON.stringify({
+          regNo: Number(formData.regNo), //change this id
+        }),
+        method: "POST",
+      });
 
-      //   const res = await response.json();
-      //   if (!response.ok) throw new Error(res.message);
+      const res = (await response.json()) as IResult;
+      if (!response.ok) throw new Error(res.message);
 
-      //   setData(res);
+      // {  //example res
+      //     fullName: "Shehzad Iqbal",
+      //     regNo: "0023432",
+      //     status: "Eligible for Online",
+      //     // status: "Eligible for ONSITE",
+      //   }
+      setData(res);
     } catch (err: any) {
       toast({
         title: `${err.message || "Unknown Error"}`,
@@ -63,7 +61,7 @@ export default function Page() {
         isClosable: true,
       });
 
-      if (err.message === "User with this email does not exist!") {
+      if (err.message == "No Results with this Reg. Number exists!") {
         setOccupiedErr({ regNo: "No Results with this Reg. Number exists!" });
       }
     } finally {
@@ -81,7 +79,7 @@ export default function Page() {
       </h1>
 
       <form
-        className="-top-10 z-10 mx-4 my-10 w-full max-w-2xl rounded px-4 py-8 text-black shadow-lg md:mx-10 md:px-6"
+        className="-top-10 z-10 mx-4 my-10 mt-0 w-full max-w-2xl rounded px-4 py-8 text-black shadow-lg sm:mt-10 md:mx-10 md:px-6"
         onSubmit={handleSubmit(onFormSubmit)}
         noValidate
       >
@@ -109,8 +107,10 @@ export default function Page() {
 
       {data && (
         <div
-          className={`text-center text-4xl font-bold ${
-            data.status == "Eligible for ONSITE" ? "text-green-600" : "text-orange-800"
+          className={`text-center text-2xl font-bold sm:text-4xl ${
+            data.status == "Eligible for ONSITE"
+              ? "text-green-600"
+              : "text-orange-800"
           }`}
         >
           <p>

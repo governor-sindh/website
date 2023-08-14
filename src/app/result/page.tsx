@@ -33,6 +33,7 @@ export default function Page() {
   const onFormSubmit = async (formData: IResultRequirements) => {
     try {
       setLoading(true);
+      toast.closeAll();
 
       const response = await fetch("/api/getresult", {
         body: JSON.stringify({ id: Number(formData.regNo) }),

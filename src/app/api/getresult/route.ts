@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { eq } from "drizzle-orm";
-import sgMail from "@sendgrid/mail";
 import { UsersTable } from "@/lib/schema/users";
 import { ResultTable } from "@/lib/schema/result2023";
-sgMail.setApiKey(process.env.NEXT_PUBLIC_API_KEY!);
 
 export async function POST(request: NextRequest) {
   const { id } = await request.json();
   const convertIdToNumber = Number(id);
-  if (!id) {
+  if (!convertIdToNumber) {
     throw new Error("Enter your ID!");
   }
 

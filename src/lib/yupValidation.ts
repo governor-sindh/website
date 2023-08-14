@@ -2,6 +2,7 @@ import * as yup from "yup";
 
 const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const otpRegex = /^\d{6}$/;
+const regNoRegex = /^\d{1,9}$/;
 
 export const mainFormSchema = yup.object({
   fullName: yup
@@ -74,4 +75,11 @@ export const admitCardRequirementsSchema = yup.object({
     .required("Please confirm the one time password sent to your email.")
     .min(6, "OTP must be 6 characters")
     .max(6, "OTP must be 6 characters"),
+});
+
+export const regNoRequirementsSchema = yup.object({
+  regNo: yup
+    .string()
+    .required("Registration Number is required")
+    .matches(regNoRegex, "Registration Number is not valid"),
 });

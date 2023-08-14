@@ -38,12 +38,13 @@ export default function Page() {
 
       const response = await fetch("/api/getresult", {
         body: JSON.stringify({
-          regNo: Number(formData.regNo), //change this id
+          id: Number(formData.regNo), //change this id
         }),
         method: "POST",
       });
 
       const res = (await response.json()) as IResult;
+      console.log("res ", res)
       if (!response.ok) throw new Error(res.message);
 
       // {  //example res

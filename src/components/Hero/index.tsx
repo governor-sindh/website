@@ -23,7 +23,7 @@ function Hero() {
             Governor Balochistan
           </h1>
           <h1 className=" whitespace-nowrap text-center text-[1.5rem] font-normal leading-[2rem] tracking-wider  text-main sm:text-4xl sm:leading-[3rem] md:text-left lg:text-[2.5rem]">
-            Kamran Khan Tessori
+            Abdul Wali Kakar
           </h1>
           <h1 className="mt-5 whitespace-nowrap text-center text-[1.5rem] font-semibold leading-[2rem] tracking-wider  text-sub sm:text-4xl sm:leading-[3rem] md:text-left lg:text-[2.5rem]">
             Initiative for
@@ -45,7 +45,7 @@ function Hero() {
                 APPLY NOW
               </button>
             </Link>
-            <Counter />
+            {/* <Counter /> */}
           </div>
         </div>
         <div className=" relative  mt-7 flex  w-full items-end justify-center md:m-auto md:justify-end">

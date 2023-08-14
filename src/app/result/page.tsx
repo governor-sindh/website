@@ -18,9 +18,7 @@ export default function Page() {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<IResult>();
-  const [occupiedErr, setOccupiedErr] = useState({
-    regNo: "",
-  });
+  const [occupiedErr, setOccupiedErr] = useState({ regNo: "" });
 
   const {
     register,
@@ -37,22 +35,14 @@ export default function Page() {
       setLoading(true);
 
       const response = await fetch("/api/getresult", {
-        body: JSON.stringify({
-          id: Number(formData.regNo), //change this id
-        }),
+        body: JSON.stringify({ id: Number(formData.regNo) }),
         method: "POST",
       });
 
       const res = (await response.json()) as IResult;
-      console.log("res ", res)
+      console.log("res ", res);
       if (!response.ok) throw new Error(res.message);
 
-      // {  //example res
-      //     fullName: "Shehzad Iqbal",
-      //     regNo: "0023432",
-      //     status: "Eligible for Online",
-      //     // status: "Eligible for ONSITE",
-      //   }
       setData(res);
     } catch (err: any) {
       toast({
@@ -62,7 +52,9 @@ export default function Page() {
         isClosable: true,
       });
 
-      if (err.message == "No Results with this Reg. Number exists!") {
+      setData(undefined);
+
+      if (err.message == "User with this id not found!") {
         setOccupiedErr({ regNo: "No Results with this Reg. Number exists!" });
       }
     } finally {
@@ -109,14 +101,14 @@ export default function Page() {
       {data && (
         <div
           className={`text-center text-2xl font-bold sm:text-4xl ${
-            data.status == "Eligible for ONSITE"
-              ? "text-green-600"
-              : "text-orange-800"
+            data?.status == "Eligible for Online"
+              ? "text-orange-800"
+              : "text-green-600"
           }`}
         >
           <p>
-            {/* Dear {data.fullName}, */}
-            You are {data.status}
+            {/* Dear {data?.name}, */}
+            You are {data.status ? data.status : "No Result found"}
           </p>
         </div>
       )}

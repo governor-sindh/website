@@ -56,10 +56,10 @@ export interface IAdmitCardRequirements {
 }
 
 export interface IResult {
-  message?:string;
-  fullName?: string;
+  id: string;
+  name?: string;
   status: string;
-  regNo: string;
+  message?: string;
 }
 export interface IResultRequirements {
   regNo: string;

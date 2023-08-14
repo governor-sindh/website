@@ -102,6 +102,7 @@ export default function Page() {
 
       setIsApplied(true);
     } catch (err: any) {
+      toast.closeAll();
       toast({
         title: `${err.message || "Unknown Error"}`,
         status: "error",

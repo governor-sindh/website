@@ -40,7 +40,6 @@ export default function Page() {
       });
 
       const res = (await response.json()) as IResult;
-      console.log("res ", res);
       if (!response.ok) throw new Error(res.message);
 
       setData(res);
@@ -55,7 +54,7 @@ export default function Page() {
       setData(undefined);
 
       if (err.message == "User with this id not found!") {
-        setOccupiedErr({ regNo: "No Results with this Reg. Number exists!" });
+        setOccupiedErr({ regNo: "No Result found!" });
       }
     } finally {
       setLoading(false);
@@ -100,14 +99,15 @@ export default function Page() {
 
       {data && (
         <div
-          className={`text-center text-2xl font-bold sm:text-4xl ${
+          className={`text-center text-xl font-bold sm:text-2xl ${
             data?.status == "Eligible for Online"
               ? "text-orange-800"
               : "text-green-600"
           }`}
         >
           <p>
-            {/* Dear {data?.name}, */}
+            Registration No. {data?.id}
+            <br />
             You are {data.status ? data.status : "No Result found"}
           </p>
         </div>

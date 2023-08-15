@@ -14,7 +14,7 @@ module.exports = {
       },
       colors: {
         main: "#64871e",
-        sub: "#2eb6e8",
+        sub: "#aab830",
       },
     },
     screens: {

@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
       );
 
     if (!applicants || applicants.length === 0) {
-      throw new Error("This Student ID does not exist.");
+      throw new Error("This Student does not exist.");
     }
 
     const applicant = applicants[0];

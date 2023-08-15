@@ -59,7 +59,7 @@ export default function Page() {
 
       setData(undefined);
 
-      if (err.message == "This Student ID does not exist.") {
+      if (err.message == "This Student does not exist.") {
         setOccupiedErr({ ...occupiedErr, cnic: err.message });
       } else if (err.message == "This student did not attempt the exam.") {
         setOccupiedErr({ ...occupiedErr, regNo: err.message });

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { eq } from "drizzle-orm";
 import { UsersTable } from "@/lib/schema/users";
-import { ResultTable } from "@/lib/schema/result2023";
+import { EntranceResultTable } from "@/lib/schema/entrance_exam_result";
 
 export async function POST(request: NextRequest) {
   const { id } = await request.json();
@@ -26,8 +26,8 @@ export async function POST(request: NextRequest) {
 
     const getResults = await db
       .select()
-      .from(ResultTable)
-      .where(eq(ResultTable.id, convertIdToNumber));
+      .from(EntranceResultTable)
+      .where(eq(EntranceResultTable.id, convertIdToNumber));
 
     if (!getResults || getResults.length === 0) {
       throw new Error("Result doesn't exists!");

@@ -62,5 +62,6 @@ export interface IResult {
   message?: string;
 }
 export interface IResultRequirements {
+  cnic: string;
   regNo: string;
 }

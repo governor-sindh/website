@@ -18,7 +18,7 @@ export default function Page() {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<IResult>();
-  const [occupiedErr, setOccupiedErr] = useState({ regNo: "" });
+  const [occupiedErr, setOccupiedErr] = useState({ regNo: "", cnic: "" });
 
   const {
     register,
@@ -31,12 +31,16 @@ export default function Page() {
   });
 
   const onFormSubmit = async (formData: IResultRequirements) => {
+    console.log("🚀 ~ file: page.tsx:34 ~ onFormSubmit ~ formData:", formData)
     try {
       setLoading(true);
       toast.closeAll();
 
       const response = await fetch("/api/getresult", {
-        body: JSON.stringify({ id: Number(formData.regNo) }),
+        body: JSON.stringify({
+          cnic: Number(formData.cnic),
+          id: Number(formData.regNo),
+        }),
         method: "POST",
       });
 
@@ -55,8 +59,10 @@ export default function Page() {
 
       setData(undefined);
 
-      if (err.message == "User with this id not found!") {
-        setOccupiedErr({ regNo: "No Result found!" });
+      if (err.message == "This Student ID does not exist.") {
+        setOccupiedErr({ ...occupiedErr, cnic: err.message });
+      } else if (err.message == "This student did not attempt the exam.") {
+        setOccupiedErr({ ...occupiedErr, regNo: err.message });
       }
     } finally {
       setLoading(false);
@@ -87,6 +93,17 @@ export default function Page() {
           occupiedErr={occupiedErr}
           setOccupiedErr={setOccupiedErr}
         />
+        <Input
+          type="tel"
+          id="cnic"
+          placeholder="CNIC or B-Form Number"
+          required={true}
+          register={register}
+          errors={errors}
+          occupiedErr={occupiedErr}
+          setOccupiedErr={setOccupiedErr}
+        />
+
         <div className="flex justify-center">
           <button
             type="submit"

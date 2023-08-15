@@ -53,7 +53,7 @@ export default function Page() {
       toast({
         title: `${err.message || "Unknown Error"}`,
         status: "error",
-        duration: 9000,
+        duration: 5000,
         isClosable: true,
       });
 

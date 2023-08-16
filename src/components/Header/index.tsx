@@ -12,9 +12,9 @@ import { CompulsoryData, tracks } from "@/data";
 
 const navLinks = [
   { title: "home", link: "/", id: "1" },
-  { title: "result", link: "/result", id: "2" },
   { title: "apply", link: "/apply", id: "3" },
   { title: "jobs", link: "/jobs", id: "4" },
+  { title: "result", link: "/result", id: "2" },
 ];
 
 function Header() {

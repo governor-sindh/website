@@ -92,7 +92,7 @@ export default function Page() {
       toast({
         title: `${resData.message}`,
         status: "success",
-        duration: 9000,
+        duration: 5000,
         isClosable: true,
       });
       localStorage.removeItem("facebook");
@@ -102,10 +102,11 @@ export default function Page() {
 
       setIsApplied(true);
     } catch (err: any) {
+      toast.closeAll();
       toast({
         title: `${err.message || "Unknown Error"}`,
         status: "error",
-        duration: 9000,
+        duration: 5000,
         isClosable: true,
       });
 

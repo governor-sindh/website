@@ -31,10 +31,11 @@ export default function Page() {
   });
 
   const onFormSubmit = async (formData: IResultRequirements) => {
-    console.log("🚀 ~ file: page.tsx:34 ~ onFormSubmit ~ formData:", formData)
     try {
       setLoading(true);
       toast.closeAll();
+      setData(undefined);
+      setOccupiedErr({ cnic: "", regNo: "" });
 
       const response = await fetch("/api/getresult", {
         body: JSON.stringify({
@@ -60,9 +61,7 @@ export default function Page() {
       setData(undefined);
 
       if (err.message == "This Student does not exist.") {
-        setOccupiedErr({ ...occupiedErr, cnic: err.message });
-      } else if (err.message == "This student did not attempt the exam.") {
-        setOccupiedErr({ ...occupiedErr, regNo: err.message });
+        setOccupiedErr({ regNo: err.message, cnic: err.message });
       }
     } finally {
       setLoading(false);

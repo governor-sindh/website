@@ -19,10 +19,10 @@ function Hero() {
 
       <div className=" z-50 m-auto mt-6 block w-[95%] items-center   justify-between md:flex md:flex-row lg:w-[90%] xl:w-[1300px] ">
         <div className=" h-fit w-full pt-5 md:w-1/2 md:py-10">
-          <h1 className="whitespace-nowrap text-center text-[2rem] font-extrabold leading-10 tracking-wider text-main sm:text-5xl sm:leading-none md:text-left lg:text-6xl">
+          <h1 className="whitespace-nowrap text-center text-[2rem] font-extrabold leading-10 tracking-wider text-main sm:text-5xl sm:leading-none md:text-left lg:text-6xl break-normal">
             Governor Balochistan
-          </h1>
           <h1 className=" whitespace-nowrap text-center text-[1.5rem] font-normal leading-[2rem] tracking-wider  text-main sm:text-4xl sm:leading-[3rem] md:text-left lg:text-[2.5rem]">
+          </h1>
             Abdul Wali Kakar
           </h1>
           <h1 className="mt-5 whitespace-nowrap text-center text-[1.5rem] font-semibold leading-[2rem] tracking-wider  text-sub sm:text-4xl sm:leading-[3rem] md:text-left lg:text-[2.5rem]">
@@ -52,7 +52,7 @@ function Hero() {
           <Image
             src={Cover}
             alt="piaic"
-            className=" md: ml-40 h-auto min-w-[900px] lg:w-[600px]"
+            className="md:ml-20 lg:ml-32 h-auto min-w-[500px] sm:min-w-[750px] md:min-w-[470px] lg:min-w-[620px]"
           />
         </div>
       </div>

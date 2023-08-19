@@ -15,12 +15,7 @@ interface ISocialLinks {
   class: string;
   icon: any;
 }
-import {
-  fbLink,
-  youtubeLink,
-  twitterLink,
-} from "./socialLinks";
-
+import { fbLink, youtubeLink, twitterLink } from "./socialLinks";
 
 export const socialLinks: ISocialLinks[] = [
   {

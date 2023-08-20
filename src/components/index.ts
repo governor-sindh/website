@@ -33,6 +33,3 @@ export {
   EmailAndOtpFields,
   Icons,
 };
-
-// this is for tailwind
-// bg-[#1DA1F2] bg-[#FF0000] bg-[#4267B2]

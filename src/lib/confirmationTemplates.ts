@@ -1,3 +1,5 @@
+import { officialEmail } from "@/data/socialLinks/socialLinks";
+
 export const sendConfirmationEmail = (userName: string, regNumber: string) => {
   let customerEmailTemplate = `<!DOCTYPE html>
         <html>
@@ -6,7 +8,7 @@ export const sendConfirmationEmail = (userName: string, regNumber: string) => {
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-            <title>Governor Sindh Initiative</title>
+            <title>Governor Balochistan Initiative</title>
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -74,8 +76,8 @@ export const sendConfirmationEmail = (userName: string, regNumber: string) => {
         <body>
             <div id="container" style="font-size:14px;line-height:20px;font-family:'Poppins';">
                   <div id="logo">
-                      <img src="http://www.governorsindh.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.9ff76f62.png&w=96&q=75" width="560" height="168" alt="OpenAI" title="" style="width:70px;height:auto;border:0;line-height:100%;outline:none;text-decoration:none" class="CToWUd" data-bit="iit" alt="Governor Sindh Initiative" />
-                      <h3 style="color:#202123;font-size:28px;line-height:30px;margin:20px 0px">Governor Sindh Initiative for Artificial Intelligence, Web 3.0 & Metaverse</h3>
+                      <img src="http://www.governorsindh.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.9ff76f62.png&w=96&q=75" width="560" height="168" alt="OpenAI" title="" style="width:70px;height:auto;border:0;line-height:100%;outline:none;text-decoration:none" class="CToWUd" data-bit="iit" alt="Governor Balochistan Initiative" />
+                      <h3 style="color:#202123;font-size:28px;line-height:30px;margin:20px 0px">Governor Balochistan Initiative for Artificial Intelligence, Web 3.0 & Metaverse</h3>
                   </div>
                   <div>Dear ${userName}</div>
                   <div class="gmail_quote" dir="auto">
@@ -98,8 +100,8 @@ export const sendConfirmationEmail = (userName: string, regNumber: string) => {
                     <br>
                     &nbsp; Regards,<br>
                     &nbsp; Governor’s Initiative for AI, Web 3.0 &amp; Metaverse<br>
-                    &nbsp; Email: <a href="mailto:education@governorsindh.com" target="_blank">education@governorsindh.com</a><br>
-                    &nbsp; Website: <a href="http://www.governorsindh.com" rel="noreferrer" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.governorsindh.com&amp;source=gmail&amp;ust=1686649498374000&amp;usg=AOvVaw2PSJqhgEkIY6r6XMb6ynw0">www.governorsindh.com</a><div class="yj6qo"></div><div class="adL"><br>
+                    &nbsp; Email: <a href="mailto:${officialEmail}" target="_blank">${officialEmail}</a><br>
+                    &nbsp; Website: <a href="http://www.governorbalochinstan.com" rel="noreferrer" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.governorsindh.com&amp;source=gmail&amp;ust=1686649498374000&amp;usg=AOvVaw2PSJqhgEkIY6r6XMb6ynw0">www.governorsindh.com</a><div class="yj6qo"></div><div class="adL"><br>
                     <br>
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 "use client";
 import { AdmitCard, Icons, PrintableAdmitCard } from "@/components";
+import { officialEmail } from "@/data/socialLinks/socialLinks";
 import { IAdmitCard } from "@/types";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
@@ -18,9 +19,10 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
         <p className="my-4">
           Thank you for expressing your interest in the{" "}
           <b>
-            Governor Sindh&apos;s Initiative for “Artificial Intelligence, Web
-            3.0, and Metaverse”, <i>A Nation Building Program By Honorable</i>{" "}
-            Governor Sindh Kamran Khan Tessori.
+            Governor Balochistan&apos;s Initiative for “Artificial Intelligence,
+            Web 3.0, and Metaverse”,{" "}
+            <i>A Nation Building Program By Honorable</i> Governor Balochistan
+            Abdul Wali Kakar.
           </b>
         </p>
         <p>
@@ -46,8 +48,8 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
           <li className="ml-14 pl-6">Intelligence Quotient (IQ)</li>
         </ul>
         <p>
-          For those students who are new to the computer field, you can get a
-          jump start on your learning immediately by starting HTML and CSS:{" "}
+          For those students who are new to the computer field, you can start on
+          your learning immediately by starting HTML and CSS:{" "}
         </p>
         <ul>
           <li className="my-4">
@@ -82,11 +84,11 @@ export default function DownloadAdmitCard({ data }: { data: IAdmitCard }) {
           </b>
           <Link
             className="mt-4 flex items-center text-main underline"
-            href="mailto:education@governorsindh.com"
+            href={`mailto:${officialEmail}`}
             target="_blank"
           >
             <AiOutlineMail className="mr-3 h-6 w-6 text-main" />
-            education@governorsindh.com
+            {officialEmail}
           </Link>
         </p>
         <p className="my-4">

@@ -13,7 +13,7 @@ const poppins = Poppins({
 function Hero() {
   return (
     <div
-      className={` relative z-0 w-full overflow-hidden bg-opacity-75 bg-[url('/bg_house.jpg')] bg-cover ${poppins.className}`}
+      className={` relative z-0 w-full overflow-hidden bg-opacity-75 bg-[url('/bg_house.jpeg')] bg-cover ${poppins.className}`}
     >
       <div className=" absolute inset-0 -z-50 h-full w-full bg-zinc-100 bg-opacity-80"></div>
 

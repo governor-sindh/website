@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import AI from '../../../public/AI.jpg'
-import Metaverse from '../../../public/metaverse.jpg'
-import CloudComputing from '../../../public/cloudComputing.jpg'
-import IOT from '../../../public/iot.jpg'
-import Genomics from '../../../public/genomics.jpg'
-import Automation from '../../../public/automation.jpg'
+import AI from '../../../public/AI.jpeg'
+import Metaverse from '../../../public/metaverse.jpeg'
+import CloudComputing from '../../../public/cloudComputing.jpeg'
+import IOT from '../../../public/iot.jpeg'
+import Genomics from '../../../public/genomics.jpeg'
+import Automation from '../../../public/automation.jpeg'
 import Image from 'next/image';
 
 function Advance() {

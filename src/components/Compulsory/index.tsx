@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
-import programmingFundamentals from '../../../public/programming_fundamentals.jpg'
-import nextjsCourse from '../../../public/nextjs.jpg'
-import EarnAsYouLearn from '../../../public/earn_as_your_learn.jpg'
+import programmingFundamentals from '../../../public/programming_fundamentals.jpeg'
+import nextjsCourse from '../../../public/nextjs.jpeg'
+import EarnAsYouLearn from '../../../public/earn_as_your_learn.jpeg'
 
 import Image from 'next/image';
 

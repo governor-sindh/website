@@ -70,12 +70,12 @@ export default function PrintableAdmitCard({ data }: { data: IAdmitCard }) {
             </p>
           </div>
 
-          <div className="my-1 flex text-lg">
+{/*           <div className="my-1 flex text-lg">
             <h6 className="w-52 font-bold">Venue :</h6>
             <p className="w-60 border-b-2 border-gray-700 capitalize">
               Governor House Sindh
             </p>
-          </div>
+          </div> */}
         </div>
         <div className="image order-last flex h-40 w-40 items-center justify-center border-2 border-dotted border-gray-900 text-center">
           Paste

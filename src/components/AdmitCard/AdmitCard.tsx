@@ -90,13 +90,13 @@ export default function AdmitCard({ data }: { data: IAdmitCard }) {
             </p>
           </div>
 
-          <div className="my-1 flex text-lg">
+{/*           <div className="my-1 flex text-lg">
             <h6 className="w-40 font-bold min-[375px]:w-48 md:w-52">Venue :</h6>
             <p className="w-32 border-b-2 border-gray-700  capitalize xs:w-48 md:w-60 ">
               Governor House Sindh
               <span className="h-[2px] w-full bg-gray-700"></span>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
 

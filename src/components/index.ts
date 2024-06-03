@@ -16,6 +16,7 @@ import EmailAndOtpFields from "./OTP/EmailAndOtpFields";
 import SocialInvitation from "./SocialMedia/SocialInvitation";
 import Icons from "./SocialMedia/Icons";
 import SocialIconStepper from "./SocialMedia/SocialIconStepper";
+import Banner from "./Banner";
 
 export {
   Header,
@@ -36,4 +37,5 @@ export {
   SocialInvitation,
   Icons,
   SocialIconStepper,
+  Banner
 };

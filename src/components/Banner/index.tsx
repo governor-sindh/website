@@ -14,9 +14,12 @@ function Banner() {
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
-        setTimeout(() => {
-            setOpen(true)
-        }, 1000)
+        const timer = setTimeout(() => {
+            setOpen(true);
+        }, 1000);
+
+        // Cleanup function
+        return () => clearTimeout(timer);
     }, [])
 
     return (

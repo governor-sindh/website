@@ -1,7 +1,7 @@
 import React from "react";
-import Solo1 from "../../../public/imageWebsite.jpg";
-import Solo2 from "../../../public/imageWebsite2.jpg";
-import Solo3 from "../../../public/imageWebsite3.jpg";
+import Solo1 from "../../../public/imageWebsite.jpeg";
+import Solo2 from "../../../public/imageWebsite2.jpeg";
+import Solo3 from "../../../public/imageWebsite3.jpeg";
 import Image from "next/image";
 import Slider from '../Slider'
 

@@ -5,14 +5,14 @@ import React, { Component } from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import Image1 from '../../../public/slideShow1.jpg'
-import Image3 from '../../../public/slideShow2.jpg'
-import Image2 from '../../../public/slideShow3.jpg'
-import Image4 from '../../../public/slideShow4.jpg'
-import Image5 from '../../../public/slideShow5.jpg'
-import Image6 from '../../../public/slideShow6.jpg'
-import Image7 from '../../../public/slideShow7.jpg'
-import Image8 from '../../../public/slideShow8.jpg'
+import Image1 from '../../../public/slideShow1.jpeg'
+import Image3 from '../../../public/slideShow2.jpeg'
+import Image2 from '../../../public/slideShow3.jpeg'
+import Image4 from '../../../public/slideShow4.jpeg'
+import Image5 from '../../../public/slideShow5.jpeg'
+import Image6 from '../../../public/slideShow6.jpeg'
+import Image7 from '../../../public/slideShow7.jpeg'
+import Image8 from '../../../public/slideShow8.jpeg'
 
 export default class ImagesCaurosel extends Component {
     render() {
